@@ -5,12 +5,22 @@ void StartGame()
 {
     // Init
  //----------------------------------------------------------------------------------
+    InitGame();
+    
+    GameLoop();
+}
+
+void InitGame()
+{
 
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
 
     InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
+}
 
+void GameLoop() 
+{
     while (!WindowShouldClose())
     {
         // Update
@@ -21,8 +31,6 @@ void StartGame()
         BeginDrawing();
 
         ClearBackground(BLACK);
-
-        DrawText("Congrats! You created your first window!", GetScreenWidth() / 2.5, GetScreenHeight() / 2, 20, WHITE);
 
         EndDrawing();
     }

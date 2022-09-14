@@ -5,6 +5,9 @@
     <ClCompile Include="src\Window\StartGame.cpp">
       <Filter>Window</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\PlayerShip.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -17,6 +20,9 @@
   <ItemGroup>
     <ClInclude Include="src\Window\Game.h">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\PlayerShip.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
