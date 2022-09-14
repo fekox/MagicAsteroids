@@ -8,6 +8,9 @@
     <ClCompile Include="src\Objects\PlayerShip.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Asteroid.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -22,6 +25,9 @@
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\PlayerShip.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Asteroid.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

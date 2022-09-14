@@ -3,8 +3,6 @@
 
 void StartGame()
 {
-    // Init
- //----------------------------------------------------------------------------------
     InitGame();
     
     GameLoop();
@@ -17,6 +15,7 @@ void InitGame()
     const int screenHeight = GetScreenHeight();
 
     InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
+    SetWindowState(FLAG_VSYNC_HINT);
 }
 
 void GameLoop() 
@@ -25,6 +24,8 @@ void GameLoop()
     {
         // Update
         //----------------------------------------------------------------------------------
+
+
 
         // Draw
         //----------------------------------------------------------------------------------
