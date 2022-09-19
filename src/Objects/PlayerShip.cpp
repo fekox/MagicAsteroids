@@ -17,14 +17,15 @@ Ship CreateShip()
 
 	playerShip.points = 0;
 
-	playerShip.rotation = 0;
+	playerShip.rotation.x = 0;
+	playerShip.rotation.y = 0;
 
 	return playerShip;
 }
 
-void DrawShip()
+void DrawShip(Ship &PlayerShip)
 {
-
+	DrawRectangle(PlayerShip.posX, PlayerShip.posY, PlayerShip.widht, PlayerShip.height, RED);
 }
 
 void AddPoint()

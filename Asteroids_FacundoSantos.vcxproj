@@ -28,6 +28,7 @@
     <ClInclude Include="src\Objects\Asteroid.h" />
     <ClInclude Include="src\Objects\PlayerShip.h" />
     <ClInclude Include="src\Window\Game.h" />
+    <ClInclude Include="src\Window\StartGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

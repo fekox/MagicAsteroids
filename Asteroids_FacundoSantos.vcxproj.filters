@@ -30,5 +30,8 @@
     <ClInclude Include="src\Objects\Asteroid.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\Window\StartGame.h">
+      <Filter>Window</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

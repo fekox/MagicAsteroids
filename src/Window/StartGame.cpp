@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Window/Game.h"
 #include "Objects/PlayerShip.h"
+#include "Window/StartGame.h"
 
 Ship playerShip;
 
@@ -13,23 +14,23 @@ void StartGame()
 
 void InitGame()
 {
-
-    const int screenWidth = GetScreenWidth();
-    const int screenHeight = GetScreenHeight();
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
     SetWindowState(FLAG_VSYNC_HINT);
 
     playerShip = CreateShip();
 
-    playerShip.posX = GetScreenWidth() / 2;
-    playerShip.posY = GetScreenWidth() / 2;
-    playerShip.height = 40.0f;
-    playerShip.widht = 40.0f;
+    playerShip.posX = screenWidth / 2;
+    playerShip.posY = screenHeight / 2;
+    playerShip.height = 100.0f;
+    playerShip.widht = 50.0f;
     playerShip.speed = 500.0f;
     playerShip.lifes = 3;
     playerShip.points = 0;
-    playerShip.rotation = 0;
+    playerShip.rotation.x = 0;
+    playerShip.rotation.y = 0;
 }
 
 void GameLoop() 
@@ -38,8 +39,8 @@ void GameLoop()
     {
         // Update
         //----------------------------------------------------------------------------------
-
         
+        shipRotation();
 
         // Draw
         //----------------------------------------------------------------------------------
@@ -47,8 +48,25 @@ void GameLoop()
 
         ClearBackground(BLACK);
 
+        drawGame();
+
         EndDrawing();
     }
 
     CloseWindow();
+}
+
+void drawGame() 
+{
+    DrawShip(playerShip);
+}
+
+void shipRotation()
+{
+
+}
+
+void shipMovement()
+{
+
 }

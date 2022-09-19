@@ -8,7 +8,7 @@ struct Ship
 	float widht;
 	float height;
 
-	float rotation;
+	Vector2 rotation;
 
 	float speed;
 
@@ -19,7 +19,7 @@ struct Ship
 
 Ship CreateShip();
 
-void DrawShip();
+void DrawShip(Ship& PlayerShip);
 
 void AddPoint();
 
