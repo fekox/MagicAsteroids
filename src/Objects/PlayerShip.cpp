@@ -17,6 +17,8 @@ Ship CreateShip()
 
 	playerShip.points = 0;
 
+	playerShip.rotation = 0;
+
 	return playerShip;
 }
 

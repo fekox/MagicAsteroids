@@ -8,6 +8,8 @@ struct Ship
 	float widht;
 	float height;
 
+	float rotation;
+
 	float speed;
 
 	int lifes;
