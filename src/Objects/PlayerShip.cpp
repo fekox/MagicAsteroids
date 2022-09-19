@@ -5,15 +5,15 @@ Ship CreateShip()
 {
 	Ship playerShip;
 
-	playerShip.posX = GetScreenWidth() / 2;
-	playerShip.posY = GetScreenWidth() / 2;
+	playerShip.posX = 0;
+	playerShip.posY = 0;
 
-	playerShip.height = 40.0f;
-	playerShip.widht = 40.0f;
+	playerShip.height = 0;
+	playerShip.widht = 0;
 
-	playerShip.speed = 500.0f;
+	playerShip.speed = 0;
 
-	playerShip.lifes = 3;
+	playerShip.lifes = 0;
 
 	playerShip.points = 0;
 

@@ -1,8 +1,6 @@
-#include "Window/Game.h"
+#include "Window/StartGame.h"
 
 int main(void)
 {
     StartGame();
 }
-
-
