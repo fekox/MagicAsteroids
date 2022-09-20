@@ -5,6 +5,8 @@
 
 Ship playerShip;
 
+Mouse mouse;
+
 void StartGame()
 {
     InitGame();
@@ -31,6 +33,8 @@ void InitGame()
     playerShip.points = 0;
     playerShip.rotation.x = 0;
     playerShip.rotation.y = 0;
+
+    mouse.position = GetMousePosition();
 }
 
 void GameLoop() 
@@ -63,7 +67,7 @@ void drawGame()
 
 void shipRotation()
 {
-
+    
 }
 
 void shipMovement()
