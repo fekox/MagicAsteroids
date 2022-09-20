@@ -1,14 +1,21 @@
+#include <cmath>
 #include "raylib.h"
 #include "Window/Game.h"
 #include "Objects/PlayerShip.h"
 #include "Objects/Mouse.h"
 #include "Window/StartGame.h"
 
+//Player
 Ship playerShip;
+Vector2 shipDirection;
+Vector2 shipDirNormalize;
 
+//Mouse
 Mouse mouse;
-
 Rectangle rec;
+
+
+
 
 void StartGame()
 {
@@ -27,10 +34,20 @@ void InitGame()
 
     playerShip = CreateShip();
 
+    shipDirection.x = 100;
+    shipDirection.y = 100;
+
     playerShip.position.x = screenWidth / 2;
     playerShip.position.y = screenHeight / 2;
-    playerShip.height = 100.0f;
-    playerShip.widht = 50.0f;
+
+    playerShip.direction.x = 0;
+    playerShip.direction.y = 0;
+
+    playerShip.angle = 0;
+
+    playerShip.height = 50.0f;
+    playerShip.widht = 100.0f;
+
     playerShip.speed = 500.0f;
     playerShip.lifes = 3;
     playerShip.points = 0;
@@ -46,8 +63,9 @@ void GameLoop()
     {
         // Update
         //----------------------------------------------------------------------------------
+
         HideCursor();
-        mouse.position = GetMousePosition();
+        mouseMovement();
         shipRotation();
         
 
@@ -68,16 +86,32 @@ void GameLoop()
 void drawGame() 
 {
     DrawShip(playerShip);
-    DrawMouse(mouse, rec);
-    
+    DrawMouse(mouse, rec);   
 }
 
 void shipRotation()
 {
     GetShipPosition(playerShip.position);
+    shipMovement();
+}
+
+void mouseMovement()
+{
+    mouse.position = GetMousePosition();
 }
 
 void shipMovement()
 {
+    shipDirection.x = mouse.position.x - playerShip.position.x;
+    shipDirection.y = mouse.position.y - playerShip.position.y;
+
+    playerShip.angle = atan(shipDirection.y / shipDirection.x);
+
+    playerShip.rotation = playerShip.angle;
+
+    //shipDirNormalize.x = shipDirection.x / Vector2Lenght(shipDirection);
+
+    //playerShip.position.x = shipDirection.x * GetFrameTime();
+    //playerShip.position.y = shipDirection.y * GetFrameTime();
 
 }

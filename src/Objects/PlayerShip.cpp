@@ -5,17 +5,24 @@ Ship CreateShip()
 {
 	Ship playerShip;
 
+	playerShip.position.x = 0;
+	playerShip.position.y = 0;
+
+	playerShip.direction.x = 0;
+	playerShip.direction.y = 0;
+
 	playerShip.height = 0;
 	playerShip.widht = 0;
+
+	playerShip.angle = 0;
+
+	playerShip.rotation = 0;
 
 	playerShip.speed = 0;
 
 	playerShip.lifes = 0;
 
 	playerShip.points = 0;
-
-	playerShip.position.x = 0;
-	playerShip.position.y = 0;
 
 	return playerShip;
 }

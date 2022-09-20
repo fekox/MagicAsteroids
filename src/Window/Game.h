@@ -11,4 +11,6 @@ void shipRotation();
 
 void shipMovement();
 
+void mouseMovement();
+
 void drawGame();
