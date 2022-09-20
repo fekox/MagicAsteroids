@@ -14,30 +14,30 @@ Mouse CreateMouse()
 	return mouse;
 }
 
-Rectangle CreateRectangle(Mouse& mouse)
+Rectangle CreateRectangleMouse(Mouse& mouse)
 {
-	Rectangle rec;
+	Rectangle mouseRec;
 
-	rec.x = mouse.position.x;
-	rec.y = mouse.position.y;
+	mouseRec.x = mouse.position.x;
+	mouseRec.y = mouse.position.y;
 
-	rec.width = mouse.width;
-	rec.height = mouse.height;
+	mouseRec.width = mouse.width;
+	mouseRec.height = mouse.height;
 
-	return rec;
+	return mouseRec;
 }
 
-Vector2 CreateRecOrigin(Rectangle& rec)
+Vector2 CreateRecOriginMouse(Rectangle& mouseRec)
 {
 	Vector2 originRec;
 
-	originRec.x = rec.width /2;
-	originRec.y = rec.width /-2;
+	originRec.x = mouseRec.width /2;
+	originRec.y = mouseRec.width /-2;
 
 	return originRec;
 }
 
-void DrawMouse(Mouse& mouse, Rectangle& rec)
+void DrawMouse(Mouse& mouse, Rectangle& mouseRec)
 {
-	DrawRectanglePro(CreateRectangle(mouse), CreateRecOrigin(rec), 0.0f, YELLOW);
+	DrawRectanglePro(CreateRectangleMouse(mouse), CreateRecOriginMouse(mouseRec), 0.0f, YELLOW);
 }

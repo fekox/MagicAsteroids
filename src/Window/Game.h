@@ -7,8 +7,6 @@ enum PlayerIntputs
 	Shot
 };
 
-void shipRotation();
-
 void shipMovement();
 
 void mouseMovement();

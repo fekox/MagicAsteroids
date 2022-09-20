@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cmath>
 #include "raylib.h"
 #include "Window/Game.h"
@@ -5,17 +6,20 @@
 #include "Objects/Mouse.h"
 #include "Window/StartGame.h"
 
+using namespace std;
+
 //Player
 Ship playerShip;
-Vector2 shipDirection;
 Vector2 shipDirNormalize;
+Vector2 shipActualPos;
+Rectangle shipRec;
 
 //Mouse
 Mouse mouse;
-Rectangle rec;
+Rectangle mouseRec;
 
-
-
+int screenWidth = 1920;
+int screenHeight = 1080;
 
 void StartGame()
 {
@@ -26,35 +30,31 @@ void StartGame()
 
 void InitGame()
 {
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
-
     InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
     SetWindowState(FLAG_VSYNC_HINT);
 
     playerShip = CreateShip();
 
-    shipDirection.x = 100;
-    shipDirection.y = 100;
-
     playerShip.position.x = screenWidth / 2;
     playerShip.position.y = screenHeight / 2;
 
-    playerShip.direction.x = 0;
-    playerShip.direction.y = 0;
+    playerShip.directionX = 0;
+    playerShip.directionY = 0;
 
     playerShip.angle = 0;
 
-    playerShip.height = 50.0f;
-    playerShip.widht = 100.0f;
+    playerShip.height = 60.0f;
+    playerShip.widht = 30.0f;
 
-    playerShip.speed = 500.0f;
+    playerShip.speed = 100.0f;
     playerShip.lifes = 3;
     playerShip.points = 0;
 
+    shipRec = CreateRectangleShip(playerShip);
+
     mouse = CreateMouse();
 
-    rec = CreateRectangle(mouse);
+    mouseRec = CreateRectangleMouse(mouse);
 }
 
 void GameLoop() 
@@ -66,8 +66,7 @@ void GameLoop()
 
         HideCursor();
         mouseMovement();
-        shipRotation();
-        
+        shipMovement();     
 
         // Draw
         //----------------------------------------------------------------------------------
@@ -85,14 +84,8 @@ void GameLoop()
 
 void drawGame() 
 {
-    DrawShip(playerShip);
-    DrawMouse(mouse, rec);   
-}
-
-void shipRotation()
-{
-    GetShipPosition(playerShip.position);
-    shipMovement();
+    DrawShip(playerShip, shipRec);
+    DrawMouse(mouse, mouseRec);   
 }
 
 void mouseMovement()
@@ -102,16 +95,24 @@ void mouseMovement()
 
 void shipMovement()
 {
-    shipDirection.x = mouse.position.x - playerShip.position.x;
-    shipDirection.y = mouse.position.y - playerShip.position.y;
+    //shipActualPos.x = playerShip.position.x;
+    //shipActualPos.y = playerShip.position.y;
 
-    playerShip.angle = atan(shipDirection.y / shipDirection.x);
+    //playerShip.directionX = mouse.position.x - shipActualPos.x;
+    //playerShip.directionY = mouse.position.y - shipActualPos.y;
 
-    playerShip.rotation = playerShip.angle;
+    //playerShip.angle = atan(playerShip.directionY / playerShip.directionX);
 
-    //shipDirNormalize.x = shipDirection.x / Vector2Lenght(shipDirection);
+    //playerShip.rotation = playerShip.angle;
 
-    //playerShip.position.x = shipDirection.x * GetFrameTime();
-    //playerShip.position.y = shipDirection.y * GetFrameTime();
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+    {
+        playerShip.directionX += sin(playerShip.angle) * playerShip.speed * GetFrameTime();
+        playerShip.directionY += -cos(playerShip.angle) * playerShip.speed * GetFrameTime();
+    }
 
+    playerShip.position.x += playerShip.directionX * GetFrameTime();
+    playerShip.position.y += playerShip.directionY * GetFrameTime();
+
+    shipTeleport(playerShip.position, screenWidth, screenHeight);
 }

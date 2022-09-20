@@ -3,7 +3,9 @@
 struct Ship
 {
 	Vector2 position;
-	Vector2 direction;
+	
+	float directionX;
+	float directionY;
 
 	float widht;
 	float height;
@@ -21,11 +23,13 @@ struct Ship
 
 Ship CreateShip();
 
-void DrawShip(Ship& PlayerShip);
+Rectangle CreateRectangleShip(Ship& PlayerShip);
 
-Vector2 GetShipPosition(Vector2& ShipPosition);
+Vector2 CreateRecOriginShip(Rectangle& shipRec);
 
-Vector2 GetShipDirection(Vector2& ShipDirection);
+void shipTeleport(Vector2& shipPosition, int screenWidth, int screenHeight);
+
+void DrawShip(Ship& PlayerShip, Rectangle& shipRec);
 
 void AddPoint();
 

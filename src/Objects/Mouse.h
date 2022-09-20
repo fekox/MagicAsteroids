@@ -11,8 +11,8 @@ struct Mouse
 
 Mouse CreateMouse();
 
-Rectangle CreateRectangle(Mouse& mouse);
+Rectangle CreateRectangleMouse(Mouse& mouse);
 
-Vector2 CreateRecOrigin(Rectangle& rec);
+Vector2 CreateRecOriginMouse(Rectangle& mouseRec);
 
-void DrawMouse(Mouse& mouse, Rectangle& rec);
+void DrawMouse(Mouse& mouse, Rectangle& mouseRec);
