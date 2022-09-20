@@ -4,8 +4,9 @@ struct Ship
 {
 	Vector2 position;
 	
-	float directionX;
-	float directionY;
+	Vector2 direction;
+
+	Vector2 aceleration;
 
 	float widht;
 	float height;

@@ -1,6 +1,6 @@
 #include <iostream>
-#include <cmath>
 #include "raylib.h"
+#include "raymath.h"
 #include "Window/Game.h"
 #include "Objects/PlayerShip.h"
 #include "Objects/Mouse.h"
@@ -10,7 +10,6 @@ using namespace std;
 
 //Player
 Ship playerShip;
-Vector2 shipDirNormalize;
 Vector2 shipActualPos;
 Rectangle shipRec;
 
@@ -38,13 +37,16 @@ void InitGame()
     playerShip.position.x = screenWidth / 2;
     playerShip.position.y = screenHeight / 2;
 
-    playerShip.directionX = 0;
-    playerShip.directionY = 0;
+    playerShip.direction.x = 0;
+    playerShip.direction.y = 0;
+
+    playerShip.aceleration.x = 0;
+    playerShip.aceleration.y = 0;
 
     playerShip.angle = 0;
 
-    playerShip.height = 60.0f;
-    playerShip.widht = 30.0f;
+    playerShip.height = 30.0f;
+    playerShip.widht = 60.0f;
 
     playerShip.speed = 100.0f;
     playerShip.lifes = 3;
@@ -95,24 +97,28 @@ void mouseMovement()
 
 void shipMovement()
 {
-    //shipActualPos.x = playerShip.position.x;
-    //shipActualPos.y = playerShip.position.y;
+    Vector2 distanceDiff;
 
-    //playerShip.directionX = mouse.position.x - shipActualPos.x;
-    //playerShip.directionY = mouse.position.y - shipActualPos.y;
+    shipActualPos.x = playerShip.position.x;
+    shipActualPos.y = playerShip.position.y;
 
-    //playerShip.angle = atan(playerShip.directionY / playerShip.directionX);
+    distanceDiff.x = mouse.position.x - shipActualPos.x;
+    distanceDiff.y = mouse.position.y - shipActualPos.y;
 
-    //playerShip.rotation = playerShip.angle;
+    playerShip.angle = atan(distanceDiff.y / distanceDiff.x);
+    playerShip.angle = playerShip.angle * 180 / PI;
+
+    playerShip.rotation = playerShip.angle;
+
+    Vector2 shipDirNormalize;
 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
     {
-        playerShip.directionX += sin(playerShip.angle) * playerShip.speed * GetFrameTime();
-        playerShip.directionY += -cos(playerShip.angle) * playerShip.speed * GetFrameTime();
-    }
+        shipDirNormalize = Vector2Normalize(distanceDiff);
 
-    playerShip.position.x += playerShip.directionX * GetFrameTime();
-    playerShip.position.y += playerShip.directionY * GetFrameTime();
+        playerShip.aceleration.x += shipDirNormalize.x;
+        playerShip.aceleration.y += shipDirNormalize.y;
+    }
 
     shipTeleport(playerShip.position, screenWidth, screenHeight);
 }

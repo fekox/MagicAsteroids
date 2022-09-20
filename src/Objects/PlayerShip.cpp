@@ -8,8 +8,11 @@ Ship CreateShip()
 	playerShip.position.x = 0;
 	playerShip.position.y = 0;
 
-	playerShip.directionX = 0;
-	playerShip.directionY = 0;
+	playerShip.direction.x = 0;
+	playerShip.direction.y = 0;
+
+	playerShip.aceleration.x = 0;
+	playerShip.aceleration.y = 0;
 
 	playerShip.height = 0;
 	playerShip.widht = 0;
@@ -45,7 +48,7 @@ Vector2 CreateRecOriginShip(Rectangle& shipRec)
 	Vector2 shipOriginRec;
 
 	shipOriginRec.x = shipRec.width / 2;
-	shipOriginRec.y = shipRec.width / -2;
+	shipOriginRec.y = shipRec.height / 2;
 
 	return shipOriginRec;
 }
