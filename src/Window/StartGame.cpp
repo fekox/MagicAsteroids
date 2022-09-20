@@ -1,11 +1,14 @@
 #include "raylib.h"
 #include "Window/Game.h"
 #include "Objects/PlayerShip.h"
+#include "Objects/Mouse.h"
 #include "Window/StartGame.h"
 
 Ship playerShip;
 
 Mouse mouse;
+
+Rectangle rec;
 
 void StartGame()
 {
@@ -24,17 +27,17 @@ void InitGame()
 
     playerShip = CreateShip();
 
-    playerShip.posX = screenWidth / 2;
-    playerShip.posY = screenHeight / 2;
+    playerShip.position.x = screenWidth / 2;
+    playerShip.position.y = screenHeight / 2;
     playerShip.height = 100.0f;
     playerShip.widht = 50.0f;
     playerShip.speed = 500.0f;
     playerShip.lifes = 3;
     playerShip.points = 0;
-    playerShip.rotation.x = 0;
-    playerShip.rotation.y = 0;
 
-    mouse.position = GetMousePosition();
+    mouse = CreateMouse();
+
+    rec = CreateRectangle(mouse);
 }
 
 void GameLoop() 
@@ -43,8 +46,10 @@ void GameLoop()
     {
         // Update
         //----------------------------------------------------------------------------------
-        
+        HideCursor();
+        mouse.position = GetMousePosition();
         shipRotation();
+        
 
         // Draw
         //----------------------------------------------------------------------------------
@@ -63,11 +68,13 @@ void GameLoop()
 void drawGame() 
 {
     DrawShip(playerShip);
+    DrawMouse(mouse, rec);
+    
 }
 
 void shipRotation()
 {
-    
+    GetShipPosition(playerShip.position);
 }
 
 void shipMovement()

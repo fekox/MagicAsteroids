@@ -1,9 +1,18 @@
-#include "raylib.h"
 #pragma once
 
 struct Mouse
 {
 	Vector2 position;
+
+	float width;
+
+	float height;
 };
 
-void DrawMouse(Mouse& mouse);
+Mouse CreateMouse();
+
+Rectangle CreateRectangle(Mouse& mouse);
+
+Vector2 CreateRecOrigin(Rectangle& rec);
+
+void DrawMouse(Mouse& mouse, Rectangle& rec);

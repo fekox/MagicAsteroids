@@ -5,9 +5,6 @@ Ship CreateShip()
 {
 	Ship playerShip;
 
-	playerShip.posX = 0;
-	playerShip.posY = 0;
-
 	playerShip.height = 0;
 	playerShip.widht = 0;
 
@@ -17,15 +14,20 @@ Ship CreateShip()
 
 	playerShip.points = 0;
 
-	playerShip.rotation.x = 0;
-	playerShip.rotation.y = 0;
+	playerShip.position.x = 0;
+	playerShip.position.y = 0;
 
 	return playerShip;
 }
 
 void DrawShip(Ship &PlayerShip)
 {
-	DrawRectangle(PlayerShip.posX, PlayerShip.posY, PlayerShip.widht, PlayerShip.height, RED);
+	DrawRectangle(PlayerShip.position.x, PlayerShip.position.y, PlayerShip.widht, PlayerShip.height, RED);
+}
+
+Vector2 GetShipPosition(Vector2& ShipPosition)
+{
+	return ShipPosition;
 }
 
 void AddPoint()

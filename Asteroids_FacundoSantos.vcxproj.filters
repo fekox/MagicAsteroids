@@ -11,6 +11,9 @@
     <ClCompile Include="src\Objects\Asteroid.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Mouse.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -32,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="src\Window\StartGame.h">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Mouse.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
