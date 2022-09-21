@@ -32,6 +32,10 @@
     <ClInclude Include="src\Window\Game.h" />
     <ClInclude Include="src\Window\StartGame.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Asteroid.png" />
+    <Image Include="resources\Ship.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{DFE02829-CF42-42EC-8422-34C6DF945042}</ProjectGuid>

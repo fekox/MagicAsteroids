@@ -22,6 +22,9 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{93055b97-daa8-471b-9b73-e0e4f2489fd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{8569a024-5232-4fa5-a723-92c1263ac252}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Game.h">
@@ -39,5 +42,13 @@
     <ClInclude Include="src\Objects\Mouse.h">
       <Filter>Objects</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Asteroid.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\Ship.png">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>
