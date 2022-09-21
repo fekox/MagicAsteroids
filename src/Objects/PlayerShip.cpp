@@ -30,6 +30,11 @@ Ship CreateShip()
 
 	playerShip.points = 0;
 
+	playerShip.texture;
+
+	playerShip.frameWidth = 0;
+	playerShip.frameHeight = 0;
+
 	return playerShip;
 }
 
@@ -51,6 +56,7 @@ Vector2 CreateRecOriginShip(Rectangle& shipRec)
 void DrawShip(Ship& playerShip, Rectangle& shipRec)
 {
 	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), CreateRecOriginShip(shipRec), playerShip.rotation, RED);
+	//DrawTexturePro(playerShip.texture, GetRec(playerShip, playerShip.frameWidth, playerShip.frameHeight), GetRec(playerShip, playerShip.frameWidth, playerShip.frameHeight), CreateRecOriginShip(shipRec), playerShip.rotation, WHITE);
 }
 
 void AddPoint()

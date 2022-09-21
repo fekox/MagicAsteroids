@@ -20,6 +20,11 @@ struct Ship
 	int lifes;
 
 	int points;
+
+	Texture2D texture;
+
+	float frameWidth;
+	float frameHeight;
 };
 
 Ship CreateShip();

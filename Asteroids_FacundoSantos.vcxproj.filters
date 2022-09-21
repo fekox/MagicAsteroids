@@ -23,7 +23,7 @@
       <UniqueIdentifier>{93055b97-daa8-471b-9b73-e0e4f2489fd2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
-      <UniqueIdentifier>{8569a024-5232-4fa5-a723-92c1263ac252}</UniqueIdentifier>
+      <UniqueIdentifier>{53ea00c9-0ad0-4c5a-9151-f47d430265ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,10 +44,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\Asteroid.png">
+    <Image Include="src\resources\Ship.png">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="resources\Ship.png">
+    <Image Include="src\resources\Asteroid.png">
       <Filter>Resources</Filter>
     </Image>
   </ItemGroup>

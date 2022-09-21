@@ -6,7 +6,6 @@
 #include "Objects/PlayerShip.h"
 #include "Objects/Asteroid.h"
 #include "Objects/Mouse.h"
-#include "resources/Asteroid.png"
 
 using namespace std;
 
@@ -79,6 +78,12 @@ void InitGame()
     asteroid.speed = 50.0f;
 
     asteroid.radius = 80.0f;
+
+    //Texture
+
+    playerShip.texture = LoadTexture("resources/Ship.png");
+    playerShip.frameWidth = playerShip.widht;
+    playerShip.frameHeight = playerShip.height;
 }
 
 void GameLoop() 
@@ -105,6 +110,7 @@ void GameLoop()
         EndDrawing();
     }
 
+    UnloadTexture(playerShip.texture);
     CloseWindow();
 }
 
