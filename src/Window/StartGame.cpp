@@ -40,8 +40,8 @@ void InitGame()
     playerShip.direction.x = 0;
     playerShip.direction.y = 0;
 
-    playerShip.aceleration.x = 0;
-    playerShip.aceleration.y = 0;
+    playerShip.aceleration.x = 100.0f;
+    playerShip.aceleration.y = 100.0f;
 
     playerShip.angle = 0;
 
@@ -119,6 +119,9 @@ void shipMovement()
         playerShip.aceleration.x += shipDirNormalize.x;
         playerShip.aceleration.y += shipDirNormalize.y;
     }
+
+    playerShip.position.x= playerShip.position.x + playerShip.aceleration.x * GetFrameTime();
+    playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
 
     shipTeleport(playerShip.position, screenWidth, screenHeight);
 }
