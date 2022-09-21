@@ -51,7 +51,7 @@ void InitGame()
 
     playerShip.angle = 0;
 
-    playerShip.height = 30.0f;
+    playerShip.height = 60.0f;
     playerShip.widht = 60.0f;
 
     playerShip.speed = 100.0f;
@@ -62,13 +62,20 @@ void InitGame()
 
     //Mouse
     mouse = CreateMouse();
-    mouseRec = CreateRectangleMouse(mouse);
+
+    mouse.position.x = 0;
+    mouse.position.y = 0;
+
+    mouse.width = 20.0f;
+    mouse.height = 20.0f;
+
+    mouseRec = GetRecMouse(mouse, mouse.width, mouse.height);
 
     //Asteroid
-    asteroid.position.x = screenWidth / 4;
-    asteroid.position.y = screenHeight / 4;
+    asteroid.position.x = 100.0f;
+    asteroid.position.y = 100.0f;
 
-    asteroid.radius = 70.0f;
+    asteroid.radius = 80.0f;
 }
 
 void GameLoop() 
@@ -80,7 +87,8 @@ void GameLoop()
 
         HideCursor();
         mouseMovement();
-        shipMovement();   
+        shipMovement();
+        AsteroidCollision(playerShip, asteroid, asteroid.radius);
 
         // Draw
         //----------------------------------------------------------------------------------
@@ -159,5 +167,53 @@ void shipTeleport(Vector2& shipPosition, int screenWidth, int screenHeight)
     if (shipPosition.y >= screenHeight)
     {
         shipPosition.y = shipPosition.y - screenHeight;
+    }
+}
+
+bool CheckCollisionCirRec(Vector2 asteroidPos, float asteroidRadius, Rectangle rect)
+{
+    Vector2 perimeter;
+
+    perimeter.x = asteroidPos.x;
+
+    if (perimeter.x < rect.x)
+    {
+        perimeter.x = rect.x;
+    }
+
+    if (perimeter.x > rect.x + rect.width)
+    {
+        perimeter.x = rect.x + rect.width;
+    }
+
+    perimeter.y = asteroidPos.y;
+
+    if (perimeter.y < rect.y)
+    {
+        perimeter.y = rect.y;
+    }
+
+    if (perimeter.y > rect.y + rect.height)
+    {
+        perimeter.y = rect.y + rect.height;
+    }
+
+    float distance = sqrt((asteroidPos.x - perimeter.x) * (asteroidPos.x - perimeter.x) + (asteroidPos.y - perimeter.y) * (asteroidPos.y - perimeter.y));
+
+    if (distance <= asteroidRadius) 
+    {
+        return true;
+    }
+
+    return false;
+}
+
+void AsteroidCollision(Ship& playerShip, Asteroid& asteroid, float radius)
+{
+    if (CheckCollisionCirRec(Vector2{asteroid.position.x + 35, asteroid.position.y + 30}, radius - 15, GetRec(playerShip, playerShip.widht, playerShip.height)))
+    {
+
+        cout << "colision" << endl;
+        
     }
 }

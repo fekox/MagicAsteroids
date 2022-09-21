@@ -1,5 +1,8 @@
+#include <iostream>
 #include "raylib.h"
 #include "Objects/PlayerShip.h"
+
+using namespace std;
 
 Ship CreateShip()
 {
@@ -39,7 +42,7 @@ Vector2 CreateRecOriginShip(Rectangle& shipRec)
 {
 	Vector2 shipOriginRec;
 
-	shipOriginRec.x = shipRec.width / 2;
+	shipOriginRec.x = shipRec. height / 2;
 	shipOriginRec.y = shipRec.height / 2;
 
 	return shipOriginRec;

@@ -17,5 +17,5 @@ Asteroid CreateAsteroid()
 
 void DrawAsteroid(Asteroid asteroid) 
 {
-	DrawCircle(asteroid.position.x, asteroid.position.y, asteroid.radius, WHITE);
+	DrawCircleV(asteroid.position, asteroid.radius, WHITE);
 }
