@@ -5,8 +5,6 @@ struct Asteroid
 {
 	Vector2 position;
 
-	Vector2 colisionPos;
-
 	float radius;
 
 	Color color;

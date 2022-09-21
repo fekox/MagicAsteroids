@@ -75,6 +75,8 @@ void InitGame()
     asteroid.position.x = 100.0f;
     asteroid.position.y = 100.0f;
 
+    asteroid.speed = 50.0f;
+
     asteroid.radius = 80.0f;
 }
 
@@ -86,6 +88,7 @@ void GameLoop()
         //----------------------------------------------------------------------------------
 
         HideCursor();
+        asteroidMovement();
         mouseMovement();
         shipMovement();
         AsteroidCollision(playerShip, asteroid, asteroid.radius);
@@ -145,6 +148,37 @@ void shipMovement()
     playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
 
     shipTeleport(playerShip.position, screenWidth, screenHeight);
+}
+
+void asteroidMovement()
+{
+    asteroid.position.x += asteroid.speed * GetFrameTime();
+    asteroid.position.y += asteroid.speed * GetFrameTime();
+
+    asteroidTeleport(asteroid.position, screenWidth, screenHeight);
+}
+
+void asteroidTeleport(Vector2& asteroidPos, int screenWidth, int screenHeight)
+{
+    if (asteroidPos.x < 0)
+    {
+        asteroidPos.x = asteroidPos.x + screenWidth;
+    }
+
+    if (asteroidPos.x >= screenWidth)
+    {
+        asteroidPos.x = asteroidPos.x - screenWidth;
+    }
+
+    if (asteroidPos.y < 0)
+    {
+        asteroidPos.y = asteroidPos.y + screenHeight;
+    }
+
+    if (asteroidPos.y >= screenHeight)
+    {
+        asteroidPos.y = asteroidPos.y - screenHeight;
+    }
 }
 
 void shipTeleport(Vector2& shipPosition, int screenWidth, int screenHeight)
@@ -212,8 +246,6 @@ void AsteroidCollision(Ship& playerShip, Asteroid& asteroid, float radius)
 {
     if (CheckCollisionCirRec(Vector2{asteroid.position.x + 35, asteroid.position.y + 30}, radius - 15, GetRec(playerShip, playerShip.widht, playerShip.height)))
     {
-
         cout << "colision" << endl;
-        
     }
 }
