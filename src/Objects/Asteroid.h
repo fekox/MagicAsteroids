@@ -1,17 +1,17 @@
+#include "raylib.h"
 #pragma once
 
 struct Asteroid
 {
-	float posX;
-	float posY;
+	Vector2 position;
 
-	float widht;
-	float height;
+	float radius;
+
+	Color color;
 
 	float speed;
-
 };
 
 Asteroid CreateAsteroid();
 
-void DrawAsteroid();
+void DrawAsteroid(Asteroid asteroid);

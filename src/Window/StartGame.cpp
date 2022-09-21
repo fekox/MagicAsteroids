@@ -3,6 +3,7 @@
 #include "raymath.h"
 #include "Window/Game.h"
 #include "Objects/PlayerShip.h"
+#include "Objects/Asteroid.h"
 #include "Objects/Mouse.h"
 #include "Window/StartGame.h"
 
@@ -17,8 +18,12 @@ Rectangle shipRec;
 Mouse mouse;
 Rectangle mouseRec;
 
-int screenWidth = 1920;
-int screenHeight = 1080;
+//Asteroid
+Asteroid asteroid;
+
+//Window
+int screenWidth = 1024;
+int screenHeight = 768;
 
 void StartGame()
 {
@@ -32,6 +37,7 @@ void InitGame()
     InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
     SetWindowState(FLAG_VSYNC_HINT);
 
+    //Player
     playerShip = CreateShip();
 
     playerShip.position.x = screenWidth / 2;
@@ -52,11 +58,17 @@ void InitGame()
     playerShip.lifes = 3;
     playerShip.points = 0;
 
-    shipRec = CreateRectangleShip(playerShip);
+    shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 
+    //Mouse
     mouse = CreateMouse();
-
     mouseRec = CreateRectangleMouse(mouse);
+
+    //Asteroid
+    asteroid.position.x = screenWidth / 4;
+    asteroid.position.y = screenHeight / 4;
+
+    asteroid.radius = 70.0f;
 }
 
 void GameLoop() 
@@ -68,7 +80,7 @@ void GameLoop()
 
         HideCursor();
         mouseMovement();
-        shipMovement();     
+        shipMovement();   
 
         // Draw
         //----------------------------------------------------------------------------------
@@ -86,6 +98,7 @@ void GameLoop()
 
 void drawGame() 
 {
+    DrawAsteroid(asteroid);
     DrawShip(playerShip, shipRec);
     DrawMouse(mouse, mouseRec);   
 }
@@ -124,4 +137,27 @@ void shipMovement()
     playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
 
     shipTeleport(playerShip.position, screenWidth, screenHeight);
+}
+
+void shipTeleport(Vector2& shipPosition, int screenWidth, int screenHeight)
+{
+    if (shipPosition.x < 0)
+    {
+        shipPosition.x = shipPosition.x + screenWidth;
+    }
+
+    if (shipPosition.x >= screenWidth)
+    {
+        shipPosition.x = shipPosition.x - screenWidth;
+    }
+
+    if (shipPosition.y < 0)
+    {
+        shipPosition.y = shipPosition.y + screenHeight;
+    }
+
+    if (shipPosition.y >= screenHeight)
+    {
+        shipPosition.y = shipPosition.y - screenHeight;
+    }
 }

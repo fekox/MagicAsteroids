@@ -24,11 +24,9 @@ struct Ship
 
 Ship CreateShip();
 
-Rectangle CreateRectangleShip(Ship& PlayerShip);
+Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight);
 
 Vector2 CreateRecOriginShip(Rectangle& shipRec);
-
-void shipTeleport(Vector2& shipPosition, int screenWidth, int screenHeight);
 
 void DrawShip(Ship& PlayerShip, Rectangle& shipRec);
 

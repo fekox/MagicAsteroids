@@ -30,17 +30,9 @@ Ship CreateShip()
 	return playerShip;
 }
 
-Rectangle CreateRectangleShip(Ship& playerShip)
+Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 {
-	Rectangle shipRec;
-
-	shipRec.x = playerShip.position.x;
-	shipRec.y = playerShip.position.y;
-
-	shipRec.width = playerShip.widht;
-	shipRec.height = playerShip.height;
-
-	return shipRec;
+	return Rectangle{ playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerWidth, playerHeight };
 }
 
 Vector2 CreateRecOriginShip(Rectangle& shipRec)
@@ -53,32 +45,9 @@ Vector2 CreateRecOriginShip(Rectangle& shipRec)
 	return shipOriginRec;
 }
 
-void shipTeleport(Vector2& shipPosition, int screenWidth, int screenHeight)
-{
-	if (shipPosition.x < 0)
-	{
-		shipPosition.x = screenWidth;
-	}
-
-	if (shipPosition.x >= screenWidth)
-	{
-		shipPosition.x = screenWidth;
-	}
-
-	if (shipPosition.y < 0)
-	{
-		shipPosition.y = screenHeight;
-	}
-
-	if (shipPosition.y >= screenHeight)
-	{
-		shipPosition.y = screenHeight;
-	}
-}
-
 void DrawShip(Ship& playerShip, Rectangle& shipRec)
 {
-	DrawRectanglePro(CreateRectangleShip(playerShip), CreateRecOriginShip(shipRec), playerShip.rotation, RED);
+	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), CreateRecOriginShip(shipRec), playerShip.rotation, RED);
 }
 
 void AddPoint()
