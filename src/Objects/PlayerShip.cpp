@@ -8,25 +8,23 @@ Ship CreateShip()
 {
 	Ship playerShip;
 
-	playerShip.position.x = 0;
-	playerShip.position.y = 0;
+	playerShip.position.x = GetScreenWidth() / 2;
+	playerShip.position.y = GetScreenHeight() / 2;
 
 	playerShip.direction.x = 0;
 	playerShip.direction.y = 0;
 
-	playerShip.aceleration.x = 0;
-	playerShip.aceleration.y = 0;
+	playerShip.aceleration.x = 100.0f;
+	playerShip.aceleration.y = 100.0f;
 
-	playerShip.height = 0;
-	playerShip.widht = 0;
-
-	playerShip.angle = 0;
+	playerShip.height = 60.0f;
+	playerShip.widht = 60.0f;
 
 	playerShip.rotation = 0;
 
-	playerShip.speed = 0;
+	playerShip.speed = 100.0f;
 
-	playerShip.lifes = 0;
+	playerShip.lifes = 3;
 
 	playerShip.points = 0;
 
@@ -47,7 +45,7 @@ Vector2 CreateRecOriginShip(Rectangle& shipRec)
 {
 	Vector2 shipOriginRec;
 
-	shipOriginRec.x = shipRec. height / 2;
+	shipOriginRec.x = shipRec.width / 2;
 	shipOriginRec.y = shipRec.height / 2;
 
 	return shipOriginRec;
@@ -56,7 +54,6 @@ Vector2 CreateRecOriginShip(Rectangle& shipRec)
 void DrawShip(Ship& playerShip, Rectangle& shipRec)
 {
 	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), CreateRecOriginShip(shipRec), playerShip.rotation, RED);
-	//DrawTexturePro(playerShip.texture, GetRec(playerShip, playerShip.frameWidth, playerShip.frameHeight), GetRec(playerShip, playerShip.frameWidth, playerShip.frameHeight), CreateRecOriginShip(shipRec), playerShip.rotation, WHITE);
 }
 
 void AddPoint()

@@ -5,12 +5,12 @@ Asteroid CreateAsteroid()
 {
 	Asteroid asteroid;
 
-	asteroid.position.x = 0;
-	asteroid.position.y = 0;
+	asteroid.position.x = 100.0f;
+	asteroid.position.y = 100.0f;
 
-	asteroid.radius = 0;
+	asteroid.speed = 50.0f;
 
-	asteroid.speed = 0;
+	asteroid.radius = 80.0f;
 
 	return asteroid;
 }

@@ -8,8 +8,8 @@ Mouse CreateMouse()
 	mouse.position.x = 0;
 	mouse.position.y = 0;
 
-	mouse.width = 0;
-	mouse.height = 0;
+	mouse.width = 20.0f;
+	mouse.height = 20.0f;
 
 	return mouse;
 }

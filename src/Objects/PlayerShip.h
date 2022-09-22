@@ -11,8 +11,6 @@ struct Ship
 	float widht;
 	float height;
 
-	float angle;
-
 	float rotation;
 
 	float speed;

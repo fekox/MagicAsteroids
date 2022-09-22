@@ -39,49 +39,17 @@ void InitGame()
 
     //Player
     playerShip = CreateShip();
-
-    playerShip.position.x = screenWidth / 2;
-    playerShip.position.y = screenHeight / 2;
-
-    playerShip.direction.x = 0;
-    playerShip.direction.y = 0;
-
-    playerShip.aceleration.x = 100.0f;
-    playerShip.aceleration.y = 100.0f;
-
-    playerShip.angle = 0;
-
-    playerShip.height = 60.0f;
-    playerShip.widht = 60.0f;
-
-    playerShip.speed = 100.0f;
-    playerShip.lifes = 3;
-    playerShip.points = 0;
-
     shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 
     //Mouse
     mouse = CreateMouse();
-
-    mouse.position.x = 0;
-    mouse.position.y = 0;
-
-    mouse.width = 20.0f;
-    mouse.height = 20.0f;
-
     mouseRec = GetRecMouse(mouse, mouse.width, mouse.height);
 
     //Asteroid
-    asteroid.position.x = 100.0f;
-    asteroid.position.y = 100.0f;
-
-    asteroid.speed = 50.0f;
-
-    asteroid.radius = 80.0f;
+    asteroid = CreateAsteroid();
 
     //Texture
-
-    playerShip.texture = LoadTexture("resources/Ship.png");
+    Texture2D player = LoadTexture("src/resources/Ship.png");
     playerShip.frameWidth = playerShip.widht;
     playerShip.frameHeight = playerShip.height;
 }
@@ -118,7 +86,7 @@ void drawGame()
 {
     DrawAsteroid(asteroid);
     DrawShip(playerShip, shipRec);
-    DrawMouse(mouse, mouseRec);   
+    DrawMouse(mouse, mouseRec);
 }
 
 void mouseMovement()
@@ -136,10 +104,16 @@ void shipMovement()
     distanceDiff.x = mouse.position.x - shipActualPos.x;
     distanceDiff.y = mouse.position.y - shipActualPos.y;
 
-    playerShip.angle = atan(distanceDiff.y / distanceDiff.x);
-    playerShip.angle = playerShip.angle * 180 / PI;
+    float angle = atan(distanceDiff.y / distanceDiff.x);
+    angle = angle * 180 / PI;
 
-    playerShip.rotation = playerShip.angle;
+    if (distanceDiff.x < 0)
+    {
+        angle += 180;
+    }
+
+    playerShip.rotation = angle;
+
 
     Vector2 shipDirNormalize;
 
@@ -151,7 +125,7 @@ void shipMovement()
         playerShip.aceleration.y += shipDirNormalize.y;
     }
 
-    playerShip.position.x= playerShip.position.x + playerShip.aceleration.x * GetFrameTime();
+    playerShip.position.x = playerShip.position.x + playerShip.aceleration.x * GetFrameTime();
     playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
 
     objTeleport(playerShip.position, screenWidth, screenHeight);
