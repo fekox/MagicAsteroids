@@ -11,8 +11,8 @@ using namespace std;
 
 //Player
 Ship playerShip;
-Vector2 shipActualPos;
 Rectangle shipRec;
+Vector2 shipOriginRec;
 
 //Mouse
 Mouse mouse;
@@ -40,6 +40,8 @@ void InitGame()
     //Player
     playerShip = CreateShip();
     shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
+    shipOriginRec.x = shipRec.width / 2;
+    shipOriginRec.y = shipRec.height / 2;
 
     //Mouse
     mouse = CreateMouse();
@@ -47,9 +49,6 @@ void InitGame()
 
     //Asteroid
     asteroid = CreateAsteroid();
-
-    //Texture
-    Texture2D player = LoadTexture("resources/Ship.png");
 }
 
 void GameLoop() 
@@ -83,7 +82,7 @@ void GameLoop()
 void drawGame() 
 {
     DrawAsteroid(asteroid);
-    DrawShip(playerShip, shipRec);
+    DrawShip(playerShip, shipOriginRec);
     DrawMouse(mouse, mouseRec);
 }
 
@@ -95,6 +94,10 @@ void mouseMovement()
 void shipMovement()
 {
     Vector2 distanceDiff;
+    Vector2 shipActualPos;
+
+    playerShip.source = { 0,0, (float)playerShip.texture.width, (float)playerShip.texture.height };
+    playerShip.dest = { playerShip.position.x, playerShip.position.y, playerShip.widht, playerShip.height };
 
     shipActualPos.x = playerShip.position.x;
     shipActualPos.y = playerShip.position.y;

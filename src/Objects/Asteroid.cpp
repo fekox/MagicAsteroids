@@ -10,7 +10,9 @@ Asteroid CreateAsteroid()
 
 	asteroid.speed = 50.0f;
 
-	asteroid.radius = 80.0f;
+	asteroid.radius = 60.0f;
+
+	asteroid.texture = LoadTexture("resources/Asteroid.png");
 
 	return asteroid;
 }
@@ -18,4 +20,5 @@ Asteroid CreateAsteroid()
 void DrawAsteroid(Asteroid asteroid) 
 {
 	DrawCircleV(asteroid.position, asteroid.radius, WHITE);
+	DrawTexture(asteroid.texture, asteroid.position.x - 70, asteroid.position.y - 70, WHITE);
 }

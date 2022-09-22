@@ -28,7 +28,7 @@ Ship CreateShip()
 
 	playerShip.points = 0;
 
-	playerShip.texture;
+	playerShip.texture = LoadTexture("resources/Ship.png");
 
 	return playerShip;
 }
@@ -38,19 +38,10 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 	return Rectangle{ playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerWidth, playerHeight };
 }
 
-Vector2 CreateRecOriginShip(Rectangle& shipRec)
+void DrawShip(Ship& playerShip, Vector2& shipOriginRec)
 {
-	Vector2 shipOriginRec;
-
-	shipOriginRec.x = shipRec.width / 2;
-	shipOriginRec.y = shipRec.height / 2;
-
-	return shipOriginRec;
-}
-
-void DrawShip(Ship& playerShip, Rectangle& shipRec)
-{
-	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), CreateRecOriginShip(shipRec), playerShip.rotation, RED);
+	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), shipOriginRec, playerShip.rotation, RED);
+	DrawTexturePro(playerShip.texture, Rectangle{0,0, (float)playerShip.texture.width, (float)playerShip.texture.height}, Rectangle{playerShip.position.x - 30, playerShip.position.y - 30, playerShip.widht, playerShip.height}, shipOriginRec, playerShip.rotation, WHITE);
 }
 
 void AddPoint()
