@@ -44,10 +44,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="src\resources\Ship.png">
+    <Image Include="resources\Asteroid.png">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="src\resources\Asteroid.png">
+    <Image Include="resources\Ship.png">
       <Filter>Resources</Filter>
     </Image>
   </ItemGroup>

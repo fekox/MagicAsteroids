@@ -30,9 +30,6 @@ Ship CreateShip()
 
 	playerShip.texture;
 
-	playerShip.frameWidth = 0;
-	playerShip.frameHeight = 0;
-
 	return playerShip;
 }
 

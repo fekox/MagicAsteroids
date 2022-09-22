@@ -49,9 +49,7 @@ void InitGame()
     asteroid = CreateAsteroid();
 
     //Texture
-    Texture2D player = LoadTexture("src/resources/Ship.png");
-    playerShip.frameWidth = playerShip.widht;
-    playerShip.frameHeight = playerShip.height;
+    Texture2D player = LoadTexture("resources/Ship.png");
 }
 
 void GameLoop() 
