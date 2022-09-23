@@ -76,6 +76,8 @@ void GameLoop()
     }
 
     UnloadTexture(playerShip.texture);
+    UnloadTexture(asteroid.texture);
+    UnloadTexture(mouse.texture);
     CloseWindow();
 }
 

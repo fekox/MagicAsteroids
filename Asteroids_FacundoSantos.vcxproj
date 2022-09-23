@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\Asteroid.png" />
+    <Image Include="resources\Cross.png" />
     <Image Include="resources\Ship.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

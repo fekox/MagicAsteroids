@@ -19,6 +19,6 @@ Asteroid CreateAsteroid()
 
 void DrawAsteroid(Asteroid asteroid) 
 {
-	DrawCircleV(asteroid.position, asteroid.radius, WHITE);
+	DrawCircleV(asteroid.position, asteroid.radius, BLANK);
 	DrawTexture(asteroid.texture, asteroid.position.x - 70, asteroid.position.y - 70, WHITE);
 }

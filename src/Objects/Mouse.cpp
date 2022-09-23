@@ -11,6 +11,8 @@ Mouse CreateMouse()
 	mouse.width = 20.0f;
 	mouse.height = 20.0f;
 
+	mouse.texture = LoadTexture("resources/Cross.png");
+
 	return mouse;
 }
 
@@ -31,5 +33,6 @@ Vector2 CreateRecOriginMouse(Rectangle& mouseRec)
 
 void DrawMouse(Mouse& mouse, Rectangle& mouseRec)
 {
-	DrawRectanglePro(GetRecMouse(mouse, mouse.width, mouse.height), CreateRecOriginMouse(mouseRec), 0.0f, YELLOW);
+	DrawRectanglePro(GetRecMouse(mouse, mouse.width, mouse.height), CreateRecOriginMouse(mouseRec), 0.0f, BLANK);
+	DrawTexture(mouse.texture, mouse.position.x - 16, mouse.position.y -16, WHITE);
 }

@@ -40,7 +40,7 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 
 void DrawShip(Ship& playerShip, Vector2& shipOriginRec)
 {
-	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), shipOriginRec, playerShip.rotation, RED);
+	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), shipOriginRec, playerShip.rotation, BLANK);
 	DrawTexturePro(playerShip.texture, Rectangle{0,0, (float)playerShip.texture.width, (float)playerShip.texture.height}, Rectangle{playerShip.position.x - 30, playerShip.position.y - 30, playerShip.widht, playerShip.height}, shipOriginRec, playerShip.rotation, WHITE);
 }
 

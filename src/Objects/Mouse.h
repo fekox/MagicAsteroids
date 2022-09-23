@@ -7,6 +7,8 @@ struct Mouse
 	float width;
 
 	float height;
+
+	Texture2D texture;
 };
 
 Mouse CreateMouse();
