@@ -22,6 +22,7 @@ Rectangle mouseRec;
 Asteroid asteroid;
 
 //Window
+Texture2D background;
 int screenWidth = 1024;
 int screenHeight = 768;
 
@@ -34,8 +35,11 @@ void StartGame()
 
 void InitGame()
 {
+    //Window
     InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
     SetWindowState(FLAG_VSYNC_HINT);
+
+    background = LoadTexture("resources/Background.png");
 
     //Player
     playerShip = CreateShip();
@@ -78,13 +82,15 @@ void GameLoop()
     UnloadTexture(playerShip.texture);
     UnloadTexture(asteroid.texture);
     UnloadTexture(mouse.texture);
+    UnloadTexture(background);
     CloseWindow();
 }
 
 void drawGame() 
 {
-    DrawAsteroid(asteroid);
+    DrawTexture(background, 0, 0, WHITE);
     DrawShip(playerShip, shipOriginRec);
+    DrawAsteroid(asteroid);
     DrawMouse(mouse, mouseRec);
 }
 
