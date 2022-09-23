@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Objects\Asteroid.cpp" />
+    <ClCompile Include="src\Objects\Bullet.cpp" />
     <ClCompile Include="src\Objects\Mouse.cpp" />
     <ClCompile Include="src\Objects\PlayerShip.cpp" />
     <ClCompile Include="src\Window\StartGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Objects\Asteroid.h" />
+    <ClInclude Include="src\Objects\Bullet.h" />
     <ClInclude Include="src\Objects\Mouse.h" />
     <ClInclude Include="src\Objects\PlayerShip.h" />
     <ClInclude Include="src\Window\Game.h" />

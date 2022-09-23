@@ -1,7 +1,8 @@
 #include "raylib.h"
+#include "Objects/PlayerShip.h"
 #pragma once
 
-struct Asteroid
+struct Bullet
 {
 	Vector2 position;
 
@@ -12,6 +13,7 @@ struct Asteroid
 	Texture2D texture;
 };
 
-Asteroid CreateAsteroid();
+Bullet CreateBullet(Ship playerShip);
 
-void DrawAsteroid(Asteroid asteroid);
+void DrawBullet(Bullet bullet);
+

@@ -6,6 +6,7 @@
 #include "Objects/PlayerShip.h"
 #include "Objects/Asteroid.h"
 #include "Objects/Mouse.h"
+#include "Objects/Bullet.h"
 
 using namespace std;
 
@@ -13,6 +14,9 @@ using namespace std;
 Ship playerShip;
 Rectangle shipRec;
 Vector2 shipOriginRec;
+
+//Bullet
+Bullet bullet;
 
 //Mouse
 Mouse mouse;
@@ -132,6 +136,11 @@ void shipMovement()
 
         playerShip.aceleration.x += shipDirNormalize.x;
         playerShip.aceleration.y += shipDirNormalize.y;
+    }
+
+    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+    {
+
     }
 
     playerShip.position.x = playerShip.position.x + playerShip.aceleration.x * GetFrameTime();
