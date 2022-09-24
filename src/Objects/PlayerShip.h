@@ -14,6 +14,8 @@ struct Ship
 
 	float rotation;
 
+	float radius;
+
 	float speed;
 
 	int lifes;
@@ -27,7 +29,7 @@ Ship CreateShip();
 
 Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight);
 
-void DrawShip(Ship& PlayerShip, Vector2& shipOriginRec);
+void DrawShip(Ship& PlayerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight);
 
 void AddPoint();
 

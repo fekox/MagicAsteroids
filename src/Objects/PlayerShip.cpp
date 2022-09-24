@@ -20,6 +20,8 @@ Ship CreateShip()
 	playerShip.height = 60.0f;
 	playerShip.widht = 60.0f;
 
+	playerShip.radius = 25.0f;
+
 	playerShip.rotation = 0;
 
 	playerShip.speed = 100.0f;
@@ -38,10 +40,10 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 	return Rectangle{ playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerWidth, playerHeight };
 }
 
-void DrawShip(Ship& playerShip, Vector2& shipOriginRec)
+void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight)
 {
-	DrawRectanglePro(GetRec(playerShip, playerShip.widht, playerShip.height), shipOriginRec, playerShip.rotation, BLANK);
 	DrawTexturePro(playerShip.texture, Rectangle{0,0, (float)playerShip.texture.width, (float)playerShip.texture.height}, Rectangle{playerShip.position.x - playerShip.widht /2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height}, shipOriginRec, playerShip.rotation, WHITE);
+	DrawCircle(playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerShip.radius, BLANK);
 }
 
 void AddPoint()

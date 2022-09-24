@@ -1,5 +1,6 @@
 #include "Objects/Asteroid.h"
 #include "Objects/PlayerShip.h"
+#include "Objects/Bullet.h"
 #pragma once
 
 void Input();
@@ -12,8 +13,9 @@ void shipMovement();
 void bulletMovement();
 
 void asteroidMovement();
-void AsteroidCollision(Ship& playerShip, Asteroid& asteroid, float radius);
-bool CheckCollisionCirRec(Vector2 asteroidPos, float asteroidRadius, Rectangle rect);
+void AsteroidCollision(Ship& playerShip, Asteroid& asteroid);
+void BulletCollision(Asteroid& asteroid, Bullet& bullet);
+bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, float obj2Radius);
 
 void objCollisionLimit(Vector2& shipPosition, int screenWidth, int screenHeight);
 void bulletCollisonLimit();
