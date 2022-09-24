@@ -141,13 +141,12 @@ void Draw()
 
 void drawGame() 
 {
-    DrawTexture(background, 0, 0, WHITE);
-    DrawShip(playerShip, shipOriginRec);
-    
+    DrawTexture(background, 0, 0, WHITE);    
     for (int i = 0; i < maxBullets; i++)
     {
         DrawBullet(bullet[i]);
     }
+    DrawShip(playerShip, shipOriginRec);
 
     DrawAsteroid(asteroid);
     DrawMouse(mouse, mouseRec);

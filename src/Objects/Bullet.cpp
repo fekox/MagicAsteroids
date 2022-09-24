@@ -16,12 +16,13 @@ Bullet CreateBullet()
 
 	bullet.speed = 500.0f;
 
-	bullet.texture;
+	bullet.texture = LoadTexture("resources/Bullet.png");
 
 	return bullet;
 }
 
 void DrawBullet(Bullet bullet)
 {
-	DrawCircle(bullet.position.x, bullet.position.y, bullet.radius, GREEN);
+	DrawCircle(bullet.position.x, bullet.position.y, bullet.radius, RED);
+	DrawTexture(bullet.texture, bullet.position.x - 12, bullet.position.y - 12, WHITE);
 }
