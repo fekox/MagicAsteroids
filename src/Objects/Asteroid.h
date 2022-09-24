@@ -7,7 +7,7 @@ struct Asteroid
 
 	float radius;
 
-	float speed;
+	Vector2 speed;
 
 	Texture2D texture;
 };

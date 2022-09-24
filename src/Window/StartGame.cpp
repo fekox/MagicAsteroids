@@ -25,7 +25,8 @@ Mouse mouse;
 Rectangle mouseRec;
 
 //Asteroid
-Asteroid asteroid;
+const int maxAteroids = 5;
+Asteroid asteroid[maxAteroids];
 
 //Window
 Texture2D background;
@@ -59,7 +60,10 @@ void InitGame()
     mouseRec = GetRecMouse(mouse, mouse.width, mouse.height);
 
     //Asteroid
-    asteroid = CreateAsteroid();
+    for (int i = 0; i < maxAteroids; i++)
+    {
+        asteroid[i] = CreateAsteroid();
+    }
 
     //Bullet
     for (int i = 0; i < maxBullets; i++)
@@ -121,20 +125,19 @@ void Update()
 
 void Collision()
 {
-    AsteroidCollision(playerShip, asteroid);
+    AsteroidCollision(playerShip);
 
-    for (int i = 0; i < maxBullets; i++)
+    for (int i = 0; i < maxAteroids; i++)
     {
-        BulletCollision(asteroid, bullet[i]);
+        BulletCollision(asteroid[i]);
+
+        objCollisionLimit(asteroid[i].position, screenWidth, screenHeight);
     }
 
-    objCollisionLimit(asteroid.position, screenWidth, screenHeight);
     objCollisionLimit(playerShip.position, screenWidth, screenHeight);
 
-    for (int i = 0; i < maxBullets; i++)
-    {
-        bulletCollisonLimit();
-    }
+    bulletCollisonLimit();
+    
 }
 
 void Draw()
@@ -155,8 +158,11 @@ void drawGame()
     }
 
     DrawShip(playerShip, shipOriginRec, playerShip.widht, playerShip.height);
-
-    DrawAsteroid(asteroid);
+    
+    for (int i = 0; i < maxAteroids; i++)
+    {
+        DrawAsteroid(asteroid[i]);
+    }
     DrawMouse(mouse, mouseRec);
 }
 
@@ -194,8 +200,24 @@ void shipMovement()
 
 void asteroidMovement()
 {
-    asteroid.position.x += asteroid.speed * GetFrameTime();
-    asteroid.position.y += asteroid.speed * GetFrameTime();
+    for (int i = 0; i < maxAteroids; i++)
+    {
+        if (asteroid[i].speed.x != 0 && asteroid[i].speed.y != 0)
+        {
+            asteroid[i].position.x += asteroid[i].speed.x * GetFrameTime();
+            asteroid[i].position.y += asteroid[i].speed.y * GetFrameTime();
+        }
+
+        else
+        {
+            asteroid[i].speed.x = GetRandomValue(-70, 70);
+            asteroid[i].speed.y = GetRandomValue(-70, 70);
+
+            asteroid[i].position.x += asteroid[i].speed.x * GetFrameTime();
+            asteroid[i].position.y += asteroid[i].speed.y * GetFrameTime();
+        }
+
+    }
 }
 
 void bulletMovement()
@@ -283,26 +305,43 @@ bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, f
     return false;
 }
 
-void AsteroidCollision(Ship& playerShip, Asteroid& asteroid)
+void AsteroidCollision(Ship& playerShip)
 {
-    if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid.position, asteroid.radius))
+    for (int i = 0; i < maxAteroids; i++)
     {
-        cout << "colision" << endl;
+        if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid[i].position, asteroid[i].radius))
+        {
+            cout << "colision" << endl;
+        }
     }
 }
 
-void BulletCollision(Asteroid& asteroid, Bullet& bullet)
+void BulletCollision(Asteroid& asteroid)
 {
-    if (CheckCollsisionCirCir(bullet.position, bullet.radius, asteroid.position, asteroid.radius))
+    for (int i = 0; i < maxBullets; i++)
     {
-        cout << "colision de bala con asteroide" << endl;
+        if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroid.position, asteroid.radius))
+        {
+            bullet[i].isMoving = false;
+            cout << "colision bala" << endl;
+        }
     }
 }
 
 void UnloadData()
 {
     UnloadTexture(playerShip.texture);
-    UnloadTexture(asteroid.texture);
+
+    for (int i = 0; i < maxAteroids; i++)
+    {
+        UnloadTexture(asteroid[i].texture);
+    }
+
+    for (int i = 0; i < maxBullets; i++)
+    {
+        UnloadTexture(bullet[i].texture);
+    }
+
     UnloadTexture(mouse.texture);
     UnloadTexture(background);
 }

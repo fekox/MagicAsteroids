@@ -5,10 +5,11 @@ Asteroid CreateAsteroid()
 {
 	Asteroid asteroid;
 
-	asteroid.position.x = 100.0f;
-	asteroid.position.y = 100.0f;
+	asteroid.position.x = GetRandomValue(0, 1024);
+	asteroid.position.y = GetRandomValue(0, 768);
 
-	asteroid.speed = 50.0f;
+	asteroid.speed.x = GetRandomValue(-70, 70);
+	asteroid.speed.y = GetRandomValue(-70, 70);
 
 	asteroid.radius = 60.0f;
 
