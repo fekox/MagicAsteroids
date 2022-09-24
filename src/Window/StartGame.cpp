@@ -17,7 +17,7 @@ Vector2 shipOriginRec;
 Vector2 shipDirNormalize;
 
 //Bullet
-const int maxBullets = 100;
+const int maxBullets = 10;
 Bullet bullet[maxBullets];
 
 //Mouse
@@ -54,6 +54,7 @@ void InitGame()
     shipOriginRec.y = shipRec.height / 2;
 
     //Mouse
+    HideCursor();
     mouse = CreateMouse();
     mouseRec = GetRecMouse(mouse, mouse.width, mouse.height);
 
@@ -61,43 +62,93 @@ void InitGame()
     asteroid = CreateAsteroid();
 
     //Bullet
+    for (int i = 0; i < maxBullets; i++)
+    {
+        bullet[i] = CreateBullet();
+    }
 }
 
 void GameLoop() 
 {
     while (!WindowShouldClose())
     {
-        // Update
-        //----------------------------------------------------------------------------------
-
-        HideCursor();
-        asteroidMovement();
-        mouseMovement();
-        shipMovement();
-        AsteroidCollision(playerShip, asteroid, asteroid.radius);
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
-
-        ClearBackground(BLACK);
-
-        drawGame();
-
-        EndDrawing();
+        Input();
+        Update();
+        Collision();
+        Draw();
     }
 
-    UnloadTexture(playerShip.texture);
-    UnloadTexture(asteroid.texture);
-    UnloadTexture(mouse.texture);
-    UnloadTexture(background);
+    UnloadData();
     CloseWindow();
+}
+
+void Input()
+{
+    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+    {
+        shipDirNormalize = Vector2Normalize(playerShip.direction);
+
+        playerShip.aceleration.x += shipDirNormalize.x;
+        playerShip.aceleration.y += shipDirNormalize.y;
+    }
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    {
+        for (int i = 0; i < maxBullets; i++)
+        {
+            if (!bullet[i].isMoving)
+            {
+                bullet[i].isMoving = true;
+
+                bullet[i].direction.x = mouse.position.x - bullet[i].position.x;
+                bullet[i].direction.y = mouse.position.y - bullet[i].position.y;
+
+                bullet[i].direction = Vector2Normalize(bullet[i].direction);
+
+                break;
+            }
+        }
+    }
+}
+
+void Update()
+{
+    shipMovement();
+    asteroidMovement();
+    bulletMovement();
+    mouseMovement();
+}
+
+void Collision()
+{
+    AsteroidCollision(playerShip, asteroid, asteroid.radius);
+    objCollisionLimit(asteroid.position, screenWidth, screenHeight);
+    objCollisionLimit(playerShip.position, screenWidth, screenHeight);
+
+    for (int i = 0; i < maxBullets; i++)
+    {
+        bulletCollisonLimit();
+    }
+}
+
+void Draw()
+{
+    BeginDrawing();
+    ClearBackground(BLACK);
+    drawGame();
+    EndDrawing();
 }
 
 void drawGame() 
 {
     DrawTexture(background, 0, 0, WHITE);
     DrawShip(playerShip, shipOriginRec);
+    
+    for (int i = 0; i < maxBullets; i++)
+    {
+        DrawBullet(bullet[i]);
+    }
+
     DrawAsteroid(asteroid);
     DrawMouse(mouse, mouseRec);
 }
@@ -109,7 +160,6 @@ void mouseMovement()
 
 void shipMovement()
 {
-    Vector2 distanceDiff;
     Vector2 shipActualPos;
 
     playerShip.source = { 0,0, (float)playerShip.texture.width, (float)playerShip.texture.height };
@@ -118,47 +168,48 @@ void shipMovement()
     shipActualPos.x = playerShip.position.x;
     shipActualPos.y = playerShip.position.y;
 
-    distanceDiff.x = mouse.position.x - shipActualPos.x;
-    distanceDiff.y = mouse.position.y - shipActualPos.y;
+    playerShip.direction.x = mouse.position.x - shipActualPos.x;
+    playerShip.direction.y = mouse.position.y - shipActualPos.y;
 
-    float angle = atan(distanceDiff.y / distanceDiff.x);
+    float angle = atan(playerShip.direction.y / playerShip.direction.x);
     angle = angle * 180 / PI;
 
-    if (distanceDiff.x < 0)
+    if (playerShip.direction.x < 0)
     {
         angle += 180;
     }
 
     playerShip.rotation = angle;
 
-    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
-    {
-        shipDirNormalize = Vector2Normalize(distanceDiff);
-
-        playerShip.aceleration.x += shipDirNormalize.x;
-        playerShip.aceleration.y += shipDirNormalize.y;
-    }
-
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-    {
-
-    }
-
     playerShip.position.x = playerShip.position.x + playerShip.aceleration.x * GetFrameTime();
     playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
-
-    objTeleport(playerShip.position, screenWidth, screenHeight);
 }
 
 void asteroidMovement()
 {
     asteroid.position.x += asteroid.speed * GetFrameTime();
     asteroid.position.y += asteroid.speed * GetFrameTime();
-
-    objTeleport(asteroid.position, screenWidth, screenHeight);
 }
 
-void objTeleport(Vector2& objPosition, int screenWidth, int screenHeight)
+void bulletMovement()
+{
+    for (int i = 0; i < maxBullets; i++)
+    {
+        if (bullet[i].isMoving == false)
+        {
+            bullet[i].position.x = playerShip.position.x - playerShip.widht / 2;
+            bullet[i].position.y = playerShip.position.y - playerShip.height / 2;
+        }
+
+        if (bullet[i].isMoving)
+        {
+            bullet[i].position.x += bullet[i].direction.x * bullet[i].speed * GetFrameTime();
+            bullet[i].position.y += bullet[i].direction.y * bullet[i].speed * GetFrameTime();
+        }
+    }    
+}
+
+void objCollisionLimit(Vector2& objPosition, int screenWidth, int screenHeight)
 {
     if (objPosition.x < 0)
     {
@@ -178,6 +229,35 @@ void objTeleport(Vector2& objPosition, int screenWidth, int screenHeight)
     if (objPosition.y >= screenHeight)
     {
         objPosition.y = objPosition.y - screenHeight;
+    }
+}
+
+void bulletCollisonLimit()
+{
+    for (int i = 0; i < maxBullets; i++)
+    {
+        if (bullet[i].isMoving)
+        {
+            if (bullet[i].position.x < 0)
+            {
+                bullet[i].isMoving = false;
+            }
+
+            if (bullet[i].position.x >= screenWidth)
+            {
+                bullet[i].isMoving = false;
+            }
+
+            if (bullet[i].position.y < 0)
+            {
+                bullet[i].isMoving = false;
+            }
+
+            if (bullet[i].position.y >= screenHeight)
+            {
+                bullet[i].isMoving = false;
+            }
+        }
     }
 }
 
@@ -225,4 +305,12 @@ void AsteroidCollision(Ship& playerShip, Asteroid& asteroid, float radius)
     {
         cout << "colision" << endl;
     }
+}
+
+void UnloadData()
+{
+    UnloadTexture(playerShip.texture);
+    UnloadTexture(asteroid.texture);
+    UnloadTexture(mouse.texture);
+    UnloadTexture(background);
 }

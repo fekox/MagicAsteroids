@@ -17,6 +17,6 @@ struct Bullet
 	Texture2D texture;
 };
 
-Bullet CreateBullet(Ship& playerShip);
+Bullet CreateBullet();
 
 void DrawBullet(Bullet bullet);

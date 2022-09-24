@@ -1,6 +1,6 @@
 #include "Objects/Bullet.h"
 
-Bullet CreateBullet(Ship& playerShip)
+Bullet CreateBullet()
 {
 	Bullet bullet;
 
@@ -14,7 +14,7 @@ Bullet CreateBullet(Ship& playerShip)
 
 	bullet.radius = 10.0f;
 
-	bullet.speed = 90.0f;
+	bullet.speed = 500.0f;
 
 	bullet.texture;
 
