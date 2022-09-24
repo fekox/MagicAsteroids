@@ -14,9 +14,11 @@ using namespace std;
 Ship playerShip;
 Rectangle shipRec;
 Vector2 shipOriginRec;
+Vector2 shipDirNormalize;
 
 //Bullet
-Bullet bullet;
+const int maxBullets = 100;
+Bullet bullet[maxBullets];
 
 //Mouse
 Mouse mouse;
@@ -57,6 +59,8 @@ void InitGame()
 
     //Asteroid
     asteroid = CreateAsteroid();
+
+    //Bullet
 }
 
 void GameLoop() 
@@ -127,10 +131,7 @@ void shipMovement()
 
     playerShip.rotation = angle;
 
-
-    Vector2 shipDirNormalize;
-
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
     {
         shipDirNormalize = Vector2Normalize(distanceDiff);
 
@@ -138,7 +139,7 @@ void shipMovement()
         playerShip.aceleration.y += shipDirNormalize.y;
     }
 
-    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
     {
 
     }

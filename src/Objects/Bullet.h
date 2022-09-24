@@ -6,6 +6,10 @@ struct Bullet
 {
 	Vector2 position;
 
+	Vector2 direction;
+
+	bool isMoving;
+
 	float radius;
 
 	float speed;
@@ -13,7 +17,6 @@ struct Bullet
 	Texture2D texture;
 };
 
-Bullet CreateBullet();
+Bullet CreateBullet(Ship& playerShip);
 
 void DrawBullet(Bullet bullet);
-
