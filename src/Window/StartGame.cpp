@@ -28,6 +28,9 @@ Rectangle mouseRec;
 const int maxAteroids = 5;
 Asteroid asteroid[maxAteroids];
 
+const int maxNormalAsteroid = 10;
+Asteroid asteroidNor[maxNormalAsteroid];
+
 //Window
 Texture2D background;
 int screenWidth = 1024;
@@ -63,6 +66,12 @@ void InitGame()
     for (int i = 0; i < maxAteroids; i++)
     {
         asteroid[i] = CreateAsteroid();
+    }
+
+    for (int i = 0; i < maxNormalAsteroid; i++)
+    {
+        asteroidNor[i] = CreateAsteroid();
+        asteroidNor[i].radius = 45;
     }
 
     //Bullet
@@ -309,9 +318,12 @@ void AsteroidCollision(Ship& playerShip)
 {
     for (int i = 0; i < maxAteroids; i++)
     {
-        if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid[i].position, asteroid[i].radius))
+        if (asteroid[i].isActive == true)
         {
-            cout << "colision" << endl;
+            if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid[i].position, asteroid[i].radius))
+            {
+                cout << "colision" << endl;
+            }
         }
     }
 }
@@ -320,10 +332,17 @@ void BulletCollision(Asteroid& asteroid)
 {
     for (int i = 0; i < maxBullets; i++)
     {
-        if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroid.position, asteroid.radius))
+        for (int j = 0; j < maxAteroids; j++)
         {
-            bullet[i].isMoving = false;
-            cout << "colision bala" << endl;
+            if (asteroid.isActive == true)
+            {
+                if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroid.position, asteroid.radius))
+                {
+                    bullet[i].isMoving = false;
+                    asteroid.isActive = false;
+                    cout << "colision bala" << endl;
+                }
+            }
         }
     }
 }

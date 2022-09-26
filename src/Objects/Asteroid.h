@@ -7,6 +7,8 @@ struct Asteroid
 
 	float radius;
 
+	bool isActive;
+
 	Vector2 speed;
 
 	Texture2D texture;
