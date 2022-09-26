@@ -109,16 +109,20 @@ void Input()
     {
         for (int i = 0; i < maxBullets; i++)
         {
-            if (!bullet[i].isMoving)
+            if (bullet[i].isActive == false)
             {
-                bullet[i].isMoving = true;
+                if (!bullet[i].isMoving)
+                {
+                    bullet[i].isActive = true;
+                    bullet[i].isMoving = true;
 
-                bullet[i].direction.x = mouse.position.x - bullet[i].position.x;
-                bullet[i].direction.y = mouse.position.y - bullet[i].position.y;
+                    bullet[i].direction.x = mouse.position.x - bullet[i].position.x;
+                    bullet[i].direction.y = mouse.position.y - bullet[i].position.y;
 
-                bullet[i].direction = Vector2Normalize(bullet[i].direction);
+                    bullet[i].direction = Vector2Normalize(bullet[i].direction);
 
-                break;
+                    break;
+                }
             }
         }
     }
@@ -279,21 +283,25 @@ void bulletCollisonLimit()
             if (bullet[i].position.x < 0)
             {
                 bullet[i].isMoving = false;
+                bullet[i].isActive = false;
             }
 
             if (bullet[i].position.x >= screenWidth)
             {
                 bullet[i].isMoving = false;
+                bullet[i].isActive = false;
             }
 
             if (bullet[i].position.y < 0)
             {
                 bullet[i].isMoving = false;
+                bullet[i].isActive = false;
             }
 
             if (bullet[i].position.y >= screenHeight)
             {
                 bullet[i].isMoving = false;
+                bullet[i].isActive = false;
             }
         }
     }
@@ -334,13 +342,17 @@ void BulletCollision(Asteroid& asteroid)
     {
         for (int j = 0; j < maxAteroids; j++)
         {
-            if (asteroid.isActive == true)
+            if (bullet[i].isActive == true)
             {
-                if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroid.position, asteroid.radius))
+                if (asteroid.isActive == true)
                 {
-                    bullet[i].isMoving = false;
-                    asteroid.isActive = false;
-                    cout << "colision bala" << endl;
+                    if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroid.position, asteroid.radius))
+                    {
+                        bullet[i].isMoving = false;
+                        asteroid.isActive = false;
+                        bullet[i].isActive = false;
+                        cout << "colision bala" << endl;
+                    }
                 }
             }
         }

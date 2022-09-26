@@ -9,6 +9,8 @@ struct Bullet
 
 	bool isMoving;
 
+	bool isActive;
+
 	float radius;
 
 	float speed;

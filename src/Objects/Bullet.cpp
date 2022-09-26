@@ -13,6 +13,9 @@ Bullet CreateBullet()
 
 	bullet.isMoving = false;
 
+	bullet.isActive = false;
+
+
 	bullet.radius = 10.0f;
 
 	bullet.speed = 500.0f;
@@ -24,6 +27,9 @@ Bullet CreateBullet()
 
 void DrawBullet(Bullet bullet)
 {
-	DrawCircle(bullet.position.x, bullet.position.y, bullet.radius, RED);
-	DrawTexture(bullet.texture, bullet.position.x - 12, bullet.position.y - 12, WHITE);
+	if (bullet.isActive == true)
+	{
+		DrawCircle(bullet.position.x, bullet.position.y, bullet.radius, RED);
+		DrawTexture(bullet.texture, bullet.position.x - 12, bullet.position.y - 12, WHITE);
+	}
 }
