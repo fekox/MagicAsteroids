@@ -1,9 +1,18 @@
 #include "raylib.h"
 #pragma once
 
+enum Size
+{
+	Big,
+	Normal,
+	Small
+};
+
 struct Asteroid
 {
 	Vector2 position;
+
+	Size size;
 
 	float radius;
 
@@ -14,6 +23,10 @@ struct Asteroid
 	Texture2D texture;
 };
 
-Asteroid CreateAsteroid();
+Asteroid CreateAsteroid(Size size);
 
-void DrawAsteroid(Asteroid asteroid);
+void DrawAsteroidBig(Asteroid& asteroid);
+
+void DrawAsteroidNormal(Asteroid& asteroid);
+
+void DrawAsteroidSmall(Asteroid& asteroid);

@@ -62,5 +62,11 @@
     <Image Include="resources\Background.png">
       <Filter>Resources</Filter>
     </Image>
+    <Image Include="resources\NormalAsteroid.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\SmallAsteroid.png">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

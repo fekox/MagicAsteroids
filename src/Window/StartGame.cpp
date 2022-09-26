@@ -65,13 +65,8 @@ void InitGame()
     //Asteroid
     for (int i = 0; i < maxAteroids; i++)
     {
-        asteroid[i] = CreateAsteroid();
-    }
-
-    for (int i = 0; i < maxNormalAsteroid; i++)
-    {
-        asteroidNor[i] = CreateAsteroid();
-        asteroidNor[i].radius = 45;
+        asteroid[i].size = Small;
+        asteroid[i] = CreateAsteroid(asteroid[i].size);
     }
 
     //Bullet
@@ -174,7 +169,7 @@ void drawGame()
     
     for (int i = 0; i < maxAteroids; i++)
     {
-        DrawAsteroid(asteroid[i]);
+        DrawAsteroidSmall(asteroid[i]);
     }
     DrawMouse(mouse, mouseRec);
 }

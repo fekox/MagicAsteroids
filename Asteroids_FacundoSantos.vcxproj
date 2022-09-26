@@ -38,7 +38,9 @@
     <Image Include="resources\Asteroid.png" />
     <Image Include="resources\Background.png" />
     <Image Include="resources\Cross.png" />
+    <Image Include="resources\NormalAsteroid.png" />
     <Image Include="resources\Ship.png" />
+    <Image Include="resources\SmallAsteroid.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
