@@ -3,6 +3,7 @@
 #include "raymath.h"
 #include "Window/Game.h"
 #include "Window/StartGame.h"
+#include "Window/TextFont.h"
 #include "Objects/PlayerShip.h"
 #include "Objects/Asteroid.h"
 #include "Objects/Mouse.h"
@@ -40,6 +41,9 @@ Texture2D background;
 int screenWidth = 1024;
 int screenHeight = 768;
 
+//Font
+Font gameFont;
+
 void StartGame()
 {
 	InitGame();
@@ -52,6 +56,8 @@ void InitGame()
 	//Window
 	InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
 	SetWindowState(FLAG_VSYNC_HINT);
+
+	gameFont = LoadFont("resources/Font/04B_30__.TTF");
 
 	background = LoadTexture("resources/Sprites/Background.png");
 
@@ -220,7 +226,9 @@ void drawGame()
 			DrawAsteroidSmall(asteroidSmall[i]);
 		}
 	}
-
+	
+	DrawTextEx(gameFont, "Score: ", {10, 10}, 40, 0, ORANGE);
+	DrawText(TextFormat("%2i", playerShip.points), 200, 10, 40, ORANGE);
 
 	DrawMouse(mouse, mouse.mouseRec);
 }

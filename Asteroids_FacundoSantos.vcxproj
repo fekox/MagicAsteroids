@@ -25,6 +25,7 @@
     <ClCompile Include="src\Objects\Mouse.cpp" />
     <ClCompile Include="src\Objects\PlayerShip.cpp" />
     <ClCompile Include="src\Window\StartGame.cpp" />
+    <ClCompile Include="src\Window\TextFont.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Objects\Asteroid.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="src\Objects\PlayerShip.h" />
     <ClInclude Include="src\Window\Game.h" />
     <ClInclude Include="src\Window\StartGame.h" />
+    <ClInclude Include="src\Window\TextFont.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\Sprites\Asteroid.png" />
@@ -42,6 +44,9 @@
     <Image Include="resources\Sprites\NormalAsteroid.png" />
     <Image Include="resources\Sprites\Ship.png" />
     <Image Include="resources\Sprites\SmallAsteroid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\Font\04B_30__.TTF" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
