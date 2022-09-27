@@ -25,17 +25,19 @@ Mouse mouse;
 Rectangle mouseRec;
 
 //Asteroid
-const int maxAteroids = 5;
-int asteroidsCount = 5;
+const int maxAteroids = 10;
+int asteroidsCount = 10;
 
 Asteroid asteroid[maxAteroids];
 
-const int maxNorAsteroids = 10;
+//
+const int maxNorAsteroids = 20;
 int asteroidsNorCount = 0;
 
 Asteroid asteroidNor[maxNorAsteroids];
 
-const int maxSmallAsteroids = 20;
+//
+const int maxSmallAsteroids = 60;
 int asteroidsSmallCount = 0;
 
 Asteroid asteroidSmall[maxSmallAsteroids];
@@ -502,7 +504,7 @@ void BulletCollision()
 				{
 					if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroidNor[j].position, asteroidNor[j].radius))
 					{
-						for (int k = 0; k < 2; k++)
+						for (int k = 0; k < 3; k++)
 						{
 							bullet[i].isMoving = false;
 							asteroidNor[j].isActive = false;
@@ -526,7 +528,7 @@ void BulletCollision()
 
 	for (int i = 0; i < maxBullets; i++)
 	{
-		for (int j = 0; j < maxNorAsteroids; j++)
+		for (int j = 0; j < maxSmallAsteroids; j++)
 		{
 			if (bullet[i].isActive == true)
 			{
