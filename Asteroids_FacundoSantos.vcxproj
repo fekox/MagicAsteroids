@@ -35,12 +35,13 @@
     <ClInclude Include="src\Window\StartGame.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\Asteroid.png" />
-    <Image Include="resources\Background.png" />
-    <Image Include="resources\Cross.png" />
-    <Image Include="resources\NormalAsteroid.png" />
-    <Image Include="resources\Ship.png" />
-    <Image Include="resources\SmallAsteroid.png" />
+    <Image Include="resources\Sprites\Asteroid.png" />
+    <Image Include="resources\Sprites\Background.png" />
+    <Image Include="resources\Sprites\Bullet.png" />
+    <Image Include="resources\Sprites\Cross.png" />
+    <Image Include="resources\Sprites\NormalAsteroid.png" />
+    <Image Include="resources\Sprites\Ship.png" />
+    <Image Include="resources\Sprites\SmallAsteroid.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

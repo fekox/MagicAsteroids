@@ -11,7 +11,7 @@ Mouse CreateMouse()
 	mouse.width = 20.0f;
 	mouse.height = 20.0f;
 
-	mouse.texture = LoadTexture("resources/Cross.png");
+	mouse.texture = LoadTexture("resources/Sprites/Cross.png");
 
 	return mouse;
 }

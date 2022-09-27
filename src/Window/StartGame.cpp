@@ -53,7 +53,7 @@ void InitGame()
 	InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
 	SetWindowState(FLAG_VSYNC_HINT);
 
-	background = LoadTexture("resources/Background.png");
+	background = LoadTexture("resources/Sprites/Background.png");
 
 	//Player
 	playerShip = CreateShip();
@@ -412,6 +412,7 @@ void BulletCollision()
 
 						asteroidsCount--;
 						totalAsteoroidsCount--;
+						AddPoint(playerShip);
 						cout << "colision bala" << endl;
 					}
 				}
@@ -444,7 +445,7 @@ void BulletCollision()
 
 						asteroidsNorCount--;
 						totalAsteoroidsCount--;
-
+						AddPoint(playerShip);
 						cout << "colision bala" << endl;
 					}
 				}
@@ -469,14 +470,13 @@ void BulletCollision()
 
 						asteroidsSmallCount--;
 						totalAsteoroidsCount--;
+						AddPoint(playerShip);
 						cout << "colision bala" << endl;
 					}
 				}
 			}
 		}
 	}
-
-	cout << totalAsteoroidsCount << endl;
 
 	if (totalAsteoroidsCount <= 0)
 	{

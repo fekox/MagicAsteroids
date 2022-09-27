@@ -20,7 +20,7 @@ Bullet CreateBullet()
 
 	bullet.speed = 500.0f;
 
-	bullet.texture = LoadTexture("resources/Bullet.png");
+	bullet.texture = LoadTexture("resources/Sprites/Bullet.png");
 
 	return bullet;
 }

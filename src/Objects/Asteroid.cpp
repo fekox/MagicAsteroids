@@ -21,7 +21,7 @@ Asteroid CreateAsteroid(Size size)
 		asteroid.speed.x = GetRandomValue(-70, 70);
 		asteroid.speed.y = GetRandomValue(-70, 70);
 
-		asteroid.texture = LoadTexture("resources/Asteroid.png");
+		asteroid.texture = LoadTexture("resources/Sprites/Asteroid.png");
 
 		return asteroid;
 
@@ -39,7 +39,7 @@ Asteroid CreateAsteroid(Size size)
 		norAsteroid.speed.x = GetRandomValue(-90, 90);
 		norAsteroid.speed.y = GetRandomValue(-90, 90);
 
-		norAsteroid.texture = LoadTexture("resources/NormalAsteroid.png");
+		norAsteroid.texture = LoadTexture("resources/Sprites/NormalAsteroid.png");
 
 		return norAsteroid;
 
@@ -57,7 +57,7 @@ Asteroid CreateAsteroid(Size size)
 		smallAsteroid.speed.x = GetRandomValue(-110, 110);
 		smallAsteroid.speed.y = GetRandomValue(-110, 110);
 
-		smallAsteroid.texture = LoadTexture("resources/SmallAsteroid.png");
+		smallAsteroid.texture = LoadTexture("resources/Sprites/SmallAsteroid.png");
 
 		return smallAsteroid;
 

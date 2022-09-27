@@ -28,6 +28,12 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{53ea00c9-0ad0-4c5a-9151-f47d430265ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Sprites">
+      <UniqueIdentifier>{b2a1d564-49af-47e9-87aa-680a1ae9e312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Font">
+      <UniqueIdentifier>{5ce28036-7828-46ce-b2a7-b1ca9e98e409}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Game.h">
@@ -50,23 +56,26 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\Asteroid.png">
-      <Filter>Resources</Filter>
+    <Image Include="resources\Sprites\Asteroid.png">
+      <Filter>Resources\Sprites</Filter>
     </Image>
-    <Image Include="resources\Ship.png">
-      <Filter>Resources</Filter>
+    <Image Include="resources\Sprites\Background.png">
+      <Filter>Resources\Sprites</Filter>
     </Image>
-    <Image Include="resources\Cross.png">
-      <Filter>Resources</Filter>
+    <Image Include="resources\Sprites\Bullet.png">
+      <Filter>Resources\Sprites</Filter>
     </Image>
-    <Image Include="resources\Background.png">
-      <Filter>Resources</Filter>
+    <Image Include="resources\Sprites\Cross.png">
+      <Filter>Resources\Sprites</Filter>
     </Image>
-    <Image Include="resources\NormalAsteroid.png">
-      <Filter>Resources</Filter>
+    <Image Include="resources\Sprites\NormalAsteroid.png">
+      <Filter>Resources\Sprites</Filter>
     </Image>
-    <Image Include="resources\SmallAsteroid.png">
-      <Filter>Resources</Filter>
+    <Image Include="resources\Sprites\Ship.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="resources\Sprites\SmallAsteroid.png">
+      <Filter>Resources\Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ Ship CreateShip()
 
 	playerShip.points = 0;
 
-	playerShip.texture = LoadTexture("resources/Ship.png");
+	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
 	return playerShip;
 }
@@ -48,9 +48,9 @@ void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float
 
 }
 
-void AddPoint()
+void AddPoint(Ship& playerShip)
 {
-
+	playerShip.points += 10;
 }
 
 int GetPoint()
