@@ -14,7 +14,7 @@ void bulletMovement();
 
 void asteroidMovement();
 void AsteroidCollision(Ship& playerShip);
-void BulletCollision(Asteroid& asteroid);
+void BulletCollision();
 bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, float obj2Radius);
 
 void objCollisionLimit(Vector2& shipPosition, int screenWidth, int screenHeight);

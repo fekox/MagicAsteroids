@@ -29,15 +29,12 @@ Asteroid CreateAsteroid(Size size)
 
 	case Normal:
 
-		asteroid.position.x = GetRandomValue(0, 1024);
-		asteroid.position.y = GetRandomValue(0, 768);
-
-		norAsteroid.position.x = asteroid.position.x;
-		norAsteroid.position.y = asteroid.position.y;
+		norAsteroid.position.x = 0;
+		norAsteroid.position.y = 0;
 
 		norAsteroid.radius = 45.0f;
 
-		norAsteroid.isActive = true;
+		norAsteroid.isActive = false;
 
 		norAsteroid.speed.x = GetRandomValue(-90, 90);
 		norAsteroid.speed.y = GetRandomValue(-90, 90);
@@ -50,18 +47,12 @@ Asteroid CreateAsteroid(Size size)
 
 	case Small:
 
-		asteroid.position.x = GetRandomValue(0, 1024);
-		asteroid.position.y = GetRandomValue(0, 768);
-
-		norAsteroid.position.x = asteroid.position.x;
-		norAsteroid.position.y = asteroid.position.y;
-
-		smallAsteroid.position.x = asteroid.position.x;
-		smallAsteroid.position.y = asteroid.position.y;
+		smallAsteroid.position.x = 0;
+		smallAsteroid.position.y = 0;
 
 		smallAsteroid.radius = 35.0f;
 
-		smallAsteroid.isActive = true;
+		smallAsteroid.isActive = false;
 
 		smallAsteroid.speed.x = GetRandomValue(-110, 110);
 		smallAsteroid.speed.y = GetRandomValue(-110, 110);
