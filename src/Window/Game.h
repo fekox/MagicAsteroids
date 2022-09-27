@@ -21,6 +21,8 @@ void objCollisionLimit(Vector2& shipPosition, int screenWidth, int screenHeight)
 void AsteroidCollisionLimit(int const maxAteroids, Asteroid asteroid[]);
 void bulletCollisonLimit();
 
+void RespawnAsteroids();
+
 void mouseMovement();
 
 void drawGame();

@@ -33,6 +33,8 @@ const int maxSmallAsteroids = 60;
 int asteroidsSmallCount = 0;
 Asteroid asteroidSmall[maxSmallAsteroids];
 
+int totalAsteoroidsCount = 6;
+
 //Window
 Texture2D background;
 int screenWidth = 1024;
@@ -384,6 +386,7 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[], int const maxAtero
 
 void BulletCollision()
 {
+
 	for (int i = 0; i < maxBullets; i++)
 	{
 		for (int j = 0; j < maxAteroids; j++)
@@ -408,7 +411,7 @@ void BulletCollision()
 						}
 
 						asteroidsCount--;
-
+						totalAsteoroidsCount--;
 						cout << "colision bala" << endl;
 					}
 				}
@@ -440,6 +443,7 @@ void BulletCollision()
 						}
 
 						asteroidsNorCount--;
+						totalAsteoroidsCount--;
 
 						cout << "colision bala" << endl;
 					}
@@ -464,13 +468,37 @@ void BulletCollision()
 						bullet[i].isActive = false;
 
 						asteroidsSmallCount--;
-
+						totalAsteoroidsCount--;
 						cout << "colision bala" << endl;
 					}
 				}
 			}
 		}
 	}
+
+	cout << totalAsteoroidsCount << endl;
+
+	if (totalAsteoroidsCount <= 0)
+	{
+		RespawnAsteroids();
+	}
+}
+
+void RespawnAsteroids()
+{
+	totalAsteoroidsCount = 20;
+
+	for (int i = 0; i < 5; i++)
+	{
+		asteroid[i].size = Big;
+		asteroid[i] = CreateAsteroid(asteroid[i].size);
+	}
+
+	asteroidsCount = asteroidsCount + 5;
+	asteroidsNorCount = 0;
+	asteroidsSmallCount = 0;
+
+
 }
 
 void UnloadData()
