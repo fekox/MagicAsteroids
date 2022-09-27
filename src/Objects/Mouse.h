@@ -4,6 +4,8 @@ struct Mouse
 {
 	Vector2 position;
 
+	Rectangle mouseRec;
+
 	float width;
 
 	float height;

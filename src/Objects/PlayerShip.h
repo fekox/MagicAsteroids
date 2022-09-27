@@ -9,6 +9,10 @@ struct Ship
 	Rectangle dest;
 	Rectangle source;
 
+	Rectangle shipRec;
+	Vector2 shipOriginRec;
+	Vector2 shipDirNormalize;
+
 	float widht;
 	float height;
 

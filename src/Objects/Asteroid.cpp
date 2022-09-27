@@ -11,8 +11,8 @@ Asteroid CreateAsteroid(Size size)
 	{
 	case Big:
 
-		asteroid.position.x = GetRandomValue(0, 1024);
-		asteroid.position.y = GetRandomValue(0, 768);
+		asteroid.position.x = GetRandomValue(700, 1000);
+		asteroid.position.y = GetRandomValue(700, 900);
 
 		asteroid.radius = 60.0f;
 

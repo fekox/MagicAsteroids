@@ -12,12 +12,13 @@ void UnloadData();
 void shipMovement();
 void bulletMovement();
 
-void asteroidMovement();
-void AsteroidCollision(Ship& playerShip);
+void asteroidMovement(Asteroid asteroid[], int const maxAteroids);
+void AsteroidCollision(Ship& playerShip, Asteroid asteroid[], int const maxAteroids);
 void BulletCollision();
 bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, float obj2Radius);
 
 void objCollisionLimit(Vector2& shipPosition, int screenWidth, int screenHeight);
+void AsteroidCollisionLimit(int const maxAteroids, Asteroid asteroid[]);
 void bulletCollisonLimit();
 
 void mouseMovement();
