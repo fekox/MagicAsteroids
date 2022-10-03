@@ -77,6 +77,15 @@
     <Image Include="resources\Sprites\SmallAsteroid.png">
       <Filter>Resources\Sprites</Filter>
     </Image>
+    <Image Include="resources\Sprites\FullHealthBar.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="resources\Sprites\LowHealthBar.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="resources\Sprites\MidHealthBar.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\Font\04B_30__.TTF">

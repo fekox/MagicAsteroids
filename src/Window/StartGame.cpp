@@ -15,6 +15,11 @@ float timer = -0.1f;
 //Player
 Ship playerShip;
 
+//HealthBar
+Texture2D fullHealthBar;
+Texture2D midHealthBar;
+Texture2D lowHealthBar;
+
 //Bullet
 const int maxBullets = 10;
 Bullet bullet[maxBullets];
@@ -60,6 +65,10 @@ void InitGame()
 	gameFont = LoadFont("resources/Font/04B_30__.TTF");
 
 	background = LoadTexture("resources/Sprites/Background.png");
+
+	fullHealthBar = LoadTexture("resources/Sprites/FullHealthBar.png");
+	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
+	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
 
 	//Player
 	playerShip = CreateShip();
@@ -555,4 +564,8 @@ void UnloadData()
 
 	UnloadTexture(mouse.texture);
 	UnloadTexture(background);
+
+	UnloadTexture(fullHealthBar);
+	UnloadTexture(midHealthBar);
+	UnloadTexture(lowHealthBar);
 }
