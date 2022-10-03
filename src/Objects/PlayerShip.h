@@ -26,6 +26,8 @@ struct Ship
 
 	int points;
 
+	bool isCollision;
+
 	Texture2D texture;
 };
 
@@ -34,6 +36,8 @@ Ship CreateShip();
 Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight);
 
 void DrawShip(Ship& PlayerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight);
+
+void loseLife(Ship& playerShip);
 
 void AddPoint(Ship& playerShip);
 

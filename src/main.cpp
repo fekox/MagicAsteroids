@@ -1,4 +1,4 @@
-#include "Window/StartGame.h"
+#include "Window/Game.h"
 
 int main(void)
 {

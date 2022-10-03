@@ -10,6 +10,8 @@
 
 using namespace std;
 
+float timer = -0.1f;
+
 //Player
 Ship playerShip;
 
@@ -99,6 +101,8 @@ void InitGame()
 
 void GameLoop()
 {
+	SetExitKey(NULL);
+
 	while (!WindowShouldClose())
 	{
 		Input();
@@ -382,9 +386,26 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[], int const maxAtero
 	{
 		if (asteroid[i].isActive)
 		{
-			if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid[i].position, asteroid[i].radius))
+			if (timer < 0)
 			{
-				cout << "colision" << endl;
+				if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid[i].position, asteroid[i].radius))
+				{
+					//cout << "colision" << endl;
+					playerShip.isCollision = true;
+
+					loseLife(playerShip);
+					//cout << "Vidas: " << playerShip.lifes << endl;
+					timer = 3.0f;
+					
+					playerShip.isCollision = false;
+				}
+
+			}
+
+			if (timer > 0)
+			{
+				timer -= GetFrameTime();
+				//cout << timer << endl;
 			}
 		}
 	}

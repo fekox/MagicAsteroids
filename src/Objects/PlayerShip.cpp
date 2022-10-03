@@ -14,8 +14,8 @@ Ship CreateShip()
 	playerShip.direction.x = 0;
 	playerShip.direction.y = 0;
 
-	playerShip.aceleration.x = 100.0f;
-	playerShip.aceleration.y = 100.0f;
+	playerShip.aceleration.x = 50.0f;
+	playerShip.aceleration.y = 50.0f;
 
 	playerShip.height = 60.0f;
 	playerShip.widht = 60.0f;
@@ -26,9 +26,11 @@ Ship CreateShip()
 
 	playerShip.speed = 100.0f;
 
-	playerShip.lifes = 3;
+	playerShip.lifes = 4;
 
 	playerShip.points = 0;
+
+	playerShip.isCollision = false;
 
 	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
@@ -42,10 +44,16 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 
 void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight)
 {
-
 	DrawTexturePro(playerShip.texture, Rectangle{ 0,0, (float)playerShip.texture.width, (float)playerShip.texture.height }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, WHITE);
 	DrawCircle(playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerShip.radius, BLANK);
+}
 
+void loseLife(Ship& playerShip)
+{
+	if (playerShip.isCollision == true)
+	{
+		playerShip.lifes -= 1;
+	}
 }
 
 void AddPoint(Ship& playerShip)
@@ -55,7 +63,5 @@ void AddPoint(Ship& playerShip)
 
 int GetPoint()
 {
-
-
 	return 1;
 }
