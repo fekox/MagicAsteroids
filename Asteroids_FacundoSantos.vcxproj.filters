@@ -17,9 +17,6 @@
     <ClCompile Include="src\Objects\Bullet.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Window\TextFont.cpp">
-      <Filter>Window</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -56,9 +53,6 @@
     </ClInclude>
     <ClInclude Include="src\Objects\Bullet.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Window\TextFont.h">
-      <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

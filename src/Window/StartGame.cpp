@@ -3,7 +3,6 @@
 #include "raymath.h"
 #include "Window/Game.h"
 #include "Window/StartGame.h"
-#include "Window/TextFont.h"
 #include "Objects/PlayerShip.h"
 #include "Objects/Asteroid.h"
 #include "Objects/Mouse.h"
@@ -56,7 +55,6 @@ void InitGame()
 	//Window
 	InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
 	SetWindowState(FLAG_VSYNC_HINT);
-
 	gameFont = LoadFont("resources/Font/04B_30__.TTF");
 
 	background = LoadTexture("resources/Sprites/Background.png");
