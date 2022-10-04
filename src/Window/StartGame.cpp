@@ -118,7 +118,7 @@ void GameLoop()
 {
 	SetExitKey(NULL);
 
-	while (!WindowShouldClose())
+	while (IsAlive(playerShip))
 	{
 		Input();
 		Update();
@@ -435,8 +435,9 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
 					playerShip.isCollision = true;
 
 					loseLife(playerShip);
-					cout << "Vidas: " << playerShip.lifes << endl;
-					timer = 12.0f;
+					IsAlive(playerShip);
+					//cout << "Vidas: " << playerShip.lifes << endl;
+					timer = 15.0f;
 					
 					playerShip.isCollision = false;
 				}
@@ -445,7 +446,7 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
 			if (timer > 0)
 			{
 				timer -= GetFrameTime();
-				cout << timer << endl;
+				//cout << timer << endl;
 			}
 		}
 	}
@@ -600,3 +601,19 @@ void UnloadData()
 	UnloadTexture(midHealthBar);
 	UnloadTexture(lowHealthBar);
 }
+
+
+/*Color tilt;
+tilt.a = 0;
+tilt.b = 0;
+tilt.g = 0;
+tilt.r = 0;
+
+float color = 0.0f;
+
+color += GetFrameTime() * 25.0f;
+
+tilt.r = (unsigned char)color;
+
+cout << color << " " << (int)tilt.r << endl;
+*/

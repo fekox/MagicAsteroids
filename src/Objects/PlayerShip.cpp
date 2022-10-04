@@ -1,4 +1,3 @@
-#include <iostream>
 #include "raylib.h"
 #include "Objects/PlayerShip.h"
 
@@ -26,11 +25,13 @@ Ship CreateShip()
 
 	playerShip.speed = 100.0f;
 
-	playerShip.lifes = 4;
+	playerShip.lifes = 3;
 
 	playerShip.points = 0;
 
 	playerShip.isCollision = false;
+
+	playerShip.isAlive = true;
 
 	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
@@ -53,6 +54,19 @@ void loseLife(Ship& playerShip)
 	if (playerShip.isCollision == true)
 	{
 		playerShip.lifes -= 1;
+	}
+}
+
+bool IsAlive(Ship& playerShip)
+{
+	if (playerShip.lifes <= 0)
+	{
+		return playerShip.isAlive == false;
+	}
+
+	else
+	{
+		return playerShip.isAlive == true;
 	}
 }
 
