@@ -118,7 +118,7 @@ void GameLoop()
 {
 	SetExitKey(NULL);
 
-	while (IsAlive(playerShip))
+	while (!WindowShouldClose() && IsAlive(playerShip))
 	{
 		Input();
 		Update();

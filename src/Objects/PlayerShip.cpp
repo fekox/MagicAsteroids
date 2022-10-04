@@ -35,6 +35,11 @@ Ship CreateShip()
 
 	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
+	playerShip.color.a = 1;
+	playerShip.color.b = 0;
+	playerShip.color.g = 0;
+	playerShip.color.r = 0;
+
 	return playerShip;
 }
 

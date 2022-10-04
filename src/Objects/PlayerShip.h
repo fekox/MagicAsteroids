@@ -30,6 +30,8 @@ struct Ship
 	bool isAlive;
 
 	Texture2D texture;
+
+	Color color;
 };
 
 Ship CreateShip();
