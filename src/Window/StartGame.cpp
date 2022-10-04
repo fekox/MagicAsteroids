@@ -14,6 +14,7 @@ using namespace std;
 Ship playerShip;
 
 //HealthBar
+Vector2 healthBarPos;
 Texture2D fullHealthBar;
 Texture2D midHealthBar;
 Texture2D lowHealthBar;
@@ -76,6 +77,10 @@ void InitGame()
 	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
 	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+
+	//HealthBar
+	healthBarPos.x = static_cast<float>(screenWidth /2.2);
+	healthBarPos.y = 1;
 
 	//Mouse
 	HideCursor();
@@ -244,6 +249,21 @@ void drawGame()
 	DrawTextEx(gameFont, "Score: ", {10, 10}, 40, 0, ORANGE);
 	DrawText(TextFormat("%2i", playerShip.points), 200, 10, 40, ORANGE);
 
+	if (playerShip.lifes >= 3)
+	{
+		DrawTexture(fullHealthBar, static_cast<int>(healthBarPos.x), static_cast<int>(healthBarPos.y), WHITE);
+	}
+
+	if (playerShip.lifes == 2)
+	{
+		DrawTexture(midHealthBar, static_cast<int>(healthBarPos.x), static_cast<int>(healthBarPos.y), WHITE);
+	}
+
+	if (playerShip.lifes == 1)
+	{
+		DrawTexture(lowHealthBar, static_cast<int>(healthBarPos.x), static_cast<int>(healthBarPos.y), WHITE);
+	}
+
 	DrawMouse(mouse, mouse.mouseRec);
 }
 
@@ -256,7 +276,7 @@ void shipMovement()
 {
 	Vector2 shipActualPos;
 
-	playerShip.source = { 0,0, (float)playerShip.texture.width, (float)playerShip.texture.height };
+	playerShip.source = { 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) };
 	playerShip.dest = { playerShip.position.x, playerShip.position.y, playerShip.widht, playerShip.height };
 
 	shipActualPos.x = playerShip.position.x;
@@ -296,8 +316,8 @@ void asteroidMovement(Asteroid asteroid[], int const maxAteroids)
 
 			else
 			{
-				asteroid[i].speed.x = (float)GetRandomValue(-70, 70);
-				asteroid[i].speed.y = (float)GetRandomValue(-70, 70);
+				asteroid[i].speed.x = static_cast<float>(GetRandomValue(-70, 70));
+				asteroid[i].speed.y = static_cast<float>(GetRandomValue(-70, 70));
 
 				asteroid[i].position.x += asteroid[i].speed.x * GetFrameTime();
 				asteroid[i].position.y += asteroid[i].speed.y * GetFrameTime();
@@ -416,7 +436,7 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
 
 					loseLife(playerShip);
 					cout << "Vidas: " << playerShip.lifes << endl;
-					timer = 3.0f;
+					timer = 12.0f;
 					
 					playerShip.isCollision = false;
 				}
