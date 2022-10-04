@@ -10,8 +10,6 @@
 
 using namespace std;
 
-float timer = -0.1f;
-
 //Player
 Ship playerShip;
 
@@ -50,6 +48,9 @@ int screenHeight = 768;
 //Font
 Font gameFont;
 
+//Timer
+float timer = -0.1f;
+
 void StartGame()
 {
 	InitGame();
@@ -79,25 +80,25 @@ void InitGame()
 	//Mouse
 	HideCursor();
 	mouse = CreateMouse();
-	mouse.mouseRec = GetRecMouse(mouse, mouse.width, mouse.height);
+	mouse.mouseRec = GetRecMouse(mouse);
 
 	//Asteroid
 
 	for (int i = 0; i < maxAteroids; i++)
 	{
-		asteroid[i].size = Big;
+		asteroid[i].size = Size::Big;
 		asteroid[i] = CreateAsteroid(asteroid[i].size);
 	}
 
 	for (int i = 0; i < maxNorAsteroids; i++)
 	{
-		asteroidNor[i].size = Normal;
+		asteroidNor[i].size = Size::Normal;
 		asteroidNor[i] = CreateAsteroid(asteroidNor[i].size);
 	}
 
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
-		asteroidSmall[i].size = Small;
+		asteroidSmall[i].size = Size::Small;
 		asteroidSmall[i] = CreateAsteroid(asteroidSmall[i].size);
 	}
 
@@ -169,23 +170,25 @@ void Update()
 
 void Collision()
 {
-	AsteroidCollision(playerShip, asteroid, maxAteroids);
-	AsteroidCollision(playerShip, asteroidNor, maxNorAsteroids);
-	AsteroidCollision(playerShip, asteroidSmall, maxSmallAsteroids);
+	AsteroidCollision(playerShip, asteroid);
+	AsteroidCollision(playerShip, asteroidNor);
+	AsteroidCollision(playerShip, asteroidSmall);
 
 	BulletCollision();
 
-	AsteroidCollisionLimit(maxAteroids, asteroid);
-	AsteroidCollisionLimit(maxNorAsteroids, asteroidNor);
-	AsteroidCollisionLimit(maxSmallAsteroids, asteroidSmall);
+	AsteroidCollisionLimit(asteroid);
+	AsteroidCollisionLimit(asteroidNor);
+	AsteroidCollisionLimit(asteroidSmall);
 
 	objCollisionLimit(playerShip.position, screenWidth, screenHeight);
 
 	bulletCollisonLimit();
 }
 
-void AsteroidCollisionLimit(int const maxAteroids, Asteroid asteroid[])
+#pragma warning(disable: 4459)
+void AsteroidCollisionLimit(Asteroid asteroid[])
 {
+#pragma warning(default:4459)
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		if (asteroid[i].isActive)
@@ -276,8 +279,11 @@ void shipMovement()
 	playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
 }
 
+#pragma warning(disable: 4459)
 void asteroidMovement(Asteroid asteroid[], int const maxAteroids)
 {
+#pragma warning(default:4459)
+
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		if (asteroid[i].isActive)
@@ -317,9 +323,12 @@ void bulletMovement()
 		}
 	}
 }
-
+#pragma warning(disable: 4459)
 void objCollisionLimit(Vector2& objPosition, int screenWidth, int screenHeight)
 {
+#pragma warning(default: 4459)
+
+
 	if (objPosition.x < 0)
 	{
 		objPosition.x = objPosition.x + screenWidth;
@@ -389,8 +398,11 @@ bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, f
 	return false;
 }
 
-void AsteroidCollision(Ship& playerShip, Asteroid asteroid[], int const maxAteroids)
+#pragma warning(disable: 4459)
+void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
 {
+#pragma warning(default: 4459)
+
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		if (asteroid[i].isActive)
@@ -403,18 +415,17 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[], int const maxAtero
 					playerShip.isCollision = true;
 
 					loseLife(playerShip);
-					//cout << "Vidas: " << playerShip.lifes << endl;
+					cout << "Vidas: " << playerShip.lifes << endl;
 					timer = 3.0f;
 					
 					playerShip.isCollision = false;
 				}
-
 			}
 
 			if (timer > 0)
 			{
 				timer -= GetFrameTime();
-				//cout << timer << endl;
+				cout << timer << endl;
 			}
 		}
 	}
@@ -526,7 +537,7 @@ void RespawnAsteroids()
 
 	for (int i = 0; i < 5; i++)
 	{
-		asteroid[i].size = Big;
+		asteroid[i].size = Size::Big;
 		asteroid[i] = CreateAsteroid(asteroid[i].size);
 	}
 

@@ -8,8 +8,8 @@ Ship CreateShip()
 {
 	Ship playerShip;
 
-	playerShip.position.x = GetScreenWidth() / 2;
-	playerShip.position.y = GetScreenHeight() / 2;
+	playerShip.position.x = static_cast<float>(GetScreenWidth() / 2);
+	playerShip.position.y = static_cast<float>(GetScreenHeight() / 2);
 
 	playerShip.direction.x = 0;
 	playerShip.direction.y = 0;
@@ -44,8 +44,8 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 
 void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight)
 {
-	DrawTexturePro(playerShip.texture, Rectangle{ 0,0, (float)playerShip.texture.width, (float)playerShip.texture.height }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, WHITE);
-	DrawCircle(playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerShip.radius, BLANK);
+	DrawTexturePro(playerShip.texture, Rectangle{ 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, WHITE);
+	DrawCircle(static_cast<int>(playerShip.position.x - playerWidth / 2), static_cast<int>(playerShip.position.y - playerHeight / 2), playerShip.radius, BLANK);
 }
 
 void loseLife(Ship& playerShip)

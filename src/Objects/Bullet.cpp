@@ -29,7 +29,7 @@ void DrawBullet(Bullet bullet)
 {
 	if (bullet.isActive == true)
 	{
-		DrawCircle(bullet.position.x, bullet.position.y, bullet.radius, RED);
-		DrawTexture(bullet.texture, bullet.position.x - 12, bullet.position.y - 12, WHITE);
+		DrawCircle(static_cast<int>(bullet.position.x), static_cast<int>(bullet.position.y), bullet.radius, RED);
+		DrawTexture(bullet.texture, static_cast<int>(bullet.position.x - 12), static_cast<int>(bullet.position.y - 12), WHITE);
 	}
 }

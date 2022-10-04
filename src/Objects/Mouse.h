@@ -15,7 +15,7 @@ struct Mouse
 
 Mouse CreateMouse();
 
-Rectangle GetRecMouse(Mouse& mouse, float mouseWidth, float mouseHeight);
+Rectangle GetRecMouse(Mouse& mouse);
 
 Vector2 CreateRecOriginMouse(Rectangle& mouseRec);
 
