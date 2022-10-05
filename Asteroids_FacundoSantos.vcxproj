@@ -134,6 +134,23 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib-4.0.0_win32_msvc16\lib;$(SolutionDir)src;$(SolutionDir)resources;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release
+mkdir resources
+cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources
+mkdir Font
+mkdir Sprites
+mkdir Sounds
+cd..
+cd..
+cd..
+cd..
+cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\resources
+xcopy Font "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Font"
+xcopy Sprites "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sprites"
+xcopy Sounds "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sounds"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -170,6 +187,23 @@
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release
+mkdir resources
+cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources
+mkdir Font
+mkdir Sprites
+mkdir Sounds
+cd..
+cd..
+cd..
+cd..
+cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\resources
+xcopy Font "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Font"
+xcopy Sprites "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sprites"
+xcopy Sounds "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sounds"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
