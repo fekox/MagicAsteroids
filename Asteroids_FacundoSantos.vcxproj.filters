@@ -34,6 +34,9 @@
     <Filter Include="Resources\Font">
       <UniqueIdentifier>{5ce28036-7828-46ce-b2a7-b1ca9e98e409}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Sounds">
+      <UniqueIdentifier>{9599dac2-77d5-44c5-92a8-d403026e26b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Game.h">

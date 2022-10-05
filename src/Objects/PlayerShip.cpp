@@ -35,10 +35,10 @@ Ship CreateShip()
 
 	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
-	playerShip.color.a = 1;
-	playerShip.color.b = 0;
-	playerShip.color.g = 0;
-	playerShip.color.r = 0;
+	playerShip.color.a = 255;
+	playerShip.color.b = 255;
+	playerShip.color.g = 255;
+	playerShip.color.r = 255;
 
 	return playerShip;
 }
@@ -50,7 +50,7 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 
 void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight)
 {
-	DrawTexturePro(playerShip.texture, Rectangle{ 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, WHITE);
+	DrawTexturePro(playerShip.texture, Rectangle{ 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, playerShip.color);
 	DrawCircle(static_cast<int>(playerShip.position.x - playerWidth / 2), static_cast<int>(playerShip.position.y - playerHeight / 2), playerShip.radius, BLANK);
 }
 

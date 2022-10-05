@@ -220,6 +220,16 @@ void drawGame()
 		DrawBullet(bullet[i]);
 	}
 
+	if (timer > 0)
+	{
+		playerShip.color.a -= static_cast <unsigned char>(GetFrameTime() * 1000.0f);
+	}
+
+	if (timer < 0)
+	{
+		playerShip.color.a = 255;
+	}
+
 	DrawShip(playerShip, playerShip.shipOriginRec, playerShip.widht, playerShip.height);
 
 	for (int i = 0; i < maxAteroids; i++)
@@ -437,7 +447,7 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
 					loseLife(playerShip);
 					IsAlive(playerShip);
 					//cout << "Vidas: " << playerShip.lifes << endl;
-					timer = 15.0f;
+					timer = 45.0f;
 					
 					playerShip.isCollision = false;
 				}
@@ -601,19 +611,3 @@ void UnloadData()
 	UnloadTexture(midHealthBar);
 	UnloadTexture(lowHealthBar);
 }
-
-
-/*Color tilt;
-tilt.a = 0;
-tilt.b = 0;
-tilt.g = 0;
-tilt.r = 0;
-
-float color = 0.0f;
-
-color += GetFrameTime() * 25.0f;
-
-tilt.r = (unsigned char)color;
-
-cout << color << " " << (int)tilt.r << endl;
-*/
