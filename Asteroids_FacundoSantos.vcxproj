@@ -135,9 +135,9 @@
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release
+      <Command>cd $(SolutionDir)bin\Win32\Release
 mkdir resources
-cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources
+cd $(SolutionDir)bin\Win32\Release\resources
 mkdir Font
 mkdir Sprites
 mkdir Sounds
@@ -145,10 +145,10 @@ cd..
 cd..
 cd..
 cd..
-cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\resources
-xcopy Font "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Font"
-xcopy Sprites "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sprites"
-xcopy Sounds "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sounds"
+cd $(SolutionDir)resources
+xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font"
+xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites"
+xcopy Sounds "$(SolutionDir)bin\Win32\Release\resources\Sounds"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -188,9 +188,9 @@ xcopy Sounds "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Aste
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release
+      <Command>cd $(SolutionDir)bin\Win32\Release
 mkdir resources
-cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources
+cd $(SolutionDir)bin\Win32\Release\resources
 mkdir Font
 mkdir Sprites
 mkdir Sounds
@@ -198,10 +198,10 @@ cd..
 cd..
 cd..
 cd..
-cd C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\resources
-xcopy Font "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Font"
-xcopy Sprites "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sprites"
-xcopy Sounds "C:\Users\facus\OneDrive\Escritorio\Desarrollo de Videojuego 1\Asteroids_FacundoSantos\MagicAsteroids\bin\Win32\Release\resources\Sounds"
+cd $(SolutionDir)resources
+xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font"
+xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites"
+xcopy Sounds "$(SolutionDir)bin\Win32\Release\resources\Sounds"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
