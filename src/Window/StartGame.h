@@ -10,10 +10,22 @@ struct RestartMenu
 	float width;
 	float height;
 
+	Texture texture;
+
 	bool isActive;
 };
 
-void Input();
+struct RestartMenuButton
+{
+	float width;
+	float height;
+
+	int size;
+
+	Color color;
+};
+
+void Input(bool& gameOn);
 void Update();
 void Collision();
 void Draw();
@@ -37,6 +49,6 @@ void mouseMovement();
 
 void drawGame();
 
-void RestarGameMenu();
+void DrawRestarGameMenu();
 void RestarGameMenuCollisions();
 void RestartGame();

@@ -29,6 +29,7 @@ struct Ship
 	bool isCollision;
 	bool isAlive;
 	bool isActive;
+	bool win;
 
 	Texture2D texture;
 
@@ -44,6 +45,8 @@ void DrawShip(Ship& PlayerShip, Vector2& shipOriginRec, float playerWidth, float
 void loseLife(Ship& playerShip);
 
 bool IsAlive(Ship& playerShip);
+
+bool playerWin(Ship& playerShip);
 
 void AddPoint(Ship& playerShip);
 

@@ -35,6 +35,8 @@ Ship CreateShip()
 
 	playerShip.isActive = true;
 
+	playerShip.win = false;
+
 	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
 	playerShip.color.a = 255;
@@ -77,6 +79,19 @@ bool IsAlive(Ship& playerShip)
 	else
 	{
 		return playerShip.isAlive == true;
+	}
+}
+
+bool playerWin(Ship& playerShip)
+{
+	if (playerShip.points < 1000)
+	{
+		return playerShip.win == true;
+	}
+
+	else
+	{
+		return playerShip.win == false;
 	}
 }
 

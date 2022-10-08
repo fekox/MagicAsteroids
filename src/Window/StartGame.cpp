@@ -50,6 +50,10 @@ int screenHeight = 768;
 
 RestartMenu restartMenu;
 
+RestartMenuButton restartButton;
+RestartMenuButton returnMenuButton;
+RestartMenuButton quitGameButton;
+
 
 //Font
 Font gameFont;
@@ -77,27 +81,58 @@ void InitGame()
 	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
 	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
 
+	//***************************************************************************
+
+	//Restart menu
 	restartMenu.width = 600;
 	restartMenu.height = 500;
 	restartMenu.pos.x = static_cast<float>(screenWidth / 4.5);
 	restartMenu.pos.y = static_cast<float>(screenHeight / 4.5);
 	restartMenu.isActive = false;
+	restartMenu.texture = LoadTexture("resources/Sprites/RestartGameMenu.png");
+
+	//Restart Button
+	restartButton.width = static_cast<float>(screenWidth / 2.5);
+	restartButton.height = static_cast<float>(screenHeight / 2.1);
+	restartButton.size = 40;
+	restartButton.color = ORANGE;
+
+	//Menu Button
+	returnMenuButton.width = static_cast<float>(screenWidth / 2.2);
+	returnMenuButton.height = static_cast<float>(screenHeight / 1.65);
+	returnMenuButton.size = 40;
+	returnMenuButton.color = ORANGE;
+
+	//Quit Button
+	quitGameButton.width = static_cast<float>(screenWidth / 2.15);
+	quitGameButton.height = static_cast<float>(screenHeight / 1.37);
+	quitGameButton.size = 40;
+	quitGameButton.color = ORANGE;
+	
+	//***************************************************************************
 
 	//Player
 	playerShip = CreateShip();
 	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
 	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+
 	playerShip.isActive = true;
+
+	//***************************************************************************
 
 	//HealthBar
 	healthBarPos.x = static_cast<float>(screenWidth /2.2);
 	healthBarPos.y = 1;
 
+	//***************************************************************************
+
 	//Mouse
 	HideCursor();
 	mouse = CreateMouse();
 	mouse.mouseRec = GetRecMouse(mouse);
+
+	//***************************************************************************
 
 	//Asteroid
 
@@ -119,6 +154,8 @@ void InitGame()
 		asteroidSmall[i] = CreateAsteroid(asteroidSmall[i].size);
 	}
 
+	//***************************************************************************
+
 	//Bullet
 	for (int i = 0; i < maxBullets; i++)
 	{
@@ -129,20 +166,28 @@ void InitGame()
 void GameLoop()
 {
 	SetExitKey(NULL);
+	bool gameOn = true;
 
-	while (!WindowShouldClose())
+	while (!WindowShouldClose() && gameOn)
 	{
-		Input();
-		Update();
-		Collision();
-		Draw();
+		Input(gameOn);
+		
+		if (gameOn == true)
+		{
+			Update();
+			Collision();
+			Draw();
+		}
 	}
 
-	UnloadData();
-	CloseWindow();
+	if (gameOn == false)
+	{
+		UnloadData();
+		CloseWindow();
+	}
 }
 
-void Input()
+void Input(bool& gameOn)
 {
 	if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 	{
@@ -170,6 +215,36 @@ void Input()
 
 					break;
 				}
+			}
+		}
+	}
+
+	if (restartMenu.isActive)
+	{
+		//Restart Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
+		{
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				RestartGame();
+			}
+		}
+
+		//Return Menu Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.7), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+		{
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+
+			}
+		}
+
+		//Quit Game Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.4), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+		{
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				gameOn = false;
 			}
 		}
 	}
@@ -288,9 +363,9 @@ void drawGame()
 		DrawTexture(lowHealthBar, static_cast<int>(healthBarPos.x), static_cast<int>(healthBarPos.y), WHITE);
 	}
 
-	if (!IsAlive(playerShip))
+	if (!IsAlive(playerShip) || playerWin(playerShip))
 	{
-		RestarGameMenu();
+		DrawRestarGameMenu();
 	}
 
 	if (!restartMenu.isActive)
@@ -610,44 +685,8 @@ void RespawnAsteroids()
 	asteroidsSmallCount = 0;
 }
 
-void UnloadData()
+void DrawRestarGameMenu()
 {
-	UnloadTexture(playerShip.texture);
-
-	for (int i = 0; i < maxAteroids; i++)
-	{
-		UnloadTexture(asteroid[i].texture);
-	}
-
-	for (int i = 0; i < maxNorAsteroids; i++)
-	{
-		UnloadTexture(asteroidNor[i].texture);
-	}
-
-	for (int i = 0; i < maxSmallAsteroids; i++)
-	{
-		UnloadTexture(asteroidSmall[i].texture);
-	}
-
-
-	for (int i = 0; i < maxBullets; i++)
-	{
-		UnloadTexture(bullet[i].texture);
-	}
-
-	UnloadTexture(mouse.texture);
-	UnloadTexture(background);
-
-	UnloadTexture(fullHealthBar);
-	UnloadTexture(midHealthBar);
-	UnloadTexture(lowHealthBar);
-}
-
-void RestarGameMenu()
-{
-	DrawRectangle(static_cast<int>(restartMenu.pos.x), static_cast<int>(restartMenu.pos.y), static_cast<int>(restartMenu.width), static_cast<int>(restartMenu.height), GREEN);
-	restartMenu.isActive = true;
-
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		asteroid[i].isActive = false;
@@ -670,7 +709,35 @@ void RestarGameMenu()
 
 	playerShip.isActive = false;
 
+	DrawRectangle(static_cast<int>(restartMenu.pos.x), static_cast<int>(restartMenu.pos.y), static_cast<int>(restartMenu.width), static_cast<int>(restartMenu.height), BLANK);
+	restartMenu.isActive = true;
+
+	DrawTexture(restartMenu.texture, static_cast<int>(restartMenu.pos.x), static_cast<int>(restartMenu.pos.y), WHITE);
+
+	if (!IsAlive(playerShip))
+	{
+		DrawTextEx(gameFont, "You Lose", { static_cast<float>(screenWidth / 3.5), static_cast<float>(screenHeight / 3.1) }, 70, 0, ORANGE);
+	}
+
+	if (playerWin(playerShip))
+	{
+		DrawTextEx(gameFont, "You Win", { static_cast<float>(screenWidth / 3.1), static_cast<float>(screenHeight / 3.1) }, 70, 0, ORANGE);
+	}
+
+	//Restart Button
+	DrawRectangle(static_cast<int>(screenWidth /2.5), static_cast<int>(screenHeight /2.2), static_cast<int>(screenWidth /4), static_cast<int>(screenHeight /10), BLANK);
+	DrawTextEx(gameFont, "RESTART", { static_cast<float>(restartButton.width), static_cast<float>(restartButton.height) }, static_cast<float>(restartButton.size), 0, restartButton.color);
+
+
+	//Return Menu Button
+	DrawRectangle(static_cast<int>(screenWidth / 2.5), static_cast<int>(screenHeight / 1.7), static_cast<int>(screenWidth / 4), static_cast<int>(screenHeight / 12), BLANK);
+	DrawTextEx(gameFont, "MENU", { static_cast<float>(returnMenuButton.width), static_cast<float>(returnMenuButton.height) }, static_cast<float>(returnMenuButton.size), 0, returnMenuButton.color);
+
+	//Quit Game Button
+	DrawRectangle(static_cast<int>(screenWidth / 2.5), static_cast<int>(screenHeight / 1.4), static_cast<int>(screenWidth / 4), static_cast<int>(screenHeight / 12), BLANK);
+	DrawTextEx(gameFont, "QUIT", { static_cast<float>(quitGameButton.width), static_cast<float>(quitGameButton.height) }, static_cast<float>(quitGameButton.size), 0, quitGameButton.color);
 }
+
 
 void RestartGame()
 {
@@ -735,9 +802,73 @@ void RestarGameMenuCollisions()
 {
 	if (restartMenu.isActive)
 	{
-		if (CheckCollisionPointRec(mouse.position, Rectangle{ restartMenu.pos.x, restartMenu.pos.y, restartMenu.width, restartMenu.height }))
+		ShowCursor();
+
+		//Restart Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
 		{
-			ShowCursor();
+			restartButton.color = BLACK;
+		}
+
+		else
+		{
+			restartButton.color = ORANGE;
+		}
+
+		//Return Menu Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.7), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+		{
+			returnMenuButton.color = BLACK;
+		}
+
+		else
+		{
+			returnMenuButton.color = ORANGE;
+		}
+
+		//Quit Game Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 1.4), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 12) }))
+		{
+			quitGameButton.color = BLACK;
+		}
+
+		else
+		{
+			quitGameButton.color = ORANGE;
 		}
 	}
+}
+
+void UnloadData()
+{
+	UnloadTexture(playerShip.texture);
+
+	for (int i = 0; i < maxAteroids; i++)
+	{
+		UnloadTexture(asteroid[i].texture);
+	}
+
+	for (int i = 0; i < maxNorAsteroids; i++)
+	{
+		UnloadTexture(asteroidNor[i].texture);
+	}
+
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		UnloadTexture(asteroidSmall[i].texture);
+	}
+
+
+	for (int i = 0; i < maxBullets; i++)
+	{
+		UnloadTexture(bullet[i].texture);
+	}
+
+	UnloadTexture(mouse.texture);
+	UnloadTexture(background);
+
+	UnloadTexture(fullHealthBar);
+	UnloadTexture(midHealthBar);
+	UnloadTexture(lowHealthBar);
+	UnloadTexture(restartMenu.texture);
 }
