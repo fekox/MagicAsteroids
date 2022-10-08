@@ -28,6 +28,7 @@ struct Ship
 
 	bool isCollision;
 	bool isAlive;
+	bool isActive;
 
 	Texture2D texture;
 

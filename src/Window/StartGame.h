@@ -3,6 +3,16 @@
 #include "Objects/PlayerShip.h"
 #include "Objects/Bullet.h"
 
+struct RestartMenu
+{
+	Vector2 pos;
+
+	float width;
+	float height;
+
+	bool isActive;
+};
+
 void Input();
 void Update();
 void Collision();
@@ -26,3 +36,7 @@ void RespawnAsteroids();
 void mouseMovement();
 
 void drawGame();
+
+void RestarGameMenu();
+void RestarGameMenuCollisions();
+void RestartGame();

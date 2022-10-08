@@ -48,6 +48,9 @@ int screenHeight = 768;
 //int screenWidth = 1920;
 //int screenHeight = 1080;
 
+RestartMenu restartMenu;
+
+
 //Font
 Font gameFont;
 
@@ -74,11 +77,18 @@ void InitGame()
 	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
 	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
 
+	restartMenu.width = 600;
+	restartMenu.height = 500;
+	restartMenu.pos.x = static_cast<float>(screenWidth / 4.5);
+	restartMenu.pos.y = static_cast<float>(screenHeight / 4.5);
+	restartMenu.isActive = false;
+
 	//Player
 	playerShip = CreateShip();
 	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
 	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+	playerShip.isActive = true;
 
 	//HealthBar
 	healthBarPos.x = static_cast<float>(screenWidth /2.2);
@@ -120,7 +130,7 @@ void GameLoop()
 {
 	SetExitKey(NULL);
 
-	while (!WindowShouldClose() && IsAlive(playerShip))
+	while (!WindowShouldClose())
 	{
 		Input();
 		Update();
@@ -190,6 +200,8 @@ void Collision()
 	objCollisionLimit(playerShip.position, screenWidth, screenHeight);
 
 	bulletCollisonLimit();
+
+	RestarGameMenuCollisions();
 }
 
 #pragma warning(disable: 4459)
@@ -276,7 +288,15 @@ void drawGame()
 		DrawTexture(lowHealthBar, static_cast<int>(healthBarPos.x), static_cast<int>(healthBarPos.y), WHITE);
 	}
 
-	DrawMouse(mouse, mouse.mouseRec);
+	if (!IsAlive(playerShip))
+	{
+		RestarGameMenu();
+	}
+
+	if (!restartMenu.isActive)
+	{
+		DrawMouse(mouse, mouse.mouseRec);
+	}
 }
 
 void mouseMovement()
@@ -621,4 +641,103 @@ void UnloadData()
 	UnloadTexture(fullHealthBar);
 	UnloadTexture(midHealthBar);
 	UnloadTexture(lowHealthBar);
+}
+
+void RestarGameMenu()
+{
+	DrawRectangle(static_cast<int>(restartMenu.pos.x), static_cast<int>(restartMenu.pos.y), static_cast<int>(restartMenu.width), static_cast<int>(restartMenu.height), GREEN);
+	restartMenu.isActive = true;
+
+	for (int i = 0; i < maxAteroids; i++)
+	{
+		asteroid[i].isActive = false;
+	}
+
+	for (int i = 0; i < maxNorAsteroids; i++)
+	{
+		asteroidNor[i].isActive = false;
+	}
+
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		asteroidSmall[i].isActive = false;
+	}
+
+	for (int i = 0; i < maxBullets; i++)
+	{
+		bullet[i].isActive = false;
+	}
+
+	playerShip.isActive = false;
+
+}
+
+void RestartGame()
+{
+	gameFont = LoadFont("resources/Font/04B_30__.TTF");
+
+	background = LoadTexture("resources/Sprites/Background.png");
+
+	fullHealthBar = LoadTexture("resources/Sprites/FullHealthBar.png");
+	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
+	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
+
+	restartMenu.width = 600;
+	restartMenu.height = 500;
+	restartMenu.pos.x = static_cast<float>(screenWidth / 4.5);
+	restartMenu.pos.y = static_cast<float>(screenHeight / 4.5);
+	restartMenu.isActive = false;
+
+	//Player
+	playerShip = CreateShip();
+	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
+	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
+	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+	playerShip.isActive = true;
+
+	//HealthBar
+	healthBarPos.x = static_cast<float>(screenWidth / 2.2);
+	healthBarPos.y = 1;
+
+	//Mouse
+	HideCursor();
+	mouse = CreateMouse();
+	mouse.mouseRec = GetRecMouse(mouse);
+
+	//Asteroid
+
+	for (int i = 0; i < maxAteroids; i++)
+	{
+		asteroid[i].size = Size::Big;
+		asteroid[i] = CreateAsteroid(asteroid[i].size);
+	}
+
+	for (int i = 0; i < maxNorAsteroids; i++)
+	{
+		asteroidNor[i].size = Size::Normal;
+		asteroidNor[i] = CreateAsteroid(asteroidNor[i].size);
+	}
+
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		asteroidSmall[i].size = Size::Small;
+		asteroidSmall[i] = CreateAsteroid(asteroidSmall[i].size);
+	}
+
+	//Bullet
+	for (int i = 0; i < maxBullets; i++)
+	{
+		bullet[i] = CreateBullet();
+	}
+}
+
+void RestarGameMenuCollisions()
+{
+	if (restartMenu.isActive)
+	{
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ restartMenu.pos.x, restartMenu.pos.y, restartMenu.width, restartMenu.height }))
+		{
+			ShowCursor();
+		}
+	}
 }

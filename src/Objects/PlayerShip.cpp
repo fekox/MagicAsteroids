@@ -33,6 +33,8 @@ Ship CreateShip()
 
 	playerShip.isAlive = true;
 
+	playerShip.isActive = true;
+
 	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
 
 	playerShip.color.a = 255;
@@ -50,8 +52,11 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 
 void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight)
 {
-	DrawTexturePro(playerShip.texture, Rectangle{ 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, playerShip.color);
-	DrawCircle(static_cast<int>(playerShip.position.x - playerWidth / 2), static_cast<int>(playerShip.position.y - playerHeight / 2), playerShip.radius, BLANK);
+	if (playerShip.isActive)
+	{
+		DrawTexturePro(playerShip.texture, Rectangle{ 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) }, Rectangle{ playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height }, shipOriginRec, playerShip.rotation, playerShip.color);
+		DrawCircle(static_cast<int>(playerShip.position.x - playerWidth / 2), static_cast<int>(playerShip.position.y - playerHeight / 2), playerShip.radius, BLANK);
+	}
 }
 
 void loseLife(Ship& playerShip)
