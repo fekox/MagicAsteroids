@@ -92,6 +92,12 @@
     <Image Include="resources\Sprites\RestartGameMenu.png">
       <Filter>Resources\Sprites</Filter>
     </Image>
+    <Image Include="resources\Sprites\PauseButtonOff.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
+    <Image Include="resources\Sprites\PauseButtonOn.png">
+      <Filter>Resources\Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\Font\04B_30__.TTF">

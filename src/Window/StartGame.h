@@ -3,7 +3,7 @@
 #include "Objects/PlayerShip.h"
 #include "Objects/Bullet.h"
 
-struct RestartMenu
+struct SubMenu
 {
 	Vector2 pos;
 
@@ -17,12 +17,15 @@ struct RestartMenu
 
 struct Button
 {
+	Vector2 pos;
+
 	float width;
 	float height;
 
 	int size;
 
 	Texture texture;
+
 	Color color;
 };
 
@@ -53,3 +56,6 @@ void drawGame();
 void DrawRestarGameMenu();
 void RestarGameMenuCollisions();
 void RestartGame();
+
+void DrawPauseMenu();
+void PauseMenuCollisions();

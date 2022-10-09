@@ -43,6 +43,8 @@
     <Image Include="resources\Sprites\LowHealthBar.png" />
     <Image Include="resources\Sprites\MidHealthBar.png" />
     <Image Include="resources\Sprites\NormalAsteroid.png" />
+    <Image Include="resources\Sprites\PauseButtonOff.png" />
+    <Image Include="resources\Sprites\PauseButtonOn.png" />
     <Image Include="resources\Sprites\RestartGameMenu.png" />
     <Image Include="resources\Sprites\Ship.png" />
     <Image Include="resources\Sprites\SmallAsteroid.png" />
@@ -171,13 +173,14 @@ xcopy Sounds "$(SolutionDir)bin\Win32\Release\resources\Sounds"
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)lib\raylib-4.0.0_win32_msvc16\include;$(SolutionDir)src;$(SolutionDir)resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
