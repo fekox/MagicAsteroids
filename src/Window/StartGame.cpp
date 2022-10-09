@@ -50,9 +50,9 @@ int screenHeight = 768;
 
 RestartMenu restartMenu;
 
-RestartMenuButton restartButton;
-RestartMenuButton returnMenuButton;
-RestartMenuButton quitGameButton;
+Button restartButton;
+Button returnMenuButton;
+Button quitGameButton;
 
 
 //Font

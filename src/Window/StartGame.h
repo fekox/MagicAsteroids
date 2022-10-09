@@ -15,13 +15,14 @@ struct RestartMenu
 	bool isActive;
 };
 
-struct RestartMenuButton
+struct Button
 {
 	float width;
 	float height;
 
 	int size;
 
+	Texture texture;
 	Color color;
 };
 

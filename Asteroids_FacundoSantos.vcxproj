@@ -43,6 +43,7 @@
     <Image Include="resources\Sprites\LowHealthBar.png" />
     <Image Include="resources\Sprites\MidHealthBar.png" />
     <Image Include="resources\Sprites\NormalAsteroid.png" />
+    <Image Include="resources\Sprites\RestartGameMenu.png" />
     <Image Include="resources\Sprites\Ship.png" />
     <Image Include="resources\Sprites\SmallAsteroid.png" />
   </ItemGroup>
