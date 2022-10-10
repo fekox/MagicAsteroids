@@ -1,6 +1,7 @@
 #include <iostream>
 #include "raylib.h"
 #include "raymath.h"
+#include "Window/Menu.h"
 #include "Window/Game.h"
 #include "Window/StartGame.h"
 #include "Objects/PlayerShip.h"
@@ -9,6 +10,10 @@
 #include "Objects/Bullet.h"
 
 using namespace std;
+
+//Menu
+Texture2D menuBackGround;
+int optionSelect = 0;
 
 //Player
 Ship playerShip;
@@ -86,6 +91,12 @@ void InitGame()
 	fullHealthBar = LoadTexture("resources/Sprites/FullHealthBar.png");
 	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
 	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
+	
+	//***************************************************************************
+
+	//Menu
+	InitMenu();
+	menuBackGround = LoadTexture("resources/Sprites/MenuBackground.png");
 
 	//***************************************************************************
 
@@ -205,21 +216,49 @@ void GameLoop()
 {
 	SetExitKey(NULL);
 	bool gameOn = true;
+	bool playGame = false;
 
 	while (!WindowShouldClose() && gameOn)
 	{	
 		if (gameOn == true)
 		{
-			Input(gameOn);
-
-			if (!pause)
-			{
-				Update();
-				Collision();
-			}
-			PauseMenuCollisions();
 			mouseMovement();
-			Draw();
+			MenuCollisions(mouse);
+			MenuInputs(mouse, optionSelect, playGame);
+
+			if (playGame == true)
+			{
+				Input(gameOn);
+
+				if (!pause)
+				{
+					Update();
+					Collision();
+				}
+
+				PauseMenuCollisions();
+			}
+
+			switch (optionSelect)
+			{
+				case static_cast<int>(Menu::MainMenu):
+					BeginDrawing();
+					ClearBackground(BLACK);
+
+					ShowCursor();
+					DrawMenu(menuBackGround, gameFont);
+
+					EndDrawing();
+
+				break;
+
+				case static_cast<int>(Menu::Play):
+					Draw();
+				break;
+
+				default:
+				break;
+			}
 		}
 	}
 
@@ -278,7 +317,9 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
-
+				RestartGame();
+				restartMenu.isActive = false;
+				optionSelect = 0;
 			}
 		}
 
@@ -309,7 +350,10 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
-
+				RestartGame();
+				pause = false;
+				pauseMenu.isActive = false;
+				optionSelect = 0;
 			}
 		}
 
@@ -993,12 +1037,12 @@ void RestarGameMenuCollisions()
 		//Restart Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
 		{
-			resumeButton.color = BLACK;
+			restartButton.color = BLACK;
 		}
 
 		else
 		{
-			resumeButton.color = ORANGE;
+			restartButton.color = ORANGE;
 		}
 
 		//Return Menu Button
@@ -1027,6 +1071,8 @@ void RestarGameMenuCollisions()
 
 void UnloadData()
 {
+	UnloadTexture(menuBackGround);
+
 	UnloadTexture(playerShip.texture);
 
 	for (int i = 0; i < maxAteroids; i++)

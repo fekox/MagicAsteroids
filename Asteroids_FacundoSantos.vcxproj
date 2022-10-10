@@ -24,6 +24,7 @@
     <ClCompile Include="src\Objects\Bullet.cpp" />
     <ClCompile Include="src\Objects\Mouse.cpp" />
     <ClCompile Include="src\Objects\PlayerShip.cpp" />
+    <ClCompile Include="src\Window\Menu.cpp" />
     <ClCompile Include="src\Window\StartGame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +33,7 @@
     <ClInclude Include="src\Objects\Mouse.h" />
     <ClInclude Include="src\Objects\PlayerShip.h" />
     <ClInclude Include="src\Window\Game.h" />
+    <ClInclude Include="src\Window\Menu.h" />
     <ClInclude Include="src\Window\StartGame.h" />
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +43,7 @@
     <Image Include="resources\Sprites\Cross.png" />
     <Image Include="resources\Sprites\FullHealthBar.png" />
     <Image Include="resources\Sprites\LowHealthBar.png" />
+    <Image Include="resources\Sprites\MenuBackground.png" />
     <Image Include="resources\Sprites\MidHealthBar.png" />
     <Image Include="resources\Sprites\NormalAsteroid.png" />
     <Image Include="resources\Sprites\PauseButtonOff.png" />
