@@ -128,16 +128,16 @@ void InitGame()
 	//Pause Button Off
 	pauseButtonOff.pos.x = static_cast<float>(screenWidth / 1.2);
 	pauseButtonOff.pos.y = static_cast<float>(screenHeight / 20);
-	pauseButtonOff.width = 130;
-	pauseButtonOff.height = 130;
+	pauseButtonOff.width = 64;
+	pauseButtonOff.height = 64;
 	pauseButtonOff.color = WHITE;
 	pauseButtonOff.texture = LoadTexture("resources/Sprites/PauseButtonOff.png");
 
 	//Pause Button On
 	pauseButtonOn.pos.x = static_cast<float>(screenWidth / 1.2);
 	pauseButtonOn.pos.y = static_cast<float>(screenHeight / 20);
-	pauseButtonOn.width = 130;
-	pauseButtonOn.height = 130;
+	pauseButtonOn.width = 64;
+	pauseButtonOn.height = 64;
 	pauseButtonOn.color = WHITE;
 	pauseButtonOn.texture = LoadTexture("resources/Sprites/PauseButtonOn.png");
 
@@ -325,6 +325,12 @@ void Input(bool& gameOn)
 
 	if (!restartMenu.isActive && !pauseMenu.isActive)
 	{
+		if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+		{
+			pauseMenu.isActive = true;
+			pause = true;
+		}
+
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ pauseButtonOff.pos.x, pauseButtonOff.pos.y, pauseButtonOff.width, pauseButtonOff.height}))
 		{
 			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
@@ -337,12 +343,20 @@ void Input(bool& gameOn)
 
 	else
 	{
+		if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+		{
+			pauseMenu.isActive = false;
+			pause = false;
+			HideCursor();
+		}
+
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ pauseButtonOn.pos.x, pauseButtonOn.pos.y, pauseButtonOn.width, pauseButtonOn.height }))
 		{
 			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			{
 				pauseMenu.isActive = false;
 				pause = false;
+				HideCursor();
 			}
 		}
 	}
