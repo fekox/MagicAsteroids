@@ -141,9 +141,9 @@
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cd $(SolutionDir)bin\Win32\Release
+      <Command>cd $(SolutionDir)bin\Win32\Debug
 mkdir resources
-cd $(SolutionDir)bin\Win32\Release\resources
+cd $(SolutionDir)bin\Win32\Debug\resources
 mkdir Font
 mkdir Sprites
 mkdir Sounds
@@ -152,10 +152,8 @@ cd..
 cd..
 cd..
 cd $(SolutionDir)resources
-xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font"
-xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites"
-xcopy Sounds "$(SolutionDir)bin\Win32\Release\resources\Sounds"
-</Command>
+xcopy Font "$(SolutionDir)bin\Win32\Debug\resources\Font" 
+xcopy Sprites "$(SolutionDir)bin\Win32\Debug\resources\Sprites" </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -206,10 +204,8 @@ cd..
 cd..
 cd..
 cd $(SolutionDir)resources
-xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font"
-xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites"
-xcopy Sounds "$(SolutionDir)bin\Win32\Release\resources\Sounds"
-</Command>
+xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font" 
+xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites" </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
