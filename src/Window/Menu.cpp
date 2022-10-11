@@ -141,59 +141,63 @@ void MenuCollisions(Mouse& mouse)
 
 void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 {
-	//Play Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 3.5), static_cast<float>(play.width), static_cast<float>(play.height) }))
+	if (!playGame)
 	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		//Play Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 3.5), static_cast<float>(play.width), static_cast<float>(play.height) }))
 		{
-			optionSelect = 1;
-			playGame = true;
-			HideCursor();
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				optionSelect = 1;
+				playGame = true;
+				HideCursor();
+			}
 		}
-	}
 
-	//Controlls Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 2.5), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }))
-	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		//Controlls Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 2.5), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }))
 		{
-			optionSelect = 2;
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				optionSelect = 2;
+			}
 		}
-	}
 
-	//Rules Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.94), static_cast<float>(rules.width), static_cast<float>(rules.height) }))
-	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		//Rules Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.94), static_cast<float>(rules.width), static_cast<float>(rules.height) }))
 		{
-			optionSelect = 3;
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				optionSelect = 3;
+			}
 		}
-	}
 
-	//Credits Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 1.5), static_cast<float>(GetScreenHeight() / 1.13), static_cast<float>(credits.width), static_cast<float>(credits.height) }))
-	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		//Credits Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 1.5), static_cast<float>(GetScreenHeight() / 1.13), static_cast<float>(credits.width), static_cast<float>(credits.height) }))
 		{
-			optionSelect = 4;
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				optionSelect = 4;
+			}
 		}
-	}
 
-	//Quit Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.59), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
-	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		//Quit Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.59), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
 		{
-			optionSelect = 5;
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				optionSelect = 5;
+			}
 		}
-	}
 
-	//ReturnMenu Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
-	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		//ReturnMenu Button
+		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
 		{
-			optionSelect = 0;
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			{
+				optionSelect = 0;
+				playGame = false;
+			}
 		}
 	}
 }

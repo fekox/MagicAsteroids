@@ -49,6 +49,7 @@ Asteroid asteroidSmall[maxSmallAsteroids];
 int totalAsteoroidsCount = 6;
 
 //Window
+bool playGame = false;
 Texture2D background;
 int screenWidth = 1024;
 int screenHeight = 768;
@@ -220,7 +221,6 @@ void GameLoop()
 {
 	SetExitKey(NULL);
 	bool gameOn = true;
-	bool playGame = false;
 
 	while (!WindowShouldClose() && gameOn)
 	{	
@@ -248,10 +248,8 @@ void GameLoop()
 				case static_cast<int>(Menu::MainMenu):
 					BeginDrawing();
 					ClearBackground(BLACK);
-
 					ShowCursor();
 					DrawMenu(menuBackGround, gameFont);
-
 					EndDrawing();
 
 				break;
@@ -345,6 +343,7 @@ void Input(bool& gameOn)
 			{
 				RestartGame();
 				restartMenu.isActive = false;
+				playGame = false;
 				optionSelect = 0;
 			}
 		}
@@ -378,6 +377,7 @@ void Input(bool& gameOn)
 			{
 				RestartGame();
 				pause = false;
+				playGame = false;
 				pauseMenu.isActive = false;
 				optionSelect = 0;
 			}
@@ -453,7 +453,7 @@ void Collision()
 	AsteroidCollisionLimit(asteroidNor);
 	AsteroidCollisionLimit(asteroidSmall);
 
-	objCollisionLimit(playerShip.position, screenWidth, screenHeight);
+	objCollisionLimit(playerShip.position);
 
 	bulletCollisonLimit();
 
@@ -468,7 +468,7 @@ void AsteroidCollisionLimit(Asteroid asteroid[])
 	{
 		if (asteroid[i].isActive)
 		{
-			objCollisionLimit(asteroid[i].position, screenWidth, screenHeight);
+			objCollisionLimit(asteroid[i].position);
 		}
 	}
 }
@@ -645,12 +645,9 @@ void bulletMovement()
 		}
 	}
 }
-#pragma warning(disable: 4459)
-void objCollisionLimit(Vector2& objPosition, int screenWidth, int screenHeight)
+
+void objCollisionLimit(Vector2& objPosition)
 {
-#pragma warning(default: 4459)
-
-
 	if (objPosition.x < 0)
 	{
 		objPosition.x = objPosition.x + screenWidth;
@@ -756,7 +753,6 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
 
 void BulletCollision()
 {
-
 	for (int i = 0; i < maxBullets; i++)
 	{
 		for (int j = 0; j < maxAteroids; j++)
@@ -997,14 +993,6 @@ void DrawRestarGameMenu()
 
 void RestartGame()
 {
-	gameFont = LoadFont("resources/Font/04B_30__.TTF");
-
-	background = LoadTexture("resources/Sprites/Background.png");
-
-	fullHealthBar = LoadTexture("resources/Sprites/FullHealthBar.png");
-	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
-	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
-
 	restartMenu.width = 600;
 	restartMenu.height = 500;
 	restartMenu.pos.x = static_cast<float>(screenWidth / 4.5);

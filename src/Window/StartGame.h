@@ -43,7 +43,7 @@ void AsteroidCollision(Ship& playerShip, Asteroid asteroid[]);
 void BulletCollision();
 bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, float obj2Radius);
 
-void objCollisionLimit(Vector2& shipPosition, int screenWidth, int screenHeight);
+void objCollisionLimit(Vector2& shipPosition);
 void AsteroidCollisionLimit(Asteroid asteroid[]);
 void bulletCollisonLimit();
 
