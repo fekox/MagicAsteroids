@@ -13,6 +13,8 @@ using namespace std;
 
 //Menu
 Texture2D menuBackGround;
+Texture2D menuBackGroundEmpty;
+Texture2D texControlls;
 int optionSelect = 0;
 
 //Player
@@ -97,6 +99,8 @@ void InitGame()
 	//Menu
 	InitMenu();
 	menuBackGround = LoadTexture("resources/Sprites/MenuBackground.png");
+	menuBackGroundEmpty = LoadTexture("resources/Sprites/BackgroundEmpty.png");
+	texControlls = LoadTexture("resources/Sprites/Controlls.png");
 
 	//***************************************************************************
 
@@ -256,7 +260,29 @@ void GameLoop()
 					Draw();
 				break;
 
-				default:
+				case static_cast<int>(Menu::Controlls):
+					BeginDrawing();
+					ClearBackground(BLACK);
+					DrawControlls(menuBackGroundEmpty, texControlls, gameFont);
+					EndDrawing();
+				break;
+
+				case static_cast<int>(Menu::Rules):
+					BeginDrawing();
+					ClearBackground(BLACK);
+					DrawRules(menuBackGroundEmpty, gameFont);
+					EndDrawing();
+				break;
+
+				case static_cast<int>(Menu::Credits):
+					BeginDrawing();
+					ClearBackground(BLACK);
+					DrawCredits(menuBackGroundEmpty, gameFont);
+					EndDrawing();
+				break;
+
+				case static_cast<int>(Menu::Quit):
+					gameOn = false;
 				break;
 			}
 		}
@@ -1072,6 +1098,7 @@ void RestarGameMenuCollisions()
 void UnloadData()
 {
 	UnloadTexture(menuBackGround);
+	UnloadTexture(menuBackGroundEmpty);
 
 	UnloadTexture(playerShip.texture);
 

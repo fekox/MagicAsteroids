@@ -5,6 +5,7 @@ MenuButton controlls;
 MenuButton rules;
 MenuButton credits;
 MenuButton quit;
+MenuButton returnMenu;
 
 void InitMenu()
 {
@@ -57,6 +58,16 @@ void InitMenu()
 	quit.size = 40;
 
 	quit.color = ORANGE;
+
+	//ReturnMenu Button
+
+	returnMenu.pos.x = static_cast<float>(GetScreenWidth() / 2.5);
+	returnMenu.pos.y = static_cast<float>(GetScreenHeight() / 1.1);
+	returnMenu.width = static_cast<float>(GetScreenWidth() / 7.8);
+	returnMenu.height = static_cast<float>(GetScreenHeight() / 10);
+	returnMenu.size = 40;
+
+	returnMenu.color = ORANGE;
 }
 
 void MenuCollisions(Mouse& mouse)
@@ -115,6 +126,17 @@ void MenuCollisions(Mouse& mouse)
 	{
 		quit.color = ORANGE;
 	}
+
+	//ReturnMenu Button
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
+	{
+		returnMenu.color = BLACK;
+	}
+
+	else
+	{
+		returnMenu.color = ORANGE;
+	}
 }
 
 void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
@@ -165,13 +187,22 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 			optionSelect = 5;
 		}
 	}
+
+	//ReturnMenu Button
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
+	{
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		{
+			optionSelect = 0;
+		}
+	}
 }
 
 void DrawMenu(Texture2D menuBackGround, Font gameFont)
 {
 	ShowCursor();
 	DrawTexture(menuBackGround, 0, 0, WHITE);
-	DrawTextEx(gameFont, "  Magic\nAsteroids", { static_cast<float>(GetScreenWidth() / 20) , static_cast<float>(GetScreenHeight() / 20) }, 60, 0, ORANGE);
+	DrawTextEx(gameFont, "  Magic\nAsteroids", { static_cast<float>(GetScreenWidth() / 20) , static_cast<float>(GetScreenHeight() / 20) }, 60, 0, GOLD);
 
 	//Play Button
 
@@ -200,17 +231,47 @@ void DrawMenu(Texture2D menuBackGround, Font gameFont)
 
 }
 
-void DrawControlls()
+void DrawControlls(Texture2D menuBackGroundEmpty, Texture texControlls, Font gameFont)
 {
+	DrawTexture(menuBackGroundEmpty, 0, 0, WHITE);
+	DrawTexture(texControlls, 0, 0, WHITE);
 
+	DrawTextEx(gameFont, "Controlls", { static_cast<float>(GetScreenWidth() / 3.5) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, ORANGE);
+
+	//ReturnMenu Button
+
+	DrawRectangle(static_cast<int>(GetScreenWidth() / 2.5), static_cast<int>(GetScreenHeight() / 1.1), static_cast<int>(returnMenu.width), static_cast<int>(returnMenu.height), BLANK);
+	DrawTextEx(gameFont, "MENU", returnMenu.pos, static_cast<float>(returnMenu.size), 0, returnMenu.color);
 }
 
-void DrawRules()
+void DrawRules(Texture2D menuBackGroundEmpty, Font gameFont)
 {
+	DrawTexture(menuBackGroundEmpty, 0, 0, WHITE);
 
+	DrawTextEx(gameFont, "RULES", { static_cast<float>(GetScreenWidth() / 2.7) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, ORANGE);
+
+	DrawTextEx(gameFont, "Play as a space pilot who must survive a\nasteroid rain, if they hit you three times\nyou lose, if you reach three thousand\npoints you win.\nShoot the asteroids to prevent them from\ncolliding whit the ship but be careful,\nwhen you shoot an asteroid it breaks\ninto two or three parts.\n\nGood luck pilot.", 
+	{ static_cast<float>(GetScreenWidth() / 25) , static_cast<float>(GetScreenHeight() / 5) }, 30, 0, ORANGE);
+
+	//ReturnMenu Button
+
+	DrawRectangle(static_cast<int>(GetScreenWidth() / 2.5), static_cast<int>(GetScreenHeight() / 1.1), static_cast<int>(returnMenu.width), static_cast<int>(returnMenu.height), BLANK);
+	DrawTextEx(gameFont, "MENU", returnMenu.pos, static_cast<float>(returnMenu.size), 0, returnMenu.color);
 }
 
-void DrawCredits()
+void DrawCredits(Texture2D menuBackGroundEmpty, Font gameFont)
 {
+	DrawTexture(menuBackGroundEmpty, 0, 0, WHITE);
 
+	DrawTextEx(gameFont, "CREDITS", { static_cast<float>(GetScreenWidth() / 3) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, ORANGE);
+	
+	DrawTextEx(gameFont, "GAME MADE BY\nFacundo Santos", { static_cast<float>(GetScreenWidth() / 3.5) , static_cast<float>(GetScreenHeight() / 3.5) }, 40, 0, ORANGE);
+
+	DrawTextEx(gameFont, "FONT", { static_cast<float>(GetScreenWidth() / 2.3) , static_cast<float>(GetScreenHeight() / 1.8) }, 40, 0, ORANGE);
+	DrawTextEx(gameFont, "https://www.dafont.com/es/04b-30.font", { static_cast<float>(GetScreenWidth() / 15) , static_cast<float>(GetScreenHeight() / 1.5) }, 30, 0, ORANGE);
+
+	//ReturnMenu Button
+
+	DrawRectangle(static_cast<int>(GetScreenWidth() / 2.5), static_cast<int>(GetScreenHeight() / 1.1), static_cast<int>(returnMenu.width), static_cast<int>(returnMenu.height), BLANK);
+	DrawTextEx(gameFont, "MENU", returnMenu.pos, static_cast<float>(returnMenu.size), 0, returnMenu.color);
 }
