@@ -141,16 +141,13 @@
       <AdditionalDependencies>winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>cd $(SolutionDir)bin\Win32\Debug
+      <Command>IF EXIST $(SolutionDir)bin\Win32\Debug\resources\ (rmdir $(SolutionDir)bin\Win32\Debug\resources /s /q)
+cd $(SolutionDir)bin\Win32\Debug
 mkdir resources
 cd $(SolutionDir)bin\Win32\Debug\resources
 mkdir Font
 mkdir Sprites
 mkdir Sounds
-cd..
-cd..
-cd..
-cd..
 cd $(SolutionDir)resources
 xcopy Font "$(SolutionDir)bin\Win32\Debug\resources\Font" 
 xcopy Sprites "$(SolutionDir)bin\Win32\Debug\resources\Sprites" </Command>
@@ -193,16 +190,13 @@ xcopy Sprites "$(SolutionDir)bin\Win32\Debug\resources\Sprites" </Command>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>cd $(SolutionDir)bin\Win32\Release
+      <Command>IF EXIST $(SolutionDir)bin\Win32\Debug\resources\ (rmdir $(SolutionDir)bin\Win32\Release\resources /s /q)
+cd $(SolutionDir)bin\Win32\Release
 mkdir resources
 cd $(SolutionDir)bin\Win32\Release\resources
 mkdir Font
 mkdir Sprites
 mkdir Sounds
-cd..
-cd..
-cd..
-cd..
 cd $(SolutionDir)resources
 xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font" 
 xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites" </Command>
