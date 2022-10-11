@@ -23,7 +23,7 @@ struct Asteroid
 	Texture2D texture;
 };
 
-Asteroid CreateAsteroid(Size size);
+Asteroid CreateAsteroid(Size size, Asteroid& asteroid);
 
 void DrawAsteroidBig(Asteroid& asteroid);
 

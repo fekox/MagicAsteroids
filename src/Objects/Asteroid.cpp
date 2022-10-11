@@ -1,16 +1,13 @@
 #include "Objects/Asteroid.h"
+#include <iostream>
 
-#pragma warning (disable:4715)
-Asteroid CreateAsteroid(Size size)
+Asteroid CreateAsteroid(Size size, Asteroid& asteroid)
 {
-	Asteroid asteroid;
-	Asteroid norAsteroid;
-	Asteroid smallAsteroid;
-
 	switch (size)
 	{
-	case Size::Big:
+		case Size::Big:
 
+		asteroid.size = Size::Big;
 		asteroid.position.x = static_cast<float>(GetRandomValue(700, 1000));
 		asteroid.position.y = static_cast<float>(GetRandomValue(700, 900));
 
@@ -22,56 +19,53 @@ Asteroid CreateAsteroid(Size size)
 		asteroid.speed.y = static_cast<float>(GetRandomValue(-70, 70));
 
 		asteroid.texture = LoadTexture("resources/Sprites/Asteroid.png");
-
-		return asteroid;
-
+		
 		break;
 
-	case Size::Normal:
+		case Size::Normal:
 
-		norAsteroid.position.x = 0;
-		norAsteroid.position.y = 0;
+		asteroid.size = Size::Normal;
+		asteroid.position.x = 0;
+		asteroid.position.y = 0;
 
-		norAsteroid.radius = 45.0f;
+		asteroid.radius = 45.0f;
 
-		norAsteroid.isActive = false;
+		asteroid.isActive = false;
 
-		norAsteroid.speed.x = static_cast<float>(GetRandomValue(-90, 90));
-		norAsteroid.speed.y = static_cast<float>(GetRandomValue(-90, 90));
+		asteroid.speed.x = static_cast<float>(GetRandomValue(-90, 90));
+		asteroid.speed.y = static_cast<float>(GetRandomValue(-90, 90));
 
-		norAsteroid.texture = LoadTexture("resources/Sprites/NormalAsteroid.png");
-
-		return norAsteroid;
-
+		asteroid.texture = LoadTexture("resources/Sprites/NormalAsteroid.png");
+		
 		break;
 
-	case Size::Small:
+		case Size::Small:
 
-		smallAsteroid.position.x = 0;
-		smallAsteroid.position.y = 0;
+		asteroid.size = Size::Small;
+		asteroid.position.x = 0;
+		asteroid.position.y = 0;
 
-		smallAsteroid.radius = 35.0f;
+		asteroid.radius = 35.0f;
 
-		smallAsteroid.isActive = false;
+		asteroid.isActive = false;
 
-		smallAsteroid.speed.x = static_cast<float>(GetRandomValue(-110, 110));
-		smallAsteroid.speed.y = static_cast<float>(GetRandomValue(-110, 110));
+		asteroid.speed.x = static_cast<float>(GetRandomValue(-110, 110));
+		asteroid.speed.y = static_cast<float>(GetRandomValue(-110, 110));
 
-		smallAsteroid.texture = LoadTexture("resources/Sprites/SmallAsteroid.png");
-
-		return smallAsteroid;
-
+		asteroid.texture = LoadTexture("resources/Sprites/SmallAsteroid.png");
+		
 		break;
 	}
+
+	return asteroid;
 }
-#pragma warning (default:4715)
 
 void DrawAsteroidBig(Asteroid& asteroid) 
 {
 	if (asteroid.isActive == true)
 	{
 		DrawTexture(asteroid.texture, static_cast<int>(asteroid.position.x - 70), static_cast<int>(asteroid.position.y -70), WHITE);
-		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, BLANK);
+		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, WHITE);
 	}
 }
 
@@ -80,7 +74,7 @@ void DrawAsteroidNormal(Asteroid& asteroid)
 	if (asteroid.isActive == true)
 	{
 		DrawTexture(asteroid.texture, static_cast<int>(asteroid.position.x - 50), static_cast<int>(asteroid.position.y - 50), WHITE);
-		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, BLANK);
+		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, WHITE);
 	}
 }
 
@@ -89,6 +83,6 @@ void DrawAsteroidSmall(Asteroid& asteroid)
 	if (asteroid.isActive == true)
 	{
 		DrawTexture(asteroid.texture, static_cast<int>(asteroid.position.x - 40), static_cast<int>(asteroid.position.y - 40), WHITE);
-		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, BLANK);
+		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, WHITE);
 	}
 }

@@ -38,13 +38,13 @@ void UnloadData();
 void shipMovement();
 void bulletMovement();
 
-void asteroidMovement(Asteroid asteroid[], int const maxAteroids);
-void AsteroidCollision(Ship& playerShip, Asteroid asteroid[]);
+void asteroidMovement(Asteroid asteroids[], int const maxObjects);
+void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects);
 void BulletCollision();
 bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, float obj2Radius);
 
 void objCollisionLimit(Vector2& shipPosition);
-void AsteroidCollisionLimit(Asteroid asteroid[]);
+void AsteroidCollisionLimit(Asteroid asteroids[]);
 void bulletCollisonLimit();
 
 void RespawnAsteroids();

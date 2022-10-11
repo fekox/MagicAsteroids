@@ -193,19 +193,19 @@ void InitGame()
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		asteroid[i].size = Size::Big;
-		asteroid[i] = CreateAsteroid(asteroid[i].size);
+		asteroid[i] = CreateAsteroid(asteroid[i].size, asteroid[i]);
 	}
 
 	for (int i = 0; i < maxNorAsteroids; i++)
 	{
 		asteroidNor[i].size = Size::Normal;
-		asteroidNor[i] = CreateAsteroid(asteroidNor[i].size);
+		asteroidNor[i] = CreateAsteroid(asteroidNor[i].size, asteroidNor[i]);
 	}
 
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
 		asteroidSmall[i].size = Size::Small;
-		asteroidSmall[i] = CreateAsteroid(asteroidSmall[i].size);
+		asteroidSmall[i] = CreateAsteroid(asteroidSmall[i].size, asteroidSmall[i]);
 	}
 
 	//***************************************************************************
@@ -443,9 +443,9 @@ void Update()
 
 void Collision()
 {
-	AsteroidCollision(playerShip, asteroid);
-	AsteroidCollision(playerShip, asteroidNor);
-	AsteroidCollision(playerShip, asteroidSmall);
+	AsteroidCollision(playerShip, asteroid, maxAteroids);
+	AsteroidCollision(playerShip, asteroidNor, maxNorAsteroids);
+	AsteroidCollision(playerShip, asteroidSmall, maxSmallAsteroids);
 
 	BulletCollision();
 
@@ -460,15 +460,14 @@ void Collision()
 	RestarGameMenuCollisions();
 }
 
-#pragma warning(disable: 4459)
-void AsteroidCollisionLimit(Asteroid asteroid[])
+
+void AsteroidCollisionLimit(Asteroid asteroids[])
 {
-#pragma warning(default:4459)
 	for (int i = 0; i < maxAteroids; i++)
 	{
-		if (asteroid[i].isActive)
+		if (asteroids[i].isActive)
 		{
-			objCollisionLimit(asteroid[i].position);
+			objCollisionLimit(asteroids[i].position);
 		}
 	}
 }
@@ -601,28 +600,26 @@ void shipMovement()
 	playerShip.position.y = playerShip.position.y + playerShip.aceleration.y * GetFrameTime();
 }
 
-#pragma warning(disable: 4459)
-void asteroidMovement(Asteroid asteroid[], int const maxAteroids)
-{
-#pragma warning(default:4459)
 
-	for (int i = 0; i < maxAteroids; i++)
+void asteroidMovement(Asteroid asteroids[], int const maxObjects)
+{
+	for (int i = 0; i < maxObjects; i++)
 	{
-		if (asteroid[i].isActive)
+		if (asteroids[i].isActive)
 		{
-			if (asteroid[i].speed.x != 0 && asteroid[i].speed.y != 0)
+			if (asteroids[i].speed.x != 0 && asteroids[i].speed.y != 0)
 			{
-				asteroid[i].position.x += asteroid[i].speed.x * GetFrameTime();
-				asteroid[i].position.y += asteroid[i].speed.y * GetFrameTime();
+				asteroids[i].position.x += asteroids[i].speed.x * GetFrameTime();
+				asteroids[i].position.y += asteroids[i].speed.y * GetFrameTime();
 			}
 
 			else
 			{
-				asteroid[i].speed.x = static_cast<float>(GetRandomValue(-70, 70));
-				asteroid[i].speed.y = static_cast<float>(GetRandomValue(-70, 70));
+				asteroids[i].speed.x = static_cast<float>(GetRandomValue(-70, 70));
+				asteroids[i].speed.y = static_cast<float>(GetRandomValue(-70, 70));
 
-				asteroid[i].position.x += asteroid[i].speed.x * GetFrameTime();
-				asteroid[i].position.y += asteroid[i].speed.y * GetFrameTime();
+				asteroids[i].position.x += asteroids[i].speed.x * GetFrameTime();
+				asteroids[i].position.y += asteroids[i].speed.y * GetFrameTime();
 			}
 		}
 	}
@@ -717,28 +714,26 @@ bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, f
 	return false;
 }
 
-#pragma warning(disable: 4459)
-void AsteroidCollision(Ship& playerShip, Asteroid asteroid[])
-{
-#pragma warning(default: 4459)
 
-	for (int i = 0; i < maxAteroids; i++)
+void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects)
+{
+	for (int i = 0; i < maxObjects; i++)
 	{
-		if (asteroid[i].isActive)
+		if (asteroids[i].isActive)
 		{
 			if (timer < 0)
 			{
-				if (CheckCollsisionCirCir(playerShip.position, playerShip.radius, asteroid[i].position, asteroid[i].radius))
+				if (CheckCollsisionCirCir(player.position, player.radius, asteroids[i].position, asteroids[i].radius))
 				{
 					//cout << "colision" << endl;
-					playerShip.isCollision = true;
+					player.isCollision = true;
 
-					loseLife(playerShip);
-					IsAlive(playerShip);
+					loseLife(player);
+					IsAlive(player);
 					//cout << "Vidas: " << playerShip.lifes << endl;
 					timer = 45.0f;
 					
-					playerShip.isCollision = false;
+					player.isCollision = false;
 				}
 			}
 
@@ -829,7 +824,6 @@ void BulletCollision()
 				{
 					if (CheckCollsisionCirCir(bullet[i].position, bullet[i].radius, asteroidSmall[j].position, asteroidSmall[j].radius))
 					{
-
 						bullet[i].isMoving = false;
 						asteroidSmall[j].isActive = false;
 						bullet[i].isActive = false;
@@ -861,7 +855,7 @@ void RespawnAsteroids()
 		if (!asteroid[i].isActive)
 		{
 			asteroid[i].size = Size::Big;
-			asteroid[i] = CreateAsteroid(asteroid[i].size);
+			asteroid[i] = CreateAsteroid(asteroid[i].size, asteroid[i]);
 			asteroidsSpawn--;
 
 			if (asteroidsSpawn <= 0)
