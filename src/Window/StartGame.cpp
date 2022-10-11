@@ -1000,11 +1000,28 @@ void RestartGame()
 	restartMenu.isActive = false;
 
 	//Player
-	playerShip = CreateShip();
-	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
-	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
-	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+	playerShip.position.x = static_cast<float>(GetScreenWidth() / 2);
+	playerShip.position.y = static_cast<float>(GetScreenHeight() / 2);
+	playerShip.direction.x = 0;
+	playerShip.direction.y = 0;
+	playerShip.aceleration.x = 50.0f;
+	playerShip.aceleration.y = 50.0f;
+	playerShip.height = 60.0f;
+	playerShip.widht = 60.0f;
+	playerShip.radius = 25.0f;
+	playerShip.rotation = 0;
+	playerShip.speed = 100.0f;
+	playerShip.lifes = 3;
+	playerShip.points = 0;
+	playerShip.isCollision = false;
+	playerShip.isAlive = true;
 	playerShip.isActive = true;
+	playerShip.win = false;
+	playerShip.color.a = 255;
+	playerShip.color.b = 255;
+	playerShip.color.g = 255;
+	playerShip.color.r = 255;
+
 
 	//HealthBar
 	healthBarPos.x = static_cast<float>(screenWidth / 2.2);
@@ -1012,7 +1029,10 @@ void RestartGame()
 
 	//Mouse
 	HideCursor();
-	mouse = CreateMouse();
+	mouse.position.x = 0;
+	mouse.position.y = 0;
+	mouse.width = 20.0f;
+	mouse.height = 20.0f;
 	mouse.mouseRec = GetRecMouse(mouse);
 
 	//Asteroid
@@ -1020,25 +1040,47 @@ void RestartGame()
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		asteroid[i].size = Size::Big;
-		asteroid[i] = CreateAsteroid(asteroid[i].size);
+		asteroid[i].position.x = static_cast<float>(GetRandomValue(700, 1000));
+		asteroid[i].position.y = static_cast<float>(GetRandomValue(700, 900));
+		asteroid[i].radius = 60.0f;
+		asteroid[i].isActive = true;
+		asteroid[i].speed.x = static_cast<float>(GetRandomValue(-70, 70));
+		asteroid[i].speed.y = static_cast<float>(GetRandomValue(-70, 70));
 	}
 
 	for (int i = 0; i < maxNorAsteroids; i++)
 	{
 		asteroidNor[i].size = Size::Normal;
-		asteroidNor[i] = CreateAsteroid(asteroidNor[i].size);
+		asteroidNor[i].position.x = 0;
+		asteroidNor[i].position.y = 0;
+		asteroidNor[i].radius = 45.0f;
+		asteroidNor[i].isActive = false;
+		asteroidNor[i].speed.x = static_cast<float>(GetRandomValue(-90, 90));
+		asteroidNor[i].speed.y = static_cast<float>(GetRandomValue(-90, 90));
 	}
 
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
 		asteroidSmall[i].size = Size::Small;
-		asteroidSmall[i] = CreateAsteroid(asteroidSmall[i].size);
+		asteroidSmall[i].position.x = 0;
+		asteroidSmall[i].position.y = 0;
+		asteroidSmall[i].radius = 35.0f;
+		asteroidSmall[i].isActive = false;
+		asteroidSmall[i].speed.x = static_cast<float>(GetRandomValue(-110, 110));
+		asteroidSmall[i].speed.y = static_cast<float>(GetRandomValue(-110, 110));
 	}
 
 	//Bullet
 	for (int i = 0; i < maxBullets; i++)
 	{
-		bullet[i] = CreateBullet();
+		bullet[i].position.x = 0;
+		bullet[i].position.y = 0;
+		bullet[i].direction.x = 0;
+		bullet[i].direction.y = 0;
+		bullet[i].isMoving = false;
+		bullet[i].isActive = false;
+		bullet[i].radius = 10.0f;
+		bullet[i].speed = 500.0f;
 	}
 }
 
