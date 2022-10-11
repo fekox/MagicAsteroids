@@ -65,7 +65,7 @@ void DrawAsteroidBig(Asteroid& asteroid)
 	if (asteroid.isActive == true)
 	{
 		DrawTexture(asteroid.texture, static_cast<int>(asteroid.position.x - 70), static_cast<int>(asteroid.position.y -70), WHITE);
-		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, WHITE);
+		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, BLANK);
 	}
 }
 
@@ -74,7 +74,7 @@ void DrawAsteroidNormal(Asteroid& asteroid)
 	if (asteroid.isActive == true)
 	{
 		DrawTexture(asteroid.texture, static_cast<int>(asteroid.position.x - 50), static_cast<int>(asteroid.position.y - 50), WHITE);
-		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, WHITE);
+		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, BLANK);
 	}
 }
 
@@ -83,6 +83,6 @@ void DrawAsteroidSmall(Asteroid& asteroid)
 	if (asteroid.isActive == true)
 	{
 		DrawTexture(asteroid.texture, static_cast<int>(asteroid.position.x - 40), static_cast<int>(asteroid.position.y - 40), WHITE);
-		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, WHITE);
+		DrawCircle(static_cast<int>(asteroid.position.x), static_cast<int>(asteroid.position.y), asteroid.radius, BLANK);
 	}
 }

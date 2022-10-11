@@ -113,4 +113,9 @@
       <Filter>Resources\Font</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Sounds\Interplanetary Odyssey.ogg">
+      <Filter>Resources\Sounds</Filter>
+    </None>
+  </ItemGroup>
 </Project>

@@ -254,7 +254,7 @@ void DrawRules(Texture2D menuBackGroundEmpty, Font gameFont)
 
 	DrawTextEx(gameFont, "RULES", { static_cast<float>(GetScreenWidth() / 2.7) , static_cast<float>(GetScreenHeight() / 15) }, 60, 0, ORANGE);
 
-	DrawTextEx(gameFont, "Play as a space pilot who must survive a\nasteroid rain, if they hit you three times\nyou lose, if you reach three thousand\npoints you win.\nShoot the asteroids to prevent them from\ncolliding whit the ship but be careful,\nwhen you shoot an asteroid it breaks\ninto two or three parts.\n\nGood luck pilot.", 
+	DrawTextEx(gameFont, "Play as a space pilot who must survive a\nasteroid rain, if they hit you three times\nyou lose, if you reach five thousand\npoints you win.\nShoot the asteroids to prevent them from\ncolliding whit the ship but be careful,\nwhen you shoot an asteroid it breaks\ninto two or three parts.\n\nGood luck pilot.", 
 	{ static_cast<float>(GetScreenWidth() / 25) , static_cast<float>(GetScreenHeight() / 5) }, 30, 0, ORANGE);
 
 	//ReturnMenu Button
