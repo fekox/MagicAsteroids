@@ -1,4 +1,5 @@
 #include "raylib.h"
+
 #include "Objects/Mouse.h"
 
 Mouse CreateMouse() 

@@ -1,9 +1,12 @@
 #include <iostream>
+
 #include "raylib.h"
 #include "raymath.h"
+
 #include "Window/Menu.h"
 #include "Window/Game.h"
 #include "Window/StartGame.h"
+
 #include "Objects/PlayerShip.h"
 #include "Objects/Asteroid.h"
 #include "Objects/Mouse.h"
@@ -53,8 +56,6 @@ bool playGame = false;
 Texture2D background;
 int screenWidth = 1024;
 int screenHeight = 768;
-//int screenWidth = 1920;
-//int screenHeight = 1080;
 
 //Restart Menu
 SubMenu restartMenu;
@@ -774,13 +775,11 @@ void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects)
 			{
 				if (CheckCollsisionCirCir(player.position, player.radius, asteroids[i].position, asteroids[i].radius))
 				{
-					//cout << "colision" << endl;
 					player.isCollision = true;
 
 					PlaySound(shipCollision);
 					LoseLife(player);
 					IsAlive(player);
-					//cout << "Vidas: " << playerShip.lifes << endl;
 					timer = 45.0f;
 					
 					player.isCollision = false;
@@ -790,7 +789,6 @@ void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects)
 			if (timer > 0)
 			{
 				timer -= GetFrameTime();
-				//cout << timer << endl;
 			}
 		}
 	}
@@ -824,7 +822,6 @@ void BulletCollision()
 						asteroidsCount--;
 						totalAsteoroidsCount--;
 						AddPoint(playerShip);
-						//cout << "colision bala" << endl;
 					}
 				}
 			}
@@ -858,7 +855,6 @@ void BulletCollision()
 						asteroidsNorCount--;
 						totalAsteoroidsCount--;
 						AddPoint(playerShip);
-						//cout << "colision bala" << endl;
 					}
 				}
 			}
@@ -883,7 +879,6 @@ void BulletCollision()
 						asteroidsSmallCount--;
 						totalAsteoroidsCount--;
 						AddPoint(playerShip);
-						//cout << "colision bala" << endl;
 					}
 				}
 			}

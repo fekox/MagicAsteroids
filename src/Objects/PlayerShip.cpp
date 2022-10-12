@@ -1,7 +1,6 @@
 #include "raylib.h"
-#include "Objects/PlayerShip.h"
 
-using namespace std;
+#include "Objects/PlayerShip.h"
 
 Ship CreateShip()
 {

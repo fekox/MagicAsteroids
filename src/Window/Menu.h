@@ -1,5 +1,7 @@
 #pragma once
+
 #include "raylib.h"
+
 #include "Objects/Mouse.h"
 
 struct MenuButton

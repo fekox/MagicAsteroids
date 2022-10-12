@@ -1,5 +1,6 @@
-#include "raylib.h"
 #pragma once
+
+#include "raylib.h"
 
 struct Mouse
 {
