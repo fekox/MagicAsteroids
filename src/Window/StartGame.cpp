@@ -122,6 +122,7 @@ void InitGame()
 	shoot = LoadSound("resources/Sounds/Shoot.mp3");
 
 	PlayMusicStream(music);
+	SetMusicVolume(music, 0.5f);
 	
 	//***************************************************************************
 
