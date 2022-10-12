@@ -16,6 +16,7 @@ void InitMenu()
 	play.width = static_cast<float>(GetScreenWidth() / 7);
 	play.height = static_cast<float>(GetScreenHeight() / 10);
 	play.size = 40;
+	play.isActive = false;
 
 	play.color = ORANGE;
 
@@ -26,6 +27,7 @@ void InitMenu()
 	controlls.width = static_cast<float>(GetScreenWidth() / 3.1);
 	controlls.height = static_cast<float>(GetScreenHeight() / 10);
 	controlls.size = 40;
+	controlls.isActive = false;
 
 	controlls.color = ORANGE;
 
@@ -36,6 +38,7 @@ void InitMenu()
 	rules.width = static_cast<float>(GetScreenWidth() / 5.6);
 	rules.height = static_cast<float>(GetScreenHeight() / 10);
 	rules.size = 40;
+	rules.isActive = false;
 
 	rules.color = ORANGE;
 
@@ -46,6 +49,7 @@ void InitMenu()
 	credits.width = static_cast<float>(GetScreenWidth() / 4.2);
 	credits.height = static_cast<float>(GetScreenHeight() / 10);
 	credits.size = 40;
+	credits.isActive = false;
 
 	credits.color = ORANGE;
 
@@ -56,6 +60,7 @@ void InitMenu()
 	quit.width = static_cast<float>(GetScreenWidth() / 7.8);
 	quit.height = static_cast<float>(GetScreenHeight() / 10);
 	quit.size = 40;
+	quit.isActive = false;
 
 	quit.color = ORANGE;
 
@@ -66,14 +71,15 @@ void InitMenu()
 	returnMenu.width = static_cast<float>(GetScreenWidth() / 7.8);
 	returnMenu.height = static_cast<float>(GetScreenHeight() / 10);
 	returnMenu.size = 40;
+	returnMenu.isActive = false;
 
 	returnMenu.color = ORANGE;
 }
 
-void MenuCollisions(Mouse& mouse)
+void MenuCollisions(Mouse& mouse, int& optionSelect)
 {
 	//Play Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 3.5), static_cast<float>(play.width), static_cast<float>(play.height)}))
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 3.5), static_cast<float>(play.width), static_cast<float>(play.height) }) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 	{
 		play.color = BLACK;
 	}
@@ -82,9 +88,9 @@ void MenuCollisions(Mouse& mouse)
 	{
 		play.color = ORANGE;
 	}
-
+	
 	//Controlls Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 2.5), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }))
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 2.5), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 	{
 		controlls.color = BLACK;
 	}
@@ -95,7 +101,7 @@ void MenuCollisions(Mouse& mouse)
 	}
 
 	//Rules Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.94), static_cast<float>(rules.width), static_cast<float>(rules.height) }))
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.94), static_cast<float>(rules.width), static_cast<float>(rules.height) }) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 	{
 		rules.color = BLACK;
 	}
@@ -106,7 +112,7 @@ void MenuCollisions(Mouse& mouse)
 	}
 
 	//Credits Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 1.5), static_cast<float>(GetScreenHeight() / 1.13), static_cast<float>(credits.width), static_cast<float>(credits.height) }))
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 1.5), static_cast<float>(GetScreenHeight() / 1.13), static_cast<float>(credits.width), static_cast<float>(credits.height) }) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 	{
 		credits.color = BLACK;
 	}
@@ -117,7 +123,7 @@ void MenuCollisions(Mouse& mouse)
 	}
 
 	//Quit Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.59), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.59), static_cast<float>(quit.width), static_cast<float>(quit.height) }) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 	{
 		quit.color = BLACK;
 	}
@@ -128,7 +134,7 @@ void MenuCollisions(Mouse& mouse)
 	}
 
 	//ReturnMenu Button
-	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
+	if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }) && optionSelect != 1)
 	{
 		returnMenu.color = BLACK;
 	}
@@ -139,26 +145,29 @@ void MenuCollisions(Mouse& mouse)
 	}
 }
 
-void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
+void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame, Sound selectOption)
 {
 	if (!playGame)
 	{
 		//Play Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 3.5), static_cast<float>(play.width), static_cast<float>(play.height) }))
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 			{
+				PlaySound(selectOption);
 				optionSelect = 1;
+				play.isActive = true;
 				playGame = true;
 				HideCursor();
 			}
 		}
-
+		
 		//Controlls Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 2.5), static_cast<float>(controlls.width), static_cast<float>(controlls.height) }))
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 			{
+				PlaySound(selectOption);
 				optionSelect = 2;
 			}
 		}
@@ -166,8 +175,9 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 		//Rules Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.94), static_cast<float>(rules.width), static_cast<float>(rules.height) }))
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 			{
+				PlaySound(selectOption);
 				optionSelect = 3;
 			}
 		}
@@ -175,8 +185,9 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 		//Credits Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 1.5), static_cast<float>(GetScreenHeight() / 1.13), static_cast<float>(credits.width), static_cast<float>(credits.height) }))
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 			{
+				PlaySound(selectOption);
 				optionSelect = 4;
 			}
 		}
@@ -184,8 +195,9 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 		//Quit Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 20), static_cast<float>(GetScreenHeight() / 1.59), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1 && optionSelect != 2 && optionSelect != 3 && optionSelect != 4 && optionSelect != 5)
 			{
+				PlaySound(selectOption);
 				optionSelect = 5;
 			}
 		}
@@ -193,8 +205,9 @@ void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame)
 		//ReturnMenu Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(GetScreenWidth() / 2.5), static_cast<float>(GetScreenHeight() / 1.1), static_cast<float>(quit.width), static_cast<float>(quit.height) }))
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && optionSelect != 1)
 			{
+				PlaySound(selectOption);
 				optionSelect = 0;
 				playGame = false;
 			}
@@ -271,11 +284,13 @@ void DrawCredits(Texture2D menuBackGroundEmpty, Font gameFont)
 	
 	DrawTextEx(gameFont, "GAME MADE BY\nFacundo Santos", { static_cast<float>(GetScreenWidth() / 3.5) , static_cast<float>(GetScreenHeight() / 3.5) }, 40, 0, ORANGE);
 
-	DrawTextEx(gameFont, "FONT", { static_cast<float>(GetScreenWidth() / 2.3) , static_cast<float>(GetScreenHeight() / 1.8) }, 40, 0, ORANGE);
-	DrawTextEx(gameFont, "https://www.dafont.com/es/04b-30.font", { static_cast<float>(GetScreenWidth() / 15) , static_cast<float>(GetScreenHeight() / 1.5) }, 30, 0, ORANGE);
+	DrawTextEx(gameFont, "FONT", { static_cast<float>(GetScreenWidth() / 2.3) , static_cast<float>(GetScreenHeight() / 2) }, 30, 0, ORANGE);
+	DrawTextEx(gameFont, "https://www.dafont.com/es/04b-30.font", { static_cast<float>(GetScreenWidth() / 8) , static_cast<float>(GetScreenHeight() / 1.8) }, 25, 0, ORANGE);
+
+	DrawTextEx(gameFont, "MUSIC: INTERPLANETARY ODYSSEY", { static_cast<float>(GetScreenWidth() / 7) , static_cast<float>(GetScreenHeight() / 1.5) }, 30, 0, ORANGE);
+	DrawTextEx(gameFont, "https://patrickdearteaga.com/es/musica-arcade/", { static_cast<float>(GetScreenWidth() / 15) , static_cast<float>(GetScreenHeight() / 1.4) }, 25, 0, ORANGE);
 
 	//ReturnMenu Button
-
 	DrawRectangle(static_cast<int>(GetScreenWidth() / 2.5), static_cast<int>(GetScreenHeight() / 1.1), static_cast<int>(returnMenu.width), static_cast<int>(returnMenu.height), BLANK);
 	DrawTextEx(gameFont, "MENU", returnMenu.pos, static_cast<float>(returnMenu.size), 0, returnMenu.color);
 }

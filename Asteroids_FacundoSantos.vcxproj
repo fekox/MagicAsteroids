@@ -58,6 +58,12 @@
   <ItemGroup>
     <None Include="resources\Sounds\Interplanetary Odyssey.ogg" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\Sounds\Asteroid Destroid.mp3" />
+    <Media Include="resources\Sounds\Select Option.mp3" />
+    <Media Include="resources\Sounds\Ship Collision.mp3" />
+    <Media Include="resources\Sounds\Shoot.mp3" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{DFE02829-CF42-42EC-8422-34C6DF945042}</ProjectGuid>

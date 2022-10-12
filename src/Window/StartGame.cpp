@@ -75,6 +75,15 @@ Font gameFont;
 //Timer
 float timer = -0.1f;
 
+//Music
+Music music;
+Sound asteroidDestroid;
+Sound selectOption;
+Sound shipCollision;
+Sound shoot;
+
+float musicPitch = 0.9f;
+
 void StartGame()
 {
 	InitGame();
@@ -87,6 +96,7 @@ void InitGame()
 	//Window
 	InitWindow(screenWidth, screenHeight, "Asteroids_FacundoSantos");
 	SetWindowState(FLAG_VSYNC_HINT);
+
 	gameFont = LoadFont("resources/Font/04B_30__.TTF");
 
 	background = LoadTexture("resources/Sprites/Background.png");
@@ -94,6 +104,24 @@ void InitGame()
 	fullHealthBar = LoadTexture("resources/Sprites/FullHealthBar.png");
 	midHealthBar = LoadTexture("resources/Sprites/MidHealthBar.png");
 	lowHealthBar = LoadTexture("resources/Sprites/LowHealthBar.png");
+
+	//***************************************************************************
+
+	//Music
+	InitAudioDevice();
+
+	music = LoadMusicStream("resources/Sounds/Interplanetary Odyssey.ogg");
+	music.looping = true;
+
+	asteroidDestroid = LoadSound("resources/Sounds/Asteroid Destroid.mp3");
+
+	selectOption = LoadSound("resources/Sounds/Select Option.mp3");
+
+	shipCollision = LoadSound("resources/Sounds/Ship Collision.mp3");
+
+	shoot = LoadSound("resources/Sounds/Shoot.mp3");
+
+	PlayMusicStream(music);
 	
 	//***************************************************************************
 
@@ -226,9 +254,12 @@ void GameLoop()
 	{	
 		if (gameOn == true)
 		{
+			UpdateMusicStream(music);
+			SetMusicPitch(music, musicPitch);
+
 			mouseMovement();
-			MenuCollisions(mouse);
-			MenuInputs(mouse, optionSelect, playGame);
+			MenuCollisions(mouse, optionSelect);
+			MenuInputs(mouse, optionSelect, playGame, selectOption);
 
 			if (playGame == true)
 			{
@@ -289,6 +320,7 @@ void GameLoop()
 	if (gameOn == false)
 	{
 		UnloadData();
+		CloseAudioDevice();
 		CloseWindow();
 	}
 }
@@ -311,6 +343,7 @@ void Input(bool& gameOn)
 			{
 				if (!bullet[i].isMoving)
 				{
+					PlaySound(shoot);
 					bullet[i].isActive = true;
 					bullet[i].isMoving = true;
 
@@ -332,6 +365,7 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(selectOption);
 				RestartGame();
 			}
 		}
@@ -341,6 +375,7 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(selectOption);
 				RestartGame();
 				restartMenu.isActive = false;
 				playGame = false;
@@ -353,6 +388,7 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(selectOption);
 				gameOn = false;
 			}
 		}
@@ -360,13 +396,17 @@ void Input(bool& gameOn)
 
 	if (pauseMenu.isActive)
 	{
+		PauseMusicStream(music);
+
 		//Resume Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(selectOption);
 				pause = false;
 				pauseMenu.isActive = false;
+				ResumeMusicStream(music);
 			}
 		}
 
@@ -375,11 +415,13 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(selectOption);
 				RestartGame();
 				pause = false;
 				playGame = false;
 				pauseMenu.isActive = false;
 				optionSelect = 0;
+				ResumeMusicStream(music);
 			}
 		}
 
@@ -388,6 +430,7 @@ void Input(bool& gameOn)
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(selectOption);
 				gameOn = false;
 			}
 		}
@@ -417,6 +460,7 @@ void Input(bool& gameOn)
 		{
 			pauseMenu.isActive = false;
 			pause = false;
+			ResumeMusicStream(music);
 			HideCursor();
 		}
 
@@ -426,6 +470,7 @@ void Input(bool& gameOn)
 			{
 				pauseMenu.isActive = false;
 				pause = false;
+				ResumeMusicStream(music);
 				HideCursor();
 			}
 		}
@@ -728,6 +773,7 @@ void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects)
 					//cout << "colision" << endl;
 					player.isCollision = true;
 
+					PlaySound(shipCollision);
 					loseLife(player);
 					IsAlive(player);
 					//cout << "Vidas: " << playerShip.lifes << endl;
@@ -770,7 +816,7 @@ void BulletCollision()
 
 							bullet[i].isActive = false;
 						}
-
+						PlaySound(asteroidDestroid);
 						asteroidsCount--;
 						totalAsteoroidsCount--;
 						AddPoint(playerShip);
@@ -804,6 +850,7 @@ void BulletCollision()
 							bullet[i].isActive = false;
 						}
 
+						PlaySound(asteroidDestroid);
 						asteroidsNorCount--;
 						totalAsteoroidsCount--;
 						AddPoint(playerShip);
@@ -828,6 +875,7 @@ void BulletCollision()
 						asteroidSmall[j].isActive = false;
 						bullet[i].isActive = false;
 
+						PlaySound(asteroidDestroid);
 						asteroidsSmallCount--;
 						totalAsteoroidsCount--;
 						AddPoint(playerShip);
@@ -1086,7 +1134,7 @@ void RestarGameMenuCollisions()
 
 		//Restart Button
 		if (CheckCollisionPointRec(mouse.position, Rectangle{ static_cast<float>(screenWidth / 2.5), static_cast<float>(screenHeight / 2.2), static_cast<float>(screenWidth / 4), static_cast<float>(screenHeight / 10) }))
-		{
+		{	
 			restartButton.color = BLACK;
 		}
 
@@ -1156,4 +1204,10 @@ void UnloadData()
 	UnloadTexture(restartMenu.texture);
 	UnloadTexture(pauseButtonOff.texture);
 	UnloadTexture(pauseButtonOn.texture);
+
+	UnloadMusicStream(music);
+	UnloadSound(shipCollision);
+	UnloadSound(asteroidDestroid);
+	UnloadSound(selectOption);
+	UnloadSound(shoot);
 }

@@ -118,4 +118,18 @@
       <Filter>Resources\Sounds</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\Sounds\Asteroid Destroid.mp3">
+      <Filter>Resources\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\Select Option.mp3">
+      <Filter>Resources\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\Ship Collision.mp3">
+      <Filter>Resources\Sounds</Filter>
+    </Media>
+    <Media Include="resources\Sounds\Shoot.mp3">
+      <Filter>Resources\Sounds</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

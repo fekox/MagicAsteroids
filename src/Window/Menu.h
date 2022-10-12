@@ -11,6 +11,8 @@ struct MenuButton
 
 	int size;
 
+	bool isActive;
+
 	Texture texture;
 
 	Color color;
@@ -27,8 +29,8 @@ enum class Menu
 };
 
 void InitMenu();
-void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame);
-void MenuCollisions(Mouse& mouse);
+void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame, Sound selectOption);
+void MenuCollisions(Mouse& mouse, int& optionSelect);
 void DrawMenu(Texture2D menuBackGround, Font gameFont);
 void DrawControlls(Texture2D menuBackGroundEmpty, Texture texControlls, Font gameFont);
 void DrawRules(Texture2D menuBackGroundEmpty, Font gameFont);

@@ -84,7 +84,7 @@ bool IsAlive(Ship& playerShip)
 
 bool playerWin(Ship& playerShip)
 {
-	if (playerShip.points < 5000)
+	if (playerShip.points < 10)
 	{
 		return playerShip.win == true;
 	}
@@ -94,6 +94,7 @@ bool playerWin(Ship& playerShip)
 		return playerShip.win == false;
 	}
 }
+
 
 void AddPoint(Ship& playerShip)
 {
