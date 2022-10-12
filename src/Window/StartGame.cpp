@@ -344,7 +344,11 @@ void Input(bool& gameOn)
 			{
 				if (!bullet[i].isMoving)
 				{
-					PlaySound(shoot);
+					if(!restartMenu.isActive && !pauseMenu.isActive)
+					{
+						PlaySound(shoot);
+					}
+
 					bullet[i].isActive = true;
 					bullet[i].isMoving = true;
 
