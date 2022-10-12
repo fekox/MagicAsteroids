@@ -510,18 +510,6 @@ void Collision()
 	RestarGameMenuCollisions();
 }
 
-
-void AsteroidCollisionLimit(Asteroid asteroids[])
-{
-	for (int i = 0; i < maxAteroids; i++)
-	{
-		if (asteroids[i].isActive)
-		{
-			ObjCollisionLimit(asteroids[i].position);
-		}
-	}
-}
-
 void Draw()
 {
 	BeginDrawing();
@@ -713,6 +701,17 @@ void ObjCollisionLimit(Vector2& objPosition)
 	if (objPosition.y >= screenHeight)
 	{
 		objPosition.y = objPosition.y - screenHeight;
+	}
+}
+
+void AsteroidCollisionLimit(Asteroid asteroids[])
+{
+	for (int i = 0; i < maxAteroids; i++)
+	{
+		if (asteroids[i].isActive)
+		{
+			ObjCollisionLimit(asteroids[i].position);
+		}
 	}
 }
 

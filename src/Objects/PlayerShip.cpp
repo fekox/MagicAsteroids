@@ -69,6 +69,11 @@ void LoseLife(Ship& playerShip)
 	}
 }
 
+void AddPoint(Ship& playerShip)
+{
+	playerShip.points += 10;
+}
+
 bool IsAlive(Ship& playerShip)
 {
 	if (playerShip.lifes <= 0)
@@ -93,12 +98,6 @@ bool PlayerWin(Ship& playerShip)
 	{
 		return playerShip.win == false;
 	}
-}
-
-
-void AddPoint(Ship& playerShip)
-{
-	playerShip.points += 10;
 }
 
 int GetPoint()

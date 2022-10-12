@@ -29,8 +29,8 @@ enum class Menu
 };
 
 void InitMenu();
-void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame, Sound selectOption);
 void MenuCollisions(Mouse& mouse, int& optionSelect);
+void MenuInputs(Mouse& mouse, int& optionSelect, bool& playGame, Sound selectOption);
 void DrawMenu(Texture2D menuBackGround, Font gameFont);
 void DrawControlls(Texture2D menuBackGroundEmpty, Texture texControlls, Font gameFont);
 void DrawRules(Texture2D menuBackGroundEmpty, Font gameFont);
