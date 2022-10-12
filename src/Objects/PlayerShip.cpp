@@ -61,7 +61,7 @@ void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float
 	}
 }
 
-void loseLife(Ship& playerShip)
+void LoseLife(Ship& playerShip)
 {
 	if (playerShip.isCollision == true)
 	{
@@ -82,7 +82,7 @@ bool IsAlive(Ship& playerShip)
 	}
 }
 
-bool playerWin(Ship& playerShip)
+bool PlayerWin(Ship& playerShip)
 {
 	if (playerShip.points < 15000)
 	{

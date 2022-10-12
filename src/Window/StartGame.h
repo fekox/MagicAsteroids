@@ -35,27 +35,24 @@ void Collision();
 void Draw();
 void UnloadData();
 
-void shipMovement();
-void bulletMovement();
+void ShipMovement();
+void BulletMovement();
+void AsteroidMovement(Asteroid asteroids[], int const maxObjects);
+void MouseMovement();
 
-void asteroidMovement(Asteroid asteroids[], int const maxObjects);
 void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects);
 void BulletCollision();
 bool CheckCollsisionCirCir(Vector2 Obj1Pos, float obj1Radius, Vector2 obj2Pos, float obj2Radius);
-
-void objCollisionLimit(Vector2& shipPosition);
+void ObjCollisionLimit(Vector2& shipPosition);
 void AsteroidCollisionLimit(Asteroid asteroids[]);
-void bulletCollisonLimit();
+void BulletCollisonLimit();
+void PauseMenuCollisions();
+void RestarGameMenuCollisions();
 
 void RespawnAsteroids();
 
-void mouseMovement();
-
-void drawGame();
-
+void DrawGame();
 void DrawRestarGameMenu();
-void RestarGameMenuCollisions();
-void RestartGame();
-
 void DrawPauseMenu();
-void PauseMenuCollisions();
+
+void RestartGame();

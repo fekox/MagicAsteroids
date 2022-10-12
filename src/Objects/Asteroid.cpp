@@ -1,5 +1,4 @@
 #include "Objects/Asteroid.h"
-#include <iostream>
 
 Asteroid CreateAsteroid(Size size, Asteroid& asteroid)
 {

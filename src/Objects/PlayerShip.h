@@ -1,3 +1,4 @@
+#include "raylib.h"
 #pragma once
 
 struct Ship
@@ -42,12 +43,12 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight);
 
 void DrawShip(Ship& PlayerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight);
 
-void loseLife(Ship& playerShip);
+void LoseLife(Ship& playerShip);
+
+void AddPoint(Ship& playerShip);
 
 bool IsAlive(Ship& playerShip);
 
-bool playerWin(Ship& playerShip);
-
-void AddPoint(Ship& playerShip);
+bool PlayerWin(Ship& playerShip);
 
 int GetPoint();

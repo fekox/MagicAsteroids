@@ -1,3 +1,4 @@
+#include "raylib.h"
 #pragma once
 
 struct Mouse

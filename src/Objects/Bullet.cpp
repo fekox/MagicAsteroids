@@ -1,4 +1,3 @@
-#include "raylib.h"
 #include "Objects/Bullet.h"
 
 Bullet CreateBullet()

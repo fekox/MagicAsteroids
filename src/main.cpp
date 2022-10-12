@@ -1,6 +1,6 @@
 #include "Window/Game.h"
 
-int main(void)
+int main()
 {
     StartGame();
 }

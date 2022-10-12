@@ -258,7 +258,7 @@ void GameLoop()
 			UpdateMusicStream(music);
 			SetMusicPitch(music, musicPitch);
 
-			mouseMovement();
+			MouseMovement();
 			MenuCollisions(mouse, optionSelect);
 			MenuInputs(mouse, optionSelect, playGame, selectOption);
 
@@ -484,11 +484,11 @@ void Input(bool& gameOn)
 
 void Update()
 {
-	shipMovement();
-	asteroidMovement(asteroid, maxAteroids);
-	asteroidMovement(asteroidNor, maxNorAsteroids);
-	asteroidMovement(asteroidSmall, maxSmallAsteroids);
-	bulletMovement();
+	ShipMovement();
+	AsteroidMovement(asteroid, maxAteroids);
+	AsteroidMovement(asteroidNor, maxNorAsteroids);
+	AsteroidMovement(asteroidSmall, maxSmallAsteroids);
+	BulletMovement();
 }
 
 void Collision()
@@ -503,9 +503,9 @@ void Collision()
 	AsteroidCollisionLimit(asteroidNor);
 	AsteroidCollisionLimit(asteroidSmall);
 
-	objCollisionLimit(playerShip.position);
+	ObjCollisionLimit(playerShip.position);
 
-	bulletCollisonLimit();
+	BulletCollisonLimit();
 
 	RestarGameMenuCollisions();
 }
@@ -517,7 +517,7 @@ void AsteroidCollisionLimit(Asteroid asteroids[])
 	{
 		if (asteroids[i].isActive)
 		{
-			objCollisionLimit(asteroids[i].position);
+			ObjCollisionLimit(asteroids[i].position);
 		}
 	}
 }
@@ -526,11 +526,11 @@ void Draw()
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
-	drawGame();
+	DrawGame();
 	EndDrawing();
 }
 
-void drawGame()
+void DrawGame()
 {
 	DrawTexture(background, 0, 0, WHITE);
 
@@ -607,7 +607,7 @@ void drawGame()
 		DrawTexture(lowHealthBar, static_cast<int>(healthBarPos.x), static_cast<int>(healthBarPos.y), WHITE);
 	}
 
-	if (!IsAlive(playerShip) || playerWin(playerShip))
+	if (!IsAlive(playerShip) || PlayerWin(playerShip))
 	{
 		DrawRestarGameMenu();
 	}
@@ -618,12 +618,12 @@ void drawGame()
 	}
 }
 
-void mouseMovement()
+void MouseMovement()
 {
 	mouse.position = GetMousePosition();
 }
 
-void shipMovement()
+void ShipMovement()
 {
 	Vector2 shipActualPos;
 
@@ -651,7 +651,7 @@ void shipMovement()
 }
 
 
-void asteroidMovement(Asteroid asteroids[], int const maxObjects)
+void AsteroidMovement(Asteroid asteroids[], int const maxObjects)
 {
 	for (int i = 0; i < maxObjects; i++)
 	{
@@ -675,7 +675,7 @@ void asteroidMovement(Asteroid asteroids[], int const maxObjects)
 	}
 }
 
-void bulletMovement()
+void BulletMovement()
 {
 	for (int i = 0; i < maxBullets; i++)
 	{
@@ -693,7 +693,7 @@ void bulletMovement()
 	}
 }
 
-void objCollisionLimit(Vector2& objPosition)
+void ObjCollisionLimit(Vector2& objPosition)
 {
 	if (objPosition.x < 0)
 	{
@@ -716,7 +716,7 @@ void objCollisionLimit(Vector2& objPosition)
 	}
 }
 
-void bulletCollisonLimit()
+void BulletCollisonLimit()
 {
 	for (int i = 0; i < maxBullets; i++)
 	{
@@ -779,7 +779,7 @@ void AsteroidCollision(Ship& player, Asteroid asteroids[], int const maxObjects)
 					player.isCollision = true;
 
 					PlaySound(shipCollision);
-					loseLife(player);
+					LoseLife(player);
 					IsAlive(player);
 					//cout << "Vidas: " << playerShip.lifes << endl;
 					timer = 45.0f;
@@ -1019,7 +1019,7 @@ void DrawRestarGameMenu()
 		DrawTextEx(gameFont, "You Lose", { static_cast<float>(screenWidth / 3.5), static_cast<float>(screenHeight / 3.1) }, 70, 0, ORANGE);
 	}
 
-	if (playerWin(playerShip))
+	if (PlayerWin(playerShip))
 	{
 		DrawTextEx(gameFont, "You Win", { static_cast<float>(screenWidth / 3.1), static_cast<float>(screenHeight / 3.1) }, 70, 0, ORANGE);
 	}
