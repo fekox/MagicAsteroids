@@ -22,6 +22,7 @@ int optionSelect = 0;
 
 //Player
 Ship playerShip;
+Texture2D texSpace;
 
 //HealthBar
 Vector2 healthBarPos;
@@ -200,6 +201,8 @@ void InitGame()
 	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
 	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
+	texSpace = LoadTexture("resources/Sprites/Ship.png");
 
 	playerShip.isActive = true;
 
@@ -1077,7 +1080,6 @@ void RestartGame()
 	mouse.mouseRec = GetRecMouse(mouse);
 
 	//Asteroid
-
 	for (int i = 0; i < maxAteroids; i++)
 	{
 		asteroid[i].size = Size::Big;
@@ -1172,6 +1174,7 @@ void UnloadData()
 	UnloadTexture(menuBackGroundEmpty);
 
 	UnloadTexture(playerShip.texture);
+	UnloadTexture(texSpace);
 
 	for (int i = 0; i < maxAteroids; i++)
 	{
