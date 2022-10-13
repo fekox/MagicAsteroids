@@ -334,34 +334,40 @@ void Input(bool& gameOn)
 {
 	if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 	{
-		playerShip.shipDirNormalize = Vector2Normalize(playerShip.direction);
+		if (playerShip.isActive)
+		{
+			playerShip.shipDirNormalize = Vector2Normalize(playerShip.direction);
 
-		playerShip.aceleration.x += playerShip.shipDirNormalize.x;
-		playerShip.aceleration.y += playerShip.shipDirNormalize.y;
+			playerShip.aceleration.x += playerShip.shipDirNormalize.x;
+			playerShip.aceleration.y += playerShip.shipDirNormalize.y;
+		}
 	}
 
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
-		for (int i = 0; i < maxBullets; i++)
+		if (playerShip.isActive)
 		{
-			if (bullet[i].isActive == false)
+			for (int i = 0; i < maxBullets; i++)
 			{
-				if (!bullet[i].isMoving)
+				if (bullet[i].isActive == false)
 				{
-					if(!restartMenu.isActive && !pauseMenu.isActive)
+					if (!bullet[i].isMoving)
 					{
-						PlaySound(shoot);
+						if(!restartMenu.isActive && !pauseMenu.isActive)
+						{
+							PlaySound(shoot);
+						}
+
+						bullet[i].isActive = true;
+						bullet[i].isMoving = true;
+
+						bullet[i].direction.x = mouse.position.x - bullet[i].position.x;
+						bullet[i].direction.y = mouse.position.y - bullet[i].position.y;
+
+						bullet[i].direction = Vector2Normalize(bullet[i].direction);
+
+						break;
 					}
-
-					bullet[i].isActive = true;
-					bullet[i].isMoving = true;
-
-					bullet[i].direction.x = mouse.position.x - bullet[i].position.x;
-					bullet[i].direction.y = mouse.position.y - bullet[i].position.y;
-
-					bullet[i].direction = Vector2Normalize(bullet[i].direction);
-
-					break;
 				}
 			}
 		}
@@ -497,9 +503,12 @@ void Update()
 
 void Collision()
 {
-	AsteroidCollision(playerShip, asteroid, maxAteroids);
-	AsteroidCollision(playerShip, asteroidNor, maxNorAsteroids);
-	AsteroidCollision(playerShip, asteroidSmall, maxSmallAsteroids);
+	if (playerShip.isActive)
+	{
+		AsteroidCollision(playerShip, asteroid, maxAteroids);
+		AsteroidCollision(playerShip, asteroidNor, maxNorAsteroids);
+		AsteroidCollision(playerShip, asteroidSmall, maxSmallAsteroids);
+	}
 
 	BulletCollision();
 
