@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "raymath.h"
 
 #include "Objects/PlayerShip.h"
 
@@ -14,6 +15,12 @@ Ship CreateShip()
 
 	playerShip.aceleration.x = 50.0f;
 	playerShip.aceleration.y = 50.0f;
+
+	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
+
+	playerShip.source = { 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) };
+
+	playerShip.shipDirNormalize = Vector2Normalize(playerShip.direction);
 
 	playerShip.height = 60.0f;
 	playerShip.widht = 60.0f;
@@ -36,8 +43,6 @@ Ship CreateShip()
 
 	playerShip.win = false;
 
-	playerShip.texture = LoadTexture("resources/Sprites/Ship.png");
-
 	playerShip.color.a = 255;
 	playerShip.color.b = 255;
 	playerShip.color.g = 255;
@@ -51,11 +56,11 @@ Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight)
 	return Rectangle{ playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerWidth, playerHeight };
 }
 
-void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight)
+void DrawShip(Ship playerShip, Vector2 shipOriginRec, float playerWidth, float playerHeight, Texture2D textSpace)
 {
 	if (playerShip.isActive)
 	{
-		DrawTexturePro(playerShip.texture, Rectangle{0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height)}, Rectangle{playerShip.position.x - playerShip.widht / 2, playerShip.position.y - playerShip.height / 2, playerShip.widht, playerShip.height}, shipOriginRec, playerShip.rotation, playerShip.color);
+		DrawTexturePro(textSpace, Rectangle{0,0, static_cast<float>(textSpace.width), static_cast<float>(textSpace.height)}, Rectangle{playerShip.position.x - playerWidth / 2, playerShip.position.y - playerHeight / 2, playerShip.widht, playerShip.height}, shipOriginRec, playerShip.rotation, playerShip.color);
 		DrawCircle(static_cast<int>(playerShip.position.x - playerWidth / 2), static_cast<int>(playerShip.position.y - playerHeight / 2), playerShip.radius, BLANK);
 	}
 }

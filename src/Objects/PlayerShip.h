@@ -42,7 +42,7 @@ Ship CreateShip();
 
 Rectangle GetRec(Ship& playerShip, float playerWidth, float playerHeight);
 
-void DrawShip(Ship& playerShip, Vector2& shipOriginRec, float playerWidth, float playerHeight);
+void DrawShip(Ship playerShip, Vector2 shipOriginRec, float playerWidth, float playerHeight, Texture2D textSpace);
 
 void LoseLife(Ship& playerShip);
 

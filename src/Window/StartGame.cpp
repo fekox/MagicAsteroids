@@ -541,7 +541,7 @@ void DrawGame()
 		playerShip.color.a = 255;
 	}
 
-	DrawShip(playerShip, playerShip.shipOriginRec, playerShip.widht, playerShip.height);
+	DrawShip(playerShip, playerShip.shipOriginRec, playerShip.widht, playerShip.height, texSpace);
 
 	for (int i = 0; i < maxAteroids; i++)
 	{
@@ -619,7 +619,7 @@ void ShipMovement()
 {
 	Vector2 shipActualPos;
 
-	playerShip.source = { 0,0, static_cast<float>(playerShip.texture.width), static_cast<float>(playerShip.texture.height) };
+	playerShip.source = { 0,0, static_cast<float>(texSpace.width), static_cast<float>(texSpace.height) };
 	playerShip.dest = { playerShip.position.x, playerShip.position.y, playerShip.widht, playerShip.height };
 
 	shipActualPos.x = playerShip.position.x;
@@ -1061,6 +1061,9 @@ void RestartGame()
 	playerShip.isAlive = true;
 	playerShip.isActive = true;
 	playerShip.win = false;
+	playerShip.shipOriginRec.x = playerShip.shipRec.width / 2;
+	playerShip.shipOriginRec.y = playerShip.shipRec.height / 2;
+	playerShip.shipRec = GetRec(playerShip, playerShip.widht, playerShip.height);
 	playerShip.color.a = 255;
 	playerShip.color.b = 255;
 	playerShip.color.g = 255;
