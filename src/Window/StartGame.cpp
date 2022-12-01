@@ -338,8 +338,8 @@ void Input(bool& gameOn)
 		{
 			playerShip.shipDirNormalize = Vector2Normalize(playerShip.direction);
 
-			playerShip.aceleration.x += playerShip.shipDirNormalize.x;
-			playerShip.aceleration.y += playerShip.shipDirNormalize.y;
+			playerShip.aceleration.x += playerShip.shipDirNormalize.x * playerShip.speed * GetFrameTime();
+			playerShip.aceleration.y += playerShip.shipDirNormalize.y * playerShip.speed * GetFrameTime();
 		}
 	}
 
@@ -1172,11 +1172,11 @@ void RestarGameMenuCollisions()
 		{
 			quitGameButton.color = BLACK;
 		}
+	}
 
-		else
-		{
-			quitGameButton.color = ORANGE;
-		}
+	if (restartMenu.isActive == false && pauseMenu.isActive == false)
+	{
+		HideCursor();
 	}
 }
 

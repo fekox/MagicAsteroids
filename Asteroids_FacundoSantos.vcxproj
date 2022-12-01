@@ -152,17 +152,9 @@
       </EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST $(SolutionDir)bin\Win32\Debug\resources\ (rmdir $(SolutionDir)bin\Win32\Debug\resources /s /q)
-cd $(SolutionDir)bin\Win32\Debug
-mkdir resources
-cd $(SolutionDir)bin\Win32\Debug\resources
-mkdir Font
-mkdir Sprites
-mkdir Sounds
-cd $(SolutionDir)resources
-xcopy Font "$(SolutionDir)bin\Win32\Debug\resources\Font" 
-xcopy Sprites "$(SolutionDir)bin\Win32\Debug\resources\Sprites" 
-xcopy Sounds "$(SolutionDir)bin\Win32\Debug\resources\Sounds"</Command>
+      <Command>IF exist "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources" rd "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources"
+MKDIR  "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources"
+XCOPY "$(SolutionDir)resources" "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources"/e /h /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -202,17 +194,9 @@ xcopy Sounds "$(SolutionDir)bin\Win32\Debug\resources\Sounds"</Command>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST $(SolutionDir)bin\Win32\Debug\resources\ (rmdir $(SolutionDir)bin\Win32\Release\resources /s /q)
-cd $(SolutionDir)bin\Win32\Release
-mkdir resources
-cd $(SolutionDir)bin\Win32\Release\resources
-mkdir Font
-mkdir Sprites
-mkdir Sounds
-cd $(SolutionDir)resources
-xcopy Font "$(SolutionDir)bin\Win32\Release\resources\Font" 
-xcopy Sprites "$(SolutionDir)bin\Win32\Release\resources\Sprites" 
-xcopy Sounds "$(SolutionDir)bin\Win32\Release\resources\Sounds"</Command>
+      <Command>IF exist "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources" rd "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources"
+MKDIR  "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources"
+XCOPY "$(SolutionDir)resources" "$(SolutionDir)bin\$(Platform)\$(Configuration)\resources"/e /h /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
